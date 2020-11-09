@@ -1,43 +1,35 @@
 #include "header/symtable.h"
-#include "header/data.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include<string.h>
 
 
-
-
-void symtable_add(const char* varName, struct tableNode* data)
+void symtable_add(char* varName, struct IDENT_tokenData* data)
 {
-	LinkedList_add(globl_symtable, LinkedList_size(globl_symtable), data, 0, 0, varName);
+	LinkedList_add_end(globl_symtable, data, 0, 0, varName);
 }
 
 
-struct tableNode* symtable_getItem(const char* varName)
+struct IDENT_tokenData* symtable_getItem(char* varName)
 {
-	node_t* curNode = globl_symtable->head;
-	while (curNode != NULL)
+	for (int i = 0; i < LinkedList_size(globl_symtable); i++)
 	{
-		struct tableNode* tNode =(struct tableNode*) curNode->data;
-		const char* varName_tNode = curNode->varName;
-		if (strcmp(varName, varName_tNode) == 0)
+		struct IDENT_tokenData* curID =(struct IDENT_tokenData*) LinkedList_getItem(globl_symtable, i);
+		char* curName = curID->varName;
+		if (strcmp(varName, curName) == 0)
 		{
-			//printf("right node::  %s\n", varName_tNode);
-			return tNode;
+			return curID;
 		}
-		curNode = curNode->next;
+
 	}
 	return NULL;
 }
 
 
-struct tableNode* newTableNode(const char* varName, int dataType, INT_VAL value, int hasValue)
+struct IDENT_tokenData* newID_token(int dataType, int init, INT_VAL value, char* varName)
 {
-	struct tableNode* initNode = malloc(sizeof(struct tableNode));
-	initNode->dataType = dataType;
-	initNode->hash = 0;
-	initNode->hasValue = hasValue;
-	initNode->value = value;
-	initNode->varName = varName;
-	return initNode;
+	struct IDENT_tokenData* initID = malloc(sizeof(struct IDENT_tokenData));
+	initID->dataType = dataType;
+	initID->init = init;
+	initID->value = value;
+	initID->varName = varName;
+	return initID;
 }

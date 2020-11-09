@@ -297,7 +297,7 @@ void scan_curToken()
 		}
 		if (keyword_tt == TT_IDENT)
 		{
-			currentToken = newToken_identToken(keyword_tt, Line, cur_key_ret_val.ident_name, 0);
+			currentToken = newToken_identToken(TT_IDENT, Line, cur_key_ret_val.ident_name, 0);
 		}
 	}
 

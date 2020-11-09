@@ -1,42 +1,21 @@
-#include "list.h"
+#include <stdio.h>
 #include "tokens.h"
-#ifndef TABLE_H
-#define TABLE_H
+#include "list.h"
 
-#define SYMTABLE_SIZE 16
+#pragma once
+
 
 extern LinkedList* globl_symtable;
 
-struct tableNode
+
+struct IDENT_tokenData
 {
 	char* varName;
-	unsigned long long hash;
 	int dataType;
+	int init;
 	INT_VAL value;
-	int hasValue;
 };
 
-enum
-{
-	DT_INT,
-	DT_DOUBLE,
-	DT_STRING,
-	DT_CHAR,
-	DT_BOOL,
-};
-
-
-
-unsigned long long hash_str(const char* s);
-int cmp_string(const char* s1, const char* s2);
-
-void symtable_add(const char* varName, struct tableNode* data);
-void symtable_remove(const char* varName);
-struct tableNode* symtable_getItem(const char* varName);
-
-struct tableNode* newTableNode(const char* varName, int dataType, INT_VAL value, int hasValue);
-
-void sym_init();
-
-
-#endif
+void symtable_add(char* varName, struct IDENT_tokenData* data);
+struct IDENT_tokenData* symtable_getItem(char* varName);
+struct IDENT_tokenData* newID_token(int dataType, int init, INT_VAL value, char* varName);

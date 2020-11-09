@@ -1,6 +1,7 @@
 #ifndef AST_H
 #define AST_H
 #include "tokens.h"
+#include "symtable.h"
 #include <stdio.h>
 
 
@@ -16,25 +17,15 @@ struct AST_Node
 };
 
 
-struct IDENT_token
+enum
 {
-	int dataType;
-	int hasValue;
-	INT_VAL value;
-	const char* varName;
+	DT_INT,
+	DT_DOUBLE,
+	DT_FLOAT,
+	DT_CHAR,
+	DT_STRING,
+	DT_BOOL,
 };
-
-
-static struct IDENT_token* newIdentToken(int dataType, int hasValue, INT_VAL value, const char* varName)
-{
-	struct IDENT_token* initT = malloc(sizeof(struct IDENT_token));
-	initT->dataType = dataType;
-	initT->hasValue = hasValue;
-	initT->value = value;
-	initT->varName;
-	return initT;
-}
-
 
 struct AST_Node* mkastnode(int tokenType, INT_VAL intVal, double floatVal, struct AST_Node* left, struct AST_Node* right, void* otherData);
 struct AST_Node* mkastnode_const(int tokenType, INT_VAL intVal, double floatVal, void* otherData);

@@ -1,0 +1,11 @@
+﻿  main.c
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\stringFunct.h(84,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\stringFunct.h(66,1): warning C4090: 'initializing': different 'const' qualifiers
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(80,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(81,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(82,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(83,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(84,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(85,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\main.c(19,33): warning C4047: 'initializing': 'char' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\main.c(45,11): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.

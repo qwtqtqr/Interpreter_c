@@ -1,2 +1,4 @@
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter\Debug\Interpreter.exe
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter\Debug\Interpreter.pdb
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\Debug\Interpreter.exe
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\Debug\Interpreter.pdb

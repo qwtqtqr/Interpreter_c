@@ -209,6 +209,12 @@ struct AST_Node* binexpr_int(int ptp)
 	}
 
 	left = mkastnode_const(currentToken->tokenType, currentToken->intValue * minusVal, currentToken->floatVal * minusVal, NULL);
+	if (currentToken->tokenType == TT_IDENT)
+	{
+		char* saveIdentName = calloc(strlen(currentToken->IdentToken_name), sizeof(char));
+		saveIdentName = strcpy(saveIdentName, currentToken->IdentToken_name);
+		left = mkastnode_ident(TT_IDENT, minusVal, minusVal, NULL, NULL, newID_token(DT_INT, 1, 0, saveIdentName), saveIdentName);
+	}
 	minusVal = 1;
 	int lastLine = Line;
 	scan_curToken(); // bin operator
@@ -232,10 +238,14 @@ struct AST_Node* binexpr_int(int ptp)
 	while (getOpPrecedence(currentToken) + globl_inParen * globl_parenDelta > ptp)
 	{	
 		struct Token* lastToken = currentToken;
-
-		
 		right = binexpr_int(getOpPrecedence(currentToken) + globl_inParen * globl_parenDelta);
 		left = mkastnode(lastToken->tokenType, lastToken->intValue, lastToken->floatVal, left, right, NULL);
+		if (lastToken->tokenType == TT_IDENT)
+		{
+			char* saveIdentName = calloc(strlen(lastToken->IdentToken_name), sizeof(char));
+			saveIdentName = strcpy(saveIdentName, lastToken->IdentToken_name);
+			left = mkastnode_ident(lastToken->tokenType, lastToken->intValue, lastToken->floatVal, left, right, newID_token(DT_INT, 1, 0, saveIdentName), saveIdentName);
+		}
 
 		rightParenCode();	
 	}
@@ -279,7 +289,7 @@ struct AST_Node* binexpr()
 INT_VAL interpretAST_int(struct AST_Node* root)
 {
 	int leftVal, rightVal;
-	struct IDENT_token* curIdent = NULL;
+	struct IDENT_tokenData* curIdent = NULL;
 	struct tableNode* tNode = NULL;
 	
 	if (root->left != NULL)
@@ -313,6 +323,10 @@ INT_VAL interpretAST_int(struct AST_Node* root)
 
 	case TT_INT:
 		return root->intVal;
+
+	case TT_IDENT:
+		curIdent =(struct IDENT_tokenData*) symtable_getItem(root->varName);
+		return curIdent->value * root->intVal;	
 		
 	}
 }
@@ -331,9 +345,12 @@ struct AST_Node* genMainAST()
 		node = mkastnode(t->tokenType, t->intValue, t->floatVal, left, genMainAST(), NULL);
 		break;
 
+
 	case TT_VAR:
 		node = genVarAST();
+		node->right = genMainAST();
 		return node;
+		break;
 
 	}
 	if (currentToken->tokenType == TT_EOF)
@@ -360,6 +377,24 @@ void interpretMainAST(struct AST_Node* root)
 		{
 			INT_VAL printVal = interpretAST_int(curNode->left);
 			printf("%lld\n", printVal);
+		}
+
+		if (curNode->tokenType == TT_IDENT)
+		{
+			struct IDENT_tokenData* curNodeData = (struct IDENT_tokenData*)curNode->otherData;
+			char* saveVarName = calloc(strlen(curNode->varName), sizeof(char));
+			saveVarName = strcpy(saveVarName, curNode->varName);
+			symtable_add(saveVarName, newID_token(DT_INT, 1, interpretAST_int(curNode->left), saveVarName));
+			/*if (curNodeData->init == 0)
+			{
+				symtable_add(saveVarName, newID_token(DT_INT, 0, 0, saveVarName));
+			}
+			else if (curNodeData->init == 1)
+			{
+				//printf("curNode->varName_debug:  %s\n", curNode->varName);
+
+			}*/
+			//free(curNodeData);
 		}
 
 		curNode = curNode->right;

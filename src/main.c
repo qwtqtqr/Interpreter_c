@@ -7,6 +7,11 @@
 #include "header/ast.h"
 #include "header/symtable.h"
 
+
+#define _CRT_SECURE_NO_WARNINGS
+#pragma warning(disable:4996)
+
+
 int Line = 1;
 int Putback = 0;
 struct Token* currentToken = NULL;
@@ -25,11 +30,8 @@ static void initGloblVar()
 	globl_symtable = newLinkedList();
 }
 
-struct Test
-{
-	const char* n;
-};
 
+// todo: free tokens
 
 int main(int argc, char* argv[])
 {
@@ -37,15 +39,29 @@ int main(int argc, char* argv[])
 	const char* fileName = "test.txt";
 	LinkedList* tokenList = newLinkedList();
 	
-	Infile = fopen(fileName, "r");  
+	Infile = fopen(fileName, "r");
 	if (Infile != NULL)
 	{  
 		struct AST_Node* ast_root = genMainAST();
+
+
+		//printf("test:  %s\n", ast_root->varName);
+
 		interpretMainAST(ast_root);
 
-		struct AST_Node* cNode = ast_root->right;
-		//struct IDENT_token* otherData =(struct AST_Node*) ast_root->otherData;
-		printf("main:   %s\n", ast_root->varName);
+		/*struct IDENT_tokenData* testID = symtable_getItem("y");
+		printf("res::  %s\n", testID->varName);*/
+
+
+		/*struct IDENT_tokenData* testID = newID_token(4, 5, 434, "test");
+		struct IDENT_tokenData* testID2 = newID_token(4, 5, 434, "test2");
+		symtable_add("test", testID);
+		symtable_add("test2", testID2);
+		struct IDENT_tokenData* retID1 = symtable_getItem("test");
+		struct IDENT_tokenData* retID2 = symtable_getItem("test2");
+
+		printf("testId:  %s\n", retID2->varName);*/
+
 
 
 		exit(0);
