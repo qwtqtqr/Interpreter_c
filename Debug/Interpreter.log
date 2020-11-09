@@ -1,0 +1,10 @@
+﻿  variable.c
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter\src\header\tokens.h(80,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter\src\header\tokens.h(81,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter\src\header\tokens.h(82,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter\src\header\tokens.h(83,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter\src\header\tokens.h(84,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter\src\header\tokens.h(85,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter\src\variable.c(13,16): warning C4013: 'scan_curToken' undefined; assuming extern returning int
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter\src\variable.c(21,10): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'int'
+  Interpreter.vcxproj -> C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter\Debug\Interpreter.exe
