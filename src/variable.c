@@ -6,8 +6,8 @@
 struct AST_Node* genVarAST()
 {
 	struct AST_Node* node = NULL;
-	//if (currentToken->tokenType == TT_VAR)
-	//{
+	if (currentToken->tokenType == TT_VAR)
+	{
 		scan_curToken();
 
 		if (currentToken->tokenType != TT_IDENT)
@@ -35,6 +35,6 @@ struct AST_Node* genVarAST()
 		printf("[SYNTAX ERROR] Line %d\n", Line);
 		exit(1);
 
-	//}
+	}
 	return node;
 }

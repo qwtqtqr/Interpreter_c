@@ -384,17 +384,15 @@ void interpretMainAST(struct AST_Node* root)
 			struct IDENT_tokenData* curNodeData = (struct IDENT_tokenData*)curNode->otherData;
 			char* saveVarName = calloc(strlen(curNode->varName), sizeof(char));
 			saveVarName = strcpy(saveVarName, curNode->varName);
-			symtable_add(saveVarName, newID_token(DT_INT, 1, interpretAST_int(curNode->left), saveVarName));
-			/*if (curNodeData->init == 0)
+			if (curNodeData->init == 0)
 			{
 				symtable_add(saveVarName, newID_token(DT_INT, 0, 0, saveVarName));
 			}
 			else if (curNodeData->init == 1)
 			{
-				//printf("curNode->varName_debug:  %s\n", curNode->varName);
-
-			}*/
-			//free(curNodeData);
+				symtable_add(saveVarName, newID_token(DT_INT, 1, interpretAST_int(root->left), saveVarName));
+			}
+			free(curNodeData);
 		}
 
 		curNode = curNode->right;

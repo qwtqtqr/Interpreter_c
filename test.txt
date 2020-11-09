@@ -2,4 +2,4 @@ var y = 50;
 var x = 56 + y;
 var l = 66;
 
-print (y + x + l) * y;      // todo:  fix bug:  (-x) * y;
+print y;      // todo:  fix bug:  (-x) * y;
