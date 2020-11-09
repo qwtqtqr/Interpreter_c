@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "header/stringFunct.h"
 #include "header/data.h"
 #include <stdlib.h>
 #include "header/scan.h"

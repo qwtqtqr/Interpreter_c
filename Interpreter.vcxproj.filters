@@ -35,9 +35,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\header\stringFunct.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\header\list.h">
       <Filter>Header Files</Filter>
     </ClInclude>

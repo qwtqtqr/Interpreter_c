@@ -153,7 +153,6 @@
     <ClInclude Include="src\header\data.h" />
     <ClInclude Include="src\header\list.h" />
     <ClInclude Include="src\header\scan.h" />
-    <ClInclude Include="src\header\stringFunct.h" />
     <ClInclude Include="src\header\symtable.h" />
     <ClInclude Include="src\header\tokens.h" />
   </ItemGroup>
