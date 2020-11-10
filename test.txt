@@ -1,8 +1,8 @@
-var x = 532;
-var y = 5 * x^2;
+var x = 12;
+var y = 3^x;
 
 print x;
 print y;
 
 
-// todo:  fix bug:  (-x) * y;  and fix symtable  
+// todo:  fix bug:  (-x) * y

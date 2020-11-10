@@ -1,8 +1,21 @@
-﻿  symtable.c
+﻿  ast.c
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(80,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(81,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(82,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(83,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(84,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(85,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\ast.c(41,19): warning C4013: 'tokenIsBinOp' undefined; assuming extern returning int
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\ast.c(295,41): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\ast.c(298,43): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\ast.c(326,69): warning C4090: 'function': different 'const' qualifiers
+  symtable.c
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(80,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(81,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(82,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(83,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(84,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(85,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+  Generating Code...
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\ast.c(335): warning C4715: 'interpretAST_int': not all control paths return a value
   Interpreter.vcxproj -> C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\Debug\Interpreter.exe
