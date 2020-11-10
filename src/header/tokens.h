@@ -46,7 +46,7 @@ struct Token
 	int line;
 	char* strVal;
 	double floatVal;
-	
+
 	char* IdentToken_name;
 	INT_VAL IdentToken_data;
 };
@@ -60,7 +60,7 @@ struct TokenIdent
 	int tokenType;
 };
 
-static struct TokenIdent multicharTokens[] = 
+static struct TokenIdent multicharTokens[] =
 {
 	{"print", TT_PRINT}, {"if", TT_IF},
 	{"while", TT_WHILE}, {"var", TT_VAR},
@@ -76,12 +76,12 @@ struct NumericVal
 
 
 static struct TokenIdent singleCharTokens[] =
-{ 
+{
 	{'+', TT_PLUS}, {'-', TT_MINUS},
 	{'*', TT_MUL}, {'/', TT_DIV},
-	{'^', TT_POW}, {';', TT_OP_END}, 
+	{'^', TT_POW}, {';', TT_OP_END},
 	{'(', TT_LEFT_PAREN}, {')', TT_RIGHT_PAREN},
-	{'{', TT_LEFT_CURLY}, {'}', TT_LEFT_CURLY}, 
+	{'{', TT_LEFT_CURLY}, {'}', TT_LEFT_CURLY},
 	{'=', TT_EQUALS}
 };
 

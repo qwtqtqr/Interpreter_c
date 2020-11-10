@@ -1,5 +1,8 @@
-var y = 50;
-var x = 56 + y;
-var l = 66;
+var x = 532;
+var y = 5 * x^2;
 
-print y;      // todo:  fix bug:  (-x) * y;
+print x;
+print y;
+
+
+// todo:  fix bug:  (-x) * y;  and fix symtable  

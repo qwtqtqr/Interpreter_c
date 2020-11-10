@@ -1,26 +1,8 @@
-﻿  main.c
+﻿  symtable.c
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(80,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(81,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(82,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(83,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(84,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(85,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
-C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\main.c(10,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
-C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\main.c : message : see previous definition of '_CRT_SECURE_NO_WARNINGS'
-C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\main.c(19,33): warning C4047: 'initializing': 'char' differs in levels of indirection from 'void *'
-  scan.c
-C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(80,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
-C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(81,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
-C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(82,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
-C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(83,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
-C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(84,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
-C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(85,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
-C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(14,16): warning C4013: 'isalpha' undefined; assuming extern returning int
-C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(14,30): warning C4013: 'isdigit' undefined; assuming extern returning int
-C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(38,2): warning C4091: 'static ': ignored on left of 'keyword_returnVal' when no variable is declared
-C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(266,29): warning C4047: '==': 'char *' differs in levels of indirection from 'int'
-C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(318,52): warning C4047: 'function': 'char *' differs in levels of indirection from 'char'
-C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(318,49): warning C4024: 'newToken_str': different types for formal and actual parameter 4
-  Generating Code...
-C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(137): warning C4716: 'newToken_identToken': must return a value
   Interpreter.vcxproj -> C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\Debug\Interpreter.exe

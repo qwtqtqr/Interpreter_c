@@ -17,7 +17,7 @@ struct Token* currentToken = NULL;
 FILE* Infile = NULL;
 FILE* Outfile = NULL;
 char Text[TEXTLEN + 1] = { NULL };
-LinkedList* globl_symtable = NULL;
+LinkedList* globl_symtable[SYMTABLE_SIZE] = { NULL };
 
 
 static void initGloblVar()
@@ -26,7 +26,6 @@ static void initGloblVar()
 	Line = 1;
 	Putback = 0;
 	currentToken = malloc(sizeof(struct Token));
-	globl_symtable = newLinkedList();
 }
 
 
@@ -37,36 +36,19 @@ int main(int argc, char* argv[])
 	initGloblVar();
 	const char* fileName = "test.txt";
 	LinkedList* tokenList = newLinkedList();
-	
+
 	Infile = fopen(fileName, "r");
 	if (Infile != NULL)
-	{  
+	{
 		struct AST_Node* ast_root = genMainAST();
-
-
-		//printf("test:  %s\n", ast_root->varName);
-
 		interpretMainAST(ast_root);
 
-		/*struct IDENT_tokenData* testID = symtable_getItem("y");
-		printf("res::  %s\n", testID->varName);*/
-
-
-		/*struct IDENT_tokenData* testID = newID_token(4, 5, 434, "test");
-		struct IDENT_tokenData* testID2 = newID_token(4, 5, 434, "test2");
-		symtable_add("test", testID);
-		symtable_add("test2", testID2);
-		struct IDENT_tokenData* retID1 = symtable_getItem("test");
-		struct IDENT_tokenData* retID2 = symtable_getItem("test2");
-
-		printf("testId:  %s\n", retID2->varName);*/
-
-
+	
 
 		exit(0);
 	}
 
 	printf("[ERROR] could not open file '%s'\n", fileName);
-	
+
 	exit(1);
 }

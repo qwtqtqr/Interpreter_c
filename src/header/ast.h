@@ -41,6 +41,7 @@ struct AST_Node* genMainAST();
 void interpretMainAST(struct AST_Node* root);
 
 struct AST_Node* genVarAST();
+struct AST_Node* genIdentAST();
 
 
 

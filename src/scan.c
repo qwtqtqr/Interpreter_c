@@ -33,7 +33,7 @@ int scanident(int c, char* buf, int lim) {
 static struct keyword_returnVal
 {
 	int TokenType;
-	
+
 	char* ident_name;
 };
 
@@ -61,7 +61,7 @@ void createNewString(int c, LinkedList* buffList)
 	int curStrBuffIdx = 0;
 	char* buff = calloc(STRINGBUFF_LEN, sizeof(char));
 	int bufferCount = 1;
-	
+
 
 	while (c != '"' && c != EOF)
 	{
@@ -86,9 +86,9 @@ void createNewString(int c, LinkedList* buffList)
 
 char* createFinalString(LinkedList* strBufferList)
 {
-	size_t size =(size_t) LinkedList_size(strBufferList)* STRINGBUFF_LEN + 1;
+	size_t size = (size_t)LinkedList_size(strBufferList) * STRINGBUFF_LEN + 1;
 	char* returnString = calloc(size, sizeof(char));
-	
+
 	int curIdx = 0;
 
 	node_t* listNode = LinkedList_getNode(strBufferList, 0);
@@ -172,7 +172,7 @@ struct NumericVal scanIntAndFloat(int c)   // integer and double
 	while ((k = chrpos("0123456789", c)) >= 0 || c == '.') {
 		if (count == 0)
 		{
-			firstNum =(int) k;
+			firstNum = (int)k;
 		}
 		count++;
 		if (c == '.')
@@ -194,7 +194,7 @@ struct NumericVal scanIntAndFloat(int c)   // integer and double
 		if (count >= 19)
 		{
 			printf("[STACK ERROR] number has to many digits  (Line %d)\n", Line);
-	    	exit(1);
+			exit(1);
 		}
 		INT_VAL divNum = (INT_VAL)pow(10, ((double)count - dotPos));
 		double floatVal = (double)val / (double)divNum;
