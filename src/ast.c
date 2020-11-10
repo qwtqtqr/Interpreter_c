@@ -5,14 +5,12 @@
 #include "header/list.h"
 #include "header/symtable.h"
 #include <math.h>
-
+#define PAREN_PRECEDENCE 20
 
 static double math_root(double x, double y)
 {
 	return (pow(x, 1 / y));
 }
-
-#define PAREN_PRECEDENCE 20
 
 static int binOperators[] = { TT_PLUS, TT_MINUS, TT_MUL, TT_DIV, TT_OP_END, TT_EOF, TT_POW };
 
