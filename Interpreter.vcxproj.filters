@@ -24,13 +24,16 @@
     <ClCompile Include="src\scan.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ast.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\symtable.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\variable.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\genAST.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interpretAST.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

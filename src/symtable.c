@@ -102,7 +102,7 @@ void symtable_setItemVal(char* varName, INT_VAL value)
 }
 
 
-struct IDENT_tokenData* newID_token(int dataType, int init, INT_VAL value, char* varName, int var)
+struct IDENT_tokenData* newID_token(int dataType, int init, INT_VAL value, char* varName, int var, struct DATA_STRUCT* data)
 {
     struct IDENT_tokenData* initID = malloc(sizeof(struct IDENT_tokenData));
     initID->dataType = dataType;
@@ -110,5 +110,6 @@ struct IDENT_tokenData* newID_token(int dataType, int init, INT_VAL value, char*
     initID->value = value;
     initID->varName = varName;
     initID->var = var;
+    initID->data = data;
     return initID;
 }

@@ -141,7 +141,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\ast.c" />
+    <ClCompile Include="src\genAST.c" />
+    <ClCompile Include="src\interpretAST.c" />
     <ClCompile Include="src\list.c" />
     <ClCompile Include="src\main.c" />
     <ClCompile Include="src\scan.c" />

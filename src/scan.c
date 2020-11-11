@@ -3,6 +3,7 @@
 #include <math.h>
 #include <time.h>
 #include "header/symtable.h"
+#include "header/tokens.h"
 
 
 // Scan an identifier from the input file and
@@ -258,14 +259,14 @@ void scan_curToken()
 
 	if (c == EOF)
 	{
-		currentToken = newToken(TT_EOF, 0, Line);
+		currentToken = newToken(TT_EOF, 0, Line, NULL);
 	}
 	for (size_t i = 0; i < arraySize(singleCharTokens); i++)
 	{
 		struct TokenIdent curIdent = singleCharTokens[i];
 		if (curIdent.tokenStr == c)
 		{
-			currentToken = newToken(curIdent.tokenType, 0, Line);
+			currentToken = newToken(curIdent.tokenType, 0, Line, NULL);
 		}
 	}
 
@@ -277,12 +278,17 @@ void scan_curToken()
 		if (numTT == TT_INT)
 		{
 			INT_VAL intVal = numStruct.intVal;
-			currentToken = newToken(TT_INT, intVal, Line);
+			long long* intValPtr = malloc(sizeof(long long));
+			*intValPtr = intVal;
+
+			currentToken = newToken(TT_INT, intVal, Line, new_DATA_STRUCT(NULL, NULL, NULL, intValPtr, NULL, DT_INT));
 		}
 		if (numTT == TT_FLOAT)
 		{
 			double floatVal = numStruct.floatVal;
-			currentToken = newToken_float(TT_FLOAT, floatVal, Line);
+			long double* floatValPtr = malloc(sizeof(long double));
+			*floatValPtr = floatVal;
+			currentToken = newToken_float(TT_FLOAT, floatVal, Line, new_DATA_STRUCT(NULL, NULL, floatValPtr, NULL, NULL, DT_FLOAT));
 		}
 	}
 
@@ -293,11 +299,11 @@ void scan_curToken()
 		int keyword_tt = cur_key_ret_val.TokenType;
 		if (keyword_tt != TT_IDENT)
 		{
-			currentToken = newToken(keyword_tt, 0, Line);
+			currentToken = newToken(keyword_tt, 0, Line, NULL);
 		}
 		if (keyword_tt == TT_IDENT)
 		{
-			currentToken = newToken_identToken(TT_IDENT, Line, cur_key_ret_val.ident_name, 0);
+			currentToken = newToken_identToken(TT_IDENT, Line, cur_key_ret_val.ident_name, 0, NULL);
 		}
 	}
 
@@ -306,7 +312,7 @@ void scan_curToken()
 		LinkedList* strList = newLinkedList();
 		createNewString(c, strList);
 		char* string_final = createFinalString(strList);
-		currentToken = newToken_str(TT_STRING, 0, Line, string_final);
+		currentToken = newToken_str(TT_STRING, 0, Line, string_final, new_DATA_STRUCT(string_final, NULL, NULL, NULL, NULL, DT_STRING));
 
 		free(strList);
 	}
@@ -315,6 +321,8 @@ void scan_curToken()
 	if (c == charT[0])
 	{
 		char val = scanChars(c);
-		currentToken = newToken_str(TT_CHAR, 0, Line, val);
+		char* valPtr = malloc(sizeof(char));
+		*valPtr = val;
+		currentToken = newToken_str(TT_CHAR, 0, Line, val, new_DATA_STRUCT(NULL, NULL, NULL, NULL, valPtr, DT_CHAR));
 	}
 }

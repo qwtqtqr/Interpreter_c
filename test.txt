@@ -1,8 +1,10 @@
 var x = 12;
-var y = 3^x;
+var y = 0.5 * x;
 
 print x;
 print y;
 
+x = 3;
+print x;
 
 // todo:  fix bug:  (-x) * y

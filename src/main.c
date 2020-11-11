@@ -37,12 +37,20 @@ int main(int argc, char* argv[])
 	const char* fileName = "test.txt";
 	LinkedList* tokenList = newLinkedList();
 
+
 	Infile = fopen(fileName, "r");
 	if (Infile != NULL)
 	{
 		struct AST_Node* ast_root = genMainAST();
 		interpretMainAST(ast_root);
 
+		/*
+		int** intArr = calloc(50, sizeof(int));
+		if (intArr[65] == NULL)
+		{
+			printf("NULL\n");
+		}
+		*/
 	
 
 		exit(0);

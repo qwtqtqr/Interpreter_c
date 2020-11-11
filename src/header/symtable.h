@@ -16,8 +16,9 @@ struct IDENT_tokenData
 	int init;
 	INT_VAL value;
 	int var;
+	struct DATA_STRUCT* data;
 };
 
 void symtable_add(char* varName, struct IDENT_tokenData* data);
 struct IDENT_tokenData* symtable_getItem(char* varName);
-struct IDENT_tokenData* newID_token(int dataType, int init, INT_VAL value, char* varName, int var);
+struct IDENT_tokenData* newID_token(int dataType, int init, INT_VAL value, char* varName, int var, struct DATA_STRUCT* data);

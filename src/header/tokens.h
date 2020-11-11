@@ -5,13 +5,81 @@
 #define debugLog(x, y) printf(x, y)
 #define INT_VAL  long long
 
-
-
 #include "data.h"
 #include "list.h"
-
+#include <string.h>
 
 extern struct Token* currentToken;
+
+struct DATA_STRUCT
+{
+	char* strVal;
+	int* boolVal;
+	long double* doubleVal;
+	long long* intVal;
+	char* charVal;
+	int dataType;
+};
+
+
+static struct DATA_STRUCT* new_DATA_STRUCT(char* strVal, int* boolVal, long double* doubleVal, long long intVal, char* charVal, int dataType)
+{
+	struct DATA_STRUCT* init = malloc(sizeof(struct DATA_STRUCT));
+	init->strVal = strVal;
+	init->boolVal = boolVal;
+	init->doubleVal = doubleVal;
+	init->intVal = intVal;
+	init->charVal = charVal;
+	init->dataType = dataType;
+	return init;
+};
+
+
+static void free_DATA_STRUCT(struct DATA_STRUCT* data)
+{
+	free(data->strVal);
+	free(data->boolVal);
+	free(data->doubleVal);
+	free(data->intVal);
+	free(data->charVal);
+	free(data);
+}
+
+
+static struct DATA_STRUCT* DATA_STRUCT_cpy(struct DATA_STRUCT* src)
+{
+	int* boolVal = NULL;
+	if (src->boolVal != NULL)
+	{
+		boolVal = calloc(1, sizeof(int));
+		*boolVal = *(src->boolVal);
+	}
+	int dt = src->dataType;
+	char* strVal = NULL;
+	if (src->strVal != NULL)
+	{
+		strVal = strcpy(strVal, src->strVal);
+	}
+	char* charVal = calloc(1, sizeof(char));
+	if (src->charVal != NULL)
+	{
+		*charVal = *(src->charVal);
+	}
+	long double* doubleVal = NULL;
+	if (src->doubleVal != NULL)
+	{
+		doubleVal = calloc(0, sizeof(long double));
+		*doubleVal = *(src->doubleVal);
+	}
+	long long* intVal = NULL;
+	if (src->intVal != NULL)
+	{
+		intVal = calloc(1, sizeof(long long));
+		*intVal = *(src->intVal);
+	}
+	return new_DATA_STRUCT(strVal, boolVal, doubleVal, intVal, charVal, dt);
+}
+
 
 enum
 {
@@ -39,6 +107,18 @@ enum
 };
 
 
+
+enum
+{
+	DT_INT,
+	DT_DOUBLE,
+	DT_FLOAT,
+	DT_CHAR,
+	DT_STRING,
+	DT_BOOL,
+};
+
+
 struct Token
 {
 	int tokenType;
@@ -49,6 +129,7 @@ struct Token
 
 	char* IdentToken_name;
 	INT_VAL IdentToken_data;
+	struct DATA_STRUCT* data;
 };
 
 
@@ -85,7 +166,7 @@ static struct TokenIdent singleCharTokens[] =
 	{'=', TT_EQUALS}
 };
 
-static struct Token* newToken(int tokenType, INT_VAL intValue, int line)
+static struct Token* newToken(int tokenType, INT_VAL intValue, int line, struct DATA_struct* data)
 {
 	struct Token* initToken = malloc(sizeof(struct Token));
 	initToken->tokenType = tokenType;
@@ -95,10 +176,11 @@ static struct Token* newToken(int tokenType, INT_VAL intValue, int line)
 	initToken->floatVal = 0;
 	initToken->IdentToken_name = NULL;
 	initToken->IdentToken_data = 0;
+	initToken->data = data;
 	return initToken;
 }
 
-static struct Token* newToken_str(int tokenType, INT_VAL intValue, int line, char* strVal)
+static struct Token* newToken_str(int tokenType, INT_VAL intValue, int line, char* strVal, struct DATA_struct* data)
 {
 	struct Token* initToken_str = malloc(sizeof(struct Token));
 	initToken_str->tokenType = tokenType;
@@ -108,10 +190,11 @@ static struct Token* newToken_str(int tokenType, INT_VAL intValue, int line, cha
 	initToken_str->floatVal = 0;
 	initToken_str->IdentToken_name = NULL;
 	initToken_str->IdentToken_data = 0;
+	initToken_str->data = data;
 	return initToken_str;
 }
 
-static struct Token* newToken_float(int tokenType, double floatVal, int line)
+static struct Token* newToken_float(int tokenType, double floatVal, int line, struct DATA_struct* data)
 {
 	struct Token* initToken_float = malloc(sizeof(struct Token));
 	initToken_float->tokenType = tokenType;
@@ -121,10 +204,11 @@ static struct Token* newToken_float(int tokenType, double floatVal, int line)
 	initToken_float->floatVal = floatVal;
 	initToken_float->IdentToken_name = NULL;
 	initToken_float->IdentToken_data = 0;
+	initToken_float->data = data;
 	return initToken_float;
 }
 
-static struct Token* newToken_identToken(int tokenType, int line, char* identToken_name, INT_VAL identToken_data)
+static struct Token* newToken_identToken(int tokenType, int line, char* identToken_name, INT_VAL identToken_data, struct DATA_struct* data)
 {
 	struct Token* initToken = malloc(sizeof(struct Token));
 	initToken->tokenType = tokenType;
@@ -134,12 +218,14 @@ static struct Token* newToken_identToken(int tokenType, int line, char* identTok
 	initToken->floatVal = 0;
 	initToken->IdentToken_name = identToken_name;
 	initToken->IdentToken_data = identToken_data;
+	initToken->data = data;
+	return initToken;
 }
 
 
 static void addToken(LinkedList* tokenList, int tokenType, INT_VAL intValue, int line)
 {
-	LinkedList_add_end(tokenList, newToken(tokenType, intValue, line), 0, 0, NULL);
+	LinkedList_add_end(tokenList, newToken(tokenType, intValue, line, NULL), 0, 0, NULL);
 }
 
 #endif
