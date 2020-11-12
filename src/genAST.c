@@ -310,6 +310,27 @@ struct AST_Node* genMainAST()
 		node->right = genMainAST();
 		return node;
 
+	case TT_UNDEF:
+		scan_curToken();
+		if (currentToken->tokenType != TT_IDENT)
+		{
+			printf("[SYNTAX ERROR] expected an identifier (Line %d)\n", Line);
+			exit(1);
+		}
+		char* varName_save = calloc(strlen(currentToken->IdentToken_name), sizeof(char));
+		varName_save = strcpy(varName_save, currentToken->IdentToken_name);
+		left = mkastnode_ident(TT_IDENT, currentToken->intValue, currentToken->floatVal, NULL, NULL, NULL, varName_save, NULL);
+		scan_curToken();
+		if (currentToken->tokenType != TT_OP_END)
+		{
+			printf("[SYNTAX ERROR] expected a ';' in Line %d\n", Line);
+			exit(1);
+		}
+		right = genMainAST();
+		node = mkastnode(TT_UNDEF, 0, 0, left, right, NULL, NULL);
+		return node;
+
+
 	}
 	if (currentToken->tokenType == TT_EOF)
 	{

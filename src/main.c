@@ -51,8 +51,6 @@ int main(int argc, char* argv[])
 			printf("NULL\n");
 		}
 		*/
-	
-
 		exit(0);
 	}
 

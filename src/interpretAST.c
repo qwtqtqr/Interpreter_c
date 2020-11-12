@@ -42,13 +42,29 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 			long double* result = malloc(sizeof(long double));
 			*result = *(leftVal->doubleVal) + *(rightVal->doubleVal);
 			free(leftVal), free(rightVal);
+			long long res_long = *result;
+			if ((*result / res_long) == 1)
+			{
+				long long* res_int = malloc(sizeof(long long));
+				*res_int = (long long)*result;
+				free(result);
+				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
+			}
 			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
 		}
 		if (dt_left == DT_FLOAT && dt_right == DT_INT)
 		{
 			long double* result = malloc(sizeof(long double));
 			*result = *(leftVal->doubleVal) + *(rightVal->intVal);
+			long long res_long = *result;
 			free(leftVal), free(rightVal);
+			if ((*result / res_long) == 1)
+			{
+				long long* res_int = malloc(sizeof(long long));
+				*res_int = (long long)*result;
+				free(result);
+				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
+			}
 			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
 		}
 
@@ -56,7 +72,15 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 		{
 			long double* result = malloc(sizeof(long double));
 			*result = *(leftVal->intVal) + *(rightVal->doubleVal);
+			long long res_long = *result;
 			free(leftVal), free(rightVal);
+			if ((*result / res_long) == 1)
+			{
+				long long* res_int = malloc(sizeof(long long));
+				*res_int = (long long)*result;
+				free(result);
+				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
+			}
 			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
 		}
 
@@ -75,14 +99,30 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 		{
 			long double* result = malloc(sizeof(long double));
 			*result = *(leftVal->doubleVal) - *(rightVal->doubleVal);
+			long long res_long = *result;
 			free(leftVal), free(rightVal);
+			if ((*result / res_long) == 1)
+			{
+				long long* res_int = malloc(sizeof(long long));
+				*res_int = (long long)*result;
+				free(result);
+				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
+			}
 			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
 		}
 		if (dt_left == DT_FLOAT && dt_right == DT_INT)
 		{
 			long double* result = malloc(sizeof(long double));
 			*result = *(leftVal->doubleVal) - *(rightVal->intVal);
+			long long res_long = *result;
 			free(leftVal), free(rightVal);
+			if ((*result / res_long) == 1)
+			{
+				long long* res_int = malloc(sizeof(long long));
+				*res_int = (long long)*result;
+				free(result);
+				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
+			}
 			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
 		}
 
@@ -90,7 +130,15 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 		{
 			long double* result = malloc(sizeof(long double));
 			*result = *(leftVal->intVal) - *(rightVal->doubleVal);
+			long long res_long = *result;
 			free(leftVal), free(rightVal);
+			if ((*result / res_long) == 1)
+			{
+				long long* res_int = malloc(sizeof(long long));
+				*res_int = (long long)*result;
+				free(result);
+				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
+			}
 			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
 		}
 
@@ -109,14 +157,30 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 		{
 			long double* result = malloc(sizeof(long double));
 			*result = *(leftVal->doubleVal) * *(rightVal->doubleVal);
+			long long res_long = *result;
 			free(leftVal), free(rightVal);
+			if ((*result / res_long) == 1)
+			{
+				long long* res_int = malloc(sizeof(long long));
+				*res_int = (long long)*result;
+				free(result);
+				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
+			}
 			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
 		}
 		if (dt_left == DT_FLOAT && dt_right == DT_INT)
 		{
 			long double* result = malloc(sizeof(long double));
 			*result = *(leftVal->doubleVal) * *(rightVal->intVal);
+			long long res_long = *result;
 			free(leftVal), free(rightVal);
+			if ((*result / res_long) == 1)
+			{
+				long long* res_int = malloc(sizeof(long long));
+				*res_int = (long long)*result;
+				free(result);
+				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
+			}
 			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
 		}
 
@@ -124,7 +188,16 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 		{
 			long double* result = malloc(sizeof(long double));
 			*result = *(leftVal->intVal) * *(rightVal->doubleVal);
+			long long res_long = *result;
 			free(leftVal), free(rightVal);
+			if ((*result / res_long) == 1)
+			{
+				long long* res_int = malloc(sizeof(long long));
+				*res_int = (long long)*result;
+				free(result);
+				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
+			}
+		
 			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
 		}
 
@@ -148,14 +221,30 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 		{
 			long double* result = malloc(sizeof(long double));
 			*result = *(leftVal->doubleVal) / *(rightVal->doubleVal);
+			long long res_long = *result;
 			free(leftVal), free(rightVal);
+			if ((*result / res_long) == 1)
+			{
+				long long* res_int = malloc(sizeof(long long));
+				*res_int = (long long)*result;
+				free(result);
+				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
+			}
 			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
 		}
 		if (dt_left == DT_FLOAT && dt_right == DT_INT)
 		{
 			long double* result = malloc(sizeof(long double));
 			*result = *(leftVal->doubleVal) / *(rightVal->intVal);
+			long long res_long = *result;
 			free(leftVal), free(rightVal);
+			if ((*result / res_long) == 1)
+			{
+				long long* res_int = malloc(sizeof(long long));
+				*res_int = (long long)*result;
+				free(result);
+				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
+			}
 			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
 		}
 
@@ -163,7 +252,15 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 		{
 			long double* result = malloc(sizeof(long double));
 			*result = *(leftVal->intVal) / *(rightVal->doubleVal);
+			long long res_long = *result;
 			free(leftVal), free(rightVal);
+			if ((*result / res_long) == 1)
+			{
+				long long* res_int = malloc(sizeof(long long));
+				*res_int = (long long)*result;
+				free(result);
+				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
+			}
 			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
 		}
 
@@ -183,14 +280,30 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 		{
 			long double* result = malloc(sizeof(long double));
 			*result = pow(*(leftVal->doubleVal), *(rightVal->doubleVal));
+			long long res_long = *result;
 			free(leftVal), free(rightVal);
+			if ((*result / res_long) == 1)
+			{
+				long long* res_int = malloc(sizeof(long long));
+				*res_int = (long long)*result;
+				free(result);
+				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
+			}
 			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
 		}
 		if (dt_left == DT_FLOAT && dt_right == DT_INT)
 		{
 			long double* result = malloc(sizeof(long double));
 			*result = pow(*(leftVal->doubleVal), *(rightVal->intVal));
+			long long res_long = *result;
 			free(leftVal), free(rightVal);
+			if ((*result / res_long) == 1)
+			{
+				long long* res_int = malloc(sizeof(long long));
+				*res_int = (long long)*result;
+				free(result);
+				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
+			}
 			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
 		}
 
@@ -198,7 +311,15 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 		{
 			long double* result = malloc(sizeof(long double));
 			*result = pow(*(leftVal->intVal), *(rightVal->doubleVal));
+			long long res_long = *result;
 			free(leftVal), free(rightVal);
+			if ((*result / res_long) == 1)
+			{
+				long long* res_int = malloc(sizeof(long long));
+				*res_int = (long long)*result;
+				free(result);
+				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
+			}
 			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
 		}
 
@@ -243,6 +364,7 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 		return DATA_STRUCT_cpy(curIdent->data);
 	}
 }
+
 
 void interpretMainAST(struct AST_Node* root)
 {
@@ -292,6 +414,13 @@ void interpretMainAST(struct AST_Node* root)
 
 			free(curNodeData);
 		}
+
+		// todo: free ident_node
+		else if (curNode->tokenType == TT_UNDEF)
+		{
+			symtable_removeItem(curNode->left->varName);
+		}
+
 		curNode = curNode->right;
 	}
 }

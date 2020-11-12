@@ -104,6 +104,7 @@ enum
 	TT_IDENT,
 	TT_EQUALS,
 	TT_VAR,
+	TT_UNDEF
 };
 
 
@@ -145,6 +146,7 @@ static struct TokenIdent multicharTokens[] =
 {
 	{"print", TT_PRINT}, {"if", TT_IF},
 	{"while", TT_WHILE}, {"var", TT_VAR},
+	{"undef", TT_UNDEF},
 };
 
 struct NumericVal
