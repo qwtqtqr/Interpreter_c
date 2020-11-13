@@ -194,8 +194,8 @@ struct NumericVal scanIntAndFloat(int c)   // integer and double
 
 		if (count >= 19)
 		{
-			printf("[STACK ERROR] number has to many digits  (Line %d)\n", Line);
-			exit(1);
+			/*intf("[STACK ERROR] number has to many digits  (Line %d)\n", Line);
+			exit(1);*/
 		}
 		INT_VAL divNum = (INT_VAL)pow(10, ((double)count - dotPos));
 		double floatVal = (double)val / (double)divNum;
@@ -205,8 +205,8 @@ struct NumericVal scanIntAndFloat(int c)   // integer and double
 
 	if (count >= 10 && firstNum > 1)
 	{
-		printf("[STACK ERROR] number has to many digits  (Line %d)\n", Line);
-		exit(1);
+		/*printf("[STACK ERROR] number has to many digits  (Line %d)\n", Line);
+		exit(1)*/
 	}
 
 
@@ -267,6 +267,8 @@ void scan_curToken()
 		if (curIdent.tokenStr == c)
 		{
 			currentToken = newToken(curIdent.tokenType, 0, Line, NULL);
+			putback(' ');
+			return;
 		}
 	}
 
@@ -294,6 +296,7 @@ void scan_curToken()
 
 	else if (isalpha(c) || c == '_')
 	{
+		
 		scanident(c, Text, TEXTLEN);
 		struct keyword_returnVal cur_key_ret_val = keyword(Text);
 		int keyword_tt = cur_key_ret_val.TokenType;

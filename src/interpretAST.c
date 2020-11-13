@@ -7,6 +7,157 @@
 #include <math.h>
 
 
+static struct DATA_STRUCT* RETURN_DATATYPE_NUM(struct DATA_STRUCT* leftVal, struct DATA_STRUCT* rightVal, int OP, int dt_left, int dt_right)
+{
+	int init = 0;
+	long double* result = malloc(sizeof(long double));
+	switch (OP)
+	{
+	case TT_PLUS:
+		if (dt_left == DT_FLOAT && dt_right == DT_FLOAT) 
+		{
+			*result = *(leftVal->doubleVal) + *(rightVal->doubleVal);
+			init = 1;
+		}
+		if (dt_left == DT_INT && dt_right == DT_FLOAT)
+		{ 
+			*result = *(leftVal->intVal) + *(rightVal->doubleVal);
+			init = 1;
+		}
+		if (dt_left == DT_FLOAT && dt_right == DT_INT)
+		{
+			*result = *(leftVal->doubleVal) + *(rightVal->intVal);
+			init = 1;
+		}
+		if (dt_left == DT_INT && dt_right == DT_INT)
+		{
+			long long* result = malloc(sizeof(long long));
+			*result = *(leftVal->intVal) + *(rightVal->intVal);
+			free(leftVal), free(rightVal);
+			return new_DATA_STRUCT(NULL, NULL, NULL, result, NULL, DT_INT);
+		}
+		break;
+
+	case TT_MINUS:
+		if (dt_left == DT_FLOAT && dt_right == DT_FLOAT)
+		{
+			*result = *(leftVal->doubleVal) - *(rightVal->doubleVal);
+			init = 1;
+		}
+		if (dt_left == DT_INT && dt_right == DT_FLOAT)
+		{
+			*result = *(leftVal->intVal) - *(rightVal->doubleVal);
+			init = 1;
+		}
+		if (dt_left == DT_FLOAT && dt_right == DT_INT)
+		{
+			*result = *(leftVal->doubleVal) - *(rightVal->intVal);
+			init = 1;
+		}
+		if (dt_left == DT_INT && dt_right == DT_INT)
+		{
+			long long* result = malloc(sizeof(long long));
+			*result = *(leftVal->intVal) - *(rightVal->intVal);
+			free(leftVal), free(rightVal);
+			return new_DATA_STRUCT(NULL, NULL, NULL, result, NULL, DT_INT);
+		}
+		break;
+
+	case TT_MUL:
+		if (dt_left == DT_FLOAT && dt_right == DT_FLOAT)
+		{
+			*result = *(leftVal->doubleVal) * *(rightVal->doubleVal);
+			init = 1;
+		}
+		if (dt_left == DT_INT && dt_right == DT_FLOAT)
+		{
+			*result = *(leftVal->intVal) * *(rightVal->doubleVal);
+			init = 1;
+		}
+		if (dt_left == DT_FLOAT && dt_right == DT_INT)
+		{
+			*result = *(leftVal->doubleVal) * *(rightVal->intVal);
+			init = 1;
+		}
+		if (dt_left == DT_INT && dt_right == DT_INT)
+		{
+			long long* result = malloc(sizeof(long long));
+			*result = *(leftVal->intVal) * *(rightVal->intVal);
+			free(leftVal), free(rightVal);
+			return new_DATA_STRUCT(NULL, NULL, NULL, result, NULL, DT_INT);
+		}
+		break;
+
+	case TT_DIV:
+		if (dt_left == DT_FLOAT && dt_right == DT_FLOAT)
+		{
+			*result = *(leftVal->doubleVal) / *(rightVal->doubleVal);
+			init = 1;
+		}
+		if (dt_left == DT_INT && dt_right == DT_FLOAT)
+		{
+			*result = *(leftVal->intVal) / *(rightVal->doubleVal);
+			init = 1;
+		}
+		if (dt_left == DT_FLOAT && dt_right == DT_INT)
+		{
+			*result = *(leftVal->doubleVal) / *(rightVal->intVal);
+			init = 1;
+		}
+		if (dt_left == DT_INT && dt_right == DT_INT)
+		{
+			long double* result = malloc(sizeof(long long));
+			*result =(long double) *(leftVal->intVal) / (long double)*(rightVal->intVal);
+			free(leftVal), free(rightVal);
+			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
+		}
+		break;
+
+	case TT_POW:
+		if (dt_left == DT_FLOAT && dt_right == DT_FLOAT)
+		{
+			*result = pow(*(leftVal->doubleVal), *(rightVal->doubleVal));
+			init = 1;
+		}
+		if (dt_left == DT_INT && dt_right == DT_FLOAT)
+		{
+			*result = pow(*(leftVal->intVal), *(rightVal->doubleVal));
+			init = 1;
+		}
+		if (dt_left == DT_FLOAT && dt_right == DT_INT)
+		{
+			*result = pow(*(leftVal->doubleVal), *(rightVal->intVal));
+			init = 1;
+		}
+		if (dt_left == DT_INT && dt_right == DT_INT)
+		{
+			long long* result = malloc(sizeof(long long));
+			*result = pow(*(leftVal->intVal), *(rightVal->intVal));
+			free(leftVal), free(rightVal);
+			return new_DATA_STRUCT(NULL, NULL, NULL, result, NULL, DT_INT);
+		}
+		break;
+
+	}
+	free(leftVal), free(rightVal);
+	long long res_long = *result;
+	if (init == 0)
+	{
+		printf("[ERROR] invalid datatype\n");
+		exit(1);
+	}
+	if ((*result / res_long) == 1)
+	{
+		long long* res_int = malloc(sizeof(long long));
+		*res_int = (long long)*result;
+		free(result);
+		return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
+	}
+	return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
+}
+
+
+
 
 struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 {
@@ -37,301 +188,19 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 	switch (root->tokenType)
 	{
 	case TT_PLUS:
-		if (dt_left == DT_FLOAT && dt_right == DT_FLOAT)
-		{
-			long double* result = malloc(sizeof(long double));
-			*result = *(leftVal->doubleVal) + *(rightVal->doubleVal);
-			free(leftVal), free(rightVal);
-			long long res_long = *result;
-			if ((*result / res_long) == 1)
-			{
-				long long* res_int = malloc(sizeof(long long));
-				*res_int = (long long)*result;
-				free(result);
-				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
-			}
-			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
-		}
-		if (dt_left == DT_FLOAT && dt_right == DT_INT)
-		{
-			long double* result = malloc(sizeof(long double));
-			*result = *(leftVal->doubleVal) + *(rightVal->intVal);
-			long long res_long = *result;
-			free(leftVal), free(rightVal);
-			if ((*result / res_long) == 1)
-			{
-				long long* res_int = malloc(sizeof(long long));
-				*res_int = (long long)*result;
-				free(result);
-				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
-			}
-			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
-		}
-
-		if (dt_left == DT_INT && dt_right == DT_FLOAT)
-		{
-			long double* result = malloc(sizeof(long double));
-			*result = *(leftVal->intVal) + *(rightVal->doubleVal);
-			long long res_long = *result;
-			free(leftVal), free(rightVal);
-			if ((*result / res_long) == 1)
-			{
-				long long* res_int = malloc(sizeof(long long));
-				*res_int = (long long)*result;
-				free(result);
-				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
-			}
-			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
-		}
-
-		if (dt_left == DT_INT && dt_right == DT_INT)
-		{
-			long long* result = malloc(sizeof(long long));
-			*result = *(leftVal->intVal) + *(rightVal->intVal);
-			free(leftVal), free(rightVal);
-			return new_DATA_STRUCT(NULL, NULL, NULL, result, NULL, DT_INT);
-		}
-		printf("[ERROR] invalid datatype\n");
-		exit(1);
+		return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_PLUS, dt_left, dt_right));
 
 	case TT_MINUS:
-		if (dt_left == DT_FLOAT && dt_right == DT_FLOAT)
-		{
-			long double* result = malloc(sizeof(long double));
-			*result = *(leftVal->doubleVal) - *(rightVal->doubleVal);
-			long long res_long = *result;
-			free(leftVal), free(rightVal);
-			if ((*result / res_long) == 1)
-			{
-				long long* res_int = malloc(sizeof(long long));
-				*res_int = (long long)*result;
-				free(result);
-				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
-			}
-			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
-		}
-		if (dt_left == DT_FLOAT && dt_right == DT_INT)
-		{
-			long double* result = malloc(sizeof(long double));
-			*result = *(leftVal->doubleVal) - *(rightVal->intVal);
-			long long res_long = *result;
-			free(leftVal), free(rightVal);
-			if ((*result / res_long) == 1)
-			{
-				long long* res_int = malloc(sizeof(long long));
-				*res_int = (long long)*result;
-				free(result);
-				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
-			}
-			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
-		}
-
-		if (dt_left == DT_INT && dt_right == DT_FLOAT)
-		{
-			long double* result = malloc(sizeof(long double));
-			*result = *(leftVal->intVal) - *(rightVal->doubleVal);
-			long long res_long = *result;
-			free(leftVal), free(rightVal);
-			if ((*result / res_long) == 1)
-			{
-				long long* res_int = malloc(sizeof(long long));
-				*res_int = (long long)*result;
-				free(result);
-				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
-			}
-			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
-		}
-
-		if (dt_left == DT_INT && dt_right == DT_INT)
-		{
-			long long* result = malloc(sizeof(long long));
-			*result = *(leftVal->intVal) - *(rightVal->intVal);
-			free(leftVal), free(rightVal);
-			return new_DATA_STRUCT(NULL, NULL, NULL, result, NULL, DT_INT);
-		}
-		printf("[ERROR] invalid datatype\n");
-		exit(1);
+		return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_MINUS, dt_left, dt_right));
 
 	case TT_MUL:
-		if (dt_left == DT_FLOAT && dt_right == DT_FLOAT)
-		{
-			long double* result = malloc(sizeof(long double));
-			*result = *(leftVal->doubleVal) * *(rightVal->doubleVal);
-			long long res_long = *result;
-			free(leftVal), free(rightVal);
-			if ((*result / res_long) == 1)
-			{
-				long long* res_int = malloc(sizeof(long long));
-				*res_int = (long long)*result;
-				free(result);
-				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
-			}
-			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
-		}
-		if (dt_left == DT_FLOAT && dt_right == DT_INT)
-		{
-			long double* result = malloc(sizeof(long double));
-			*result = *(leftVal->doubleVal) * *(rightVal->intVal);
-			long long res_long = *result;
-			free(leftVal), free(rightVal);
-			if ((*result / res_long) == 1)
-			{
-				long long* res_int = malloc(sizeof(long long));
-				*res_int = (long long)*result;
-				free(result);
-				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
-			}
-			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
-		}
-
-		if (dt_left == DT_INT && dt_right == DT_FLOAT)
-		{
-			long double* result = malloc(sizeof(long double));
-			*result = *(leftVal->intVal) * *(rightVal->doubleVal);
-			long long res_long = *result;
-			free(leftVal), free(rightVal);
-			if ((*result / res_long) == 1)
-			{
-				long long* res_int = malloc(sizeof(long long));
-				*res_int = (long long)*result;
-				free(result);
-				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
-			}
-		
-			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
-		}
-
-		if (dt_left == DT_INT && dt_right == DT_INT)
-		{
-			long long* result = malloc(sizeof(long long));
-			*result = *(leftVal->intVal) * *(rightVal->intVal);
-			free(leftVal), free(rightVal);
-			return new_DATA_STRUCT(NULL, NULL, NULL, result, NULL, DT_INT);
-		}
-		printf("[ERROR] invalid datatype\n");
-		exit(1);
+		return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_MUL, dt_left, dt_right));
 
 	case TT_DIV:
-		if ((*(rightVal->doubleVal) == 0 && rightVal->dataType == DT_FLOAT) ||( *(rightVal->intVal) == 0 && rightVal->dataType == DT_INT))
-		{
-			printf("[ERROR] division by zero error!");
-			exit(1);
-		}
-		if (dt_left == DT_FLOAT && dt_right == DT_FLOAT)
-		{
-			long double* result = malloc(sizeof(long double));
-			*result = *(leftVal->doubleVal) / *(rightVal->doubleVal);
-			long long res_long = *result;
-			free(leftVal), free(rightVal);
-			if ((*result / res_long) == 1)
-			{
-				long long* res_int = malloc(sizeof(long long));
-				*res_int = (long long)*result;
-				free(result);
-				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
-			}
-			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
-		}
-		if (dt_left == DT_FLOAT && dt_right == DT_INT)
-		{
-			long double* result = malloc(sizeof(long double));
-			*result = *(leftVal->doubleVal) / *(rightVal->intVal);
-			long long res_long = *result;
-			free(leftVal), free(rightVal);
-			if ((*result / res_long) == 1)
-			{
-				long long* res_int = malloc(sizeof(long long));
-				*res_int = (long long)*result;
-				free(result);
-				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
-			}
-			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
-		}
-
-		if (dt_left == DT_INT && dt_right == DT_FLOAT)
-		{
-			long double* result = malloc(sizeof(long double));
-			*result = *(leftVal->intVal) / *(rightVal->doubleVal);
-			long long res_long = *result;
-			free(leftVal), free(rightVal);
-			if ((*result / res_long) == 1)
-			{
-				long long* res_int = malloc(sizeof(long long));
-				*res_int = (long long)*result;
-				free(result);
-				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
-			}
-			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
-		}
-
-		if (dt_left == DT_INT && dt_right == DT_INT)
-		{
-			long long* result = malloc(sizeof(long long));
-			*result = *(leftVal->intVal) / *(rightVal->intVal);
-			free(leftVal), free(rightVal);
-			return new_DATA_STRUCT(NULL, NULL, NULL, result, NULL, DT_INT);
-		}
-		printf("[ERROR] invalid datatype\n");
-		exit(1);
-
+		return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_DIV, dt_left, dt_right));
 
 	case TT_POW:
-		if (dt_left == DT_FLOAT && dt_right == DT_FLOAT)
-		{
-			long double* result = malloc(sizeof(long double));
-			*result = pow(*(leftVal->doubleVal), *(rightVal->doubleVal));
-			long long res_long = *result;
-			free(leftVal), free(rightVal);
-			if ((*result / res_long) == 1)
-			{
-				long long* res_int = malloc(sizeof(long long));
-				*res_int = (long long)*result;
-				free(result);
-				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
-			}
-			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
-		}
-		if (dt_left == DT_FLOAT && dt_right == DT_INT)
-		{
-			long double* result = malloc(sizeof(long double));
-			*result = pow(*(leftVal->doubleVal), *(rightVal->intVal));
-			long long res_long = *result;
-			free(leftVal), free(rightVal);
-			if ((*result / res_long) == 1)
-			{
-				long long* res_int = malloc(sizeof(long long));
-				*res_int = (long long)*result;
-				free(result);
-				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
-			}
-			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
-		}
-
-		if (dt_left == DT_INT && dt_right == DT_FLOAT)
-		{
-			long double* result = malloc(sizeof(long double));
-			*result = pow(*(leftVal->intVal), *(rightVal->doubleVal));
-			long long res_long = *result;
-			free(leftVal), free(rightVal);
-			if ((*result / res_long) == 1)
-			{
-				long long* res_int = malloc(sizeof(long long));
-				*res_int = (long long)*result;
-				free(result);
-				return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
-			}
-			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
-		}
-
-		if (dt_left == DT_INT && dt_right == DT_INT)
-		{
-			long long* result = malloc(sizeof(long long));
-			*result = pow(*(leftVal->intVal), *(rightVal->intVal));
-			free(leftVal), free(rightVal);
-			return new_DATA_STRUCT(NULL, NULL, NULL, result, NULL, DT_INT);
-		}
-		printf("[ERROR] invalid datatype\n");
-		exit(1);
+		return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_POW, dt_left, dt_right));
 
 	case TT_INT:
 		return root->data;
@@ -381,7 +250,7 @@ void interpretMainAST(struct AST_Node* root)
 			}
 			else if (struct_dt == DT_FLOAT)
 			{
-				printf("%lf\n", *(printVal_struct->doubleVal));
+				printf("%Lf\n", *(printVal_struct->doubleVal));
 			}
 		}
 
