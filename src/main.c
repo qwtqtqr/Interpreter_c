@@ -44,6 +44,7 @@ int main(int argc, char* argv[])
 		struct AST_Node* ast_root = genMainAST();
 		interpretMainAST(ast_root);
 
+
 		/*
 		int** intArr = calloc(50, sizeof(int));
 		if (intArr[65] == NULL)
@@ -55,6 +56,7 @@ int main(int argc, char* argv[])
 		/*long double test = 0.1;
 		//printf("%Lf\n", test);
 		printf("%.27Lg\n", test);*/
+
 
 		exit(0);
 	}

@@ -6,6 +6,7 @@
 #include "header/symtable.h"
 #include <math.h>
 #define PAREN_PRECEDENCE 20
+#define BINEXPR_PTP_STARTVAL 0
 
 
 static double math_root(double x, double y)
@@ -13,7 +14,7 @@ static double math_root(double x, double y)
 	return (pow(x, 1 / y));
 }
 
-static int binOperators[] = { TT_PLUS, TT_MINUS, TT_MUL, TT_DIV, TT_OP_END, TT_EOF, TT_POW };
+static int binOperators[] = { TT_PLUS, TT_MINUS, TT_MUL, TT_DIV, TT_OP_END, TT_EOF, TT_POW , TT_EQUALS_CMP, TT_NOT_EQUALS, TT_GREATER, TT_SMALLER, TT_GREATER_EQUALS, TT_SMALLER_EQUALS };
 
 static int leftParenCount = 0;
 static int rightParenCount = 0;
@@ -22,6 +23,10 @@ static int globl_inParen = 0;
 static int globl_parenDelta = 0;
 
 static int mainAST_init = 1;
+
+static int curly_open_count = 0;
+static int curly_closed_count = 0;
+
 
 static void leftParenCode(struct Token* minusToken)
 {
@@ -129,7 +134,24 @@ static int getOpPrecedence(struct Token* t)
 
 	case TT_POW:
 		return 25;
+     
+	case TT_EQUALS_CMP:
+		return 5;
 
+	case TT_NOT_EQUALS:
+		return 5;
+
+	case TT_GREATER:
+		return 5;
+
+	case TT_SMALLER:
+		return 5;
+
+	case TT_GREATER_EQUALS:
+		return 5;
+
+	case TT_SMALLER_EQUALS: 
+		return 5;
 
 	}
 	return -1;
@@ -236,6 +258,7 @@ struct AST_Node* binexpr_int(int ptp)
 	{
 		return left;
 	}
+
 	while (getOpPrecedence(currentToken) + globl_inParen * globl_parenDelta > ptp)
 	{
 		struct Token* lastToken = currentToken;
@@ -291,12 +314,14 @@ struct AST_Node* genMainAST()
 {
 	struct AST_Node* left = NULL, * right = NULL, * node = NULL;
 	scan_curToken();
+
+
 	struct Token* t = currentToken;
 
 	switch (currentToken->tokenType)
 	{
 	case TT_PRINT:
-		left = binexpr_int(0);
+		left = binexpr_int(BINEXPR_PTP_STARTVAL);
 		node = mkastnode(t->tokenType, t->intValue, t->floatVal, left, NULL, NULL, NULL);
 		break;
 
@@ -331,6 +356,7 @@ struct AST_Node* genMainAST()
 		return node;
 
 
+
 	}
 	if (currentToken->tokenType == TT_EOF)
 	{
@@ -343,6 +369,9 @@ struct AST_Node* genMainAST()
 	node = mkastnode(t->tokenType, t->intValue, t->floatVal, left, right, NULL, NULL);
 	return node;
 }
+
+
+
 
 
 

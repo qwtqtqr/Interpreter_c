@@ -7,6 +7,8 @@
 #include<stdint.h>
 #include<stdlib.h>
 
+#define GEN_CMP_PTP_INIT -1
+
 struct AST_Node
 {
 	INT_VAL intVal;
@@ -35,6 +37,7 @@ void interpretMainAST(struct AST_Node* root);
 
 struct AST_Node* genVarAST();
 struct AST_Node* genIdentAST();
+struct AST_Node* genCMP_AST();
 
 
 

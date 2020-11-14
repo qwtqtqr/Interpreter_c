@@ -117,6 +117,55 @@ char* createFinalString(LinkedList* strBufferList)
 
 
 
+static int scan_cmp_operators(int c_)
+{
+	int c = c_;
+	switch (c)
+	{
+	case '=':
+		c = skip();
+		if (c == '=')
+		{
+			return TT_EQUALS_CMP;
+		}
+		
+		putback(c);
+		return TT_EQUALS;
+
+	case '!':
+		c = skip();
+		if (c == '=')
+		{
+			return TT_NOT_EQUALS;
+		}
+		printf("[ERROR] unknown toekn in Line %d\n", Line);
+		exit(1);
+
+	case '>':
+		c = skip();
+		if (c == '=')
+		{
+			return TT_GREATER_EQUALS;
+		}
+		putback(c);
+		return TT_GREATER;
+
+	case '<':
+		c = skip();
+		if (c == '=')
+		{
+			return TT_SMALLER_EQUALS;
+		}
+		putback(c);
+		return TT_SMALLER;
+
+	}
+	return -1;
+}
+
+
+
+
 int next(void)
 {
 	int c;
@@ -270,6 +319,14 @@ void scan_curToken()
 			putback(' ');
 			return;
 		}
+	}
+
+	int cmp_op = scan_cmp_operators(c);
+	if (cmp_op != -1)
+	{
+		currentToken = newToken(cmp_op, 0, Line, NULL);
+		return;
+
 	}
 
 	if (isdigit(c))

@@ -138,6 +138,33 @@ static struct DATA_STRUCT* RETURN_DATATYPE_NUM(struct DATA_STRUCT* leftVal, stru
 		}
 		break;
 
+
+	case TT_EQUALS_CMP:
+	    {
+		int* boolRes = malloc(sizeof(int));
+		*boolRes = 0;
+		if (dt_left == DT_FLOAT && dt_right == DT_FLOAT)
+		{
+			*boolRes = *(leftVal->doubleVal) == *(rightVal->doubleVal);
+		}
+		if (dt_left == DT_INT && dt_right == DT_FLOAT)
+		{
+			*boolRes = *(leftVal->intVal) == *(rightVal->doubleVal);
+		}
+		if (dt_left == DT_FLOAT && dt_right == DT_INT)
+		{
+			*boolRes = *(leftVal->doubleVal) == *(rightVal->intVal);
+		}
+		if (dt_left == DT_INT && dt_right == DT_INT)
+		{
+			*boolRes = *(leftVal->intVal) == *(rightVal->intVal);
+		}
+		free(leftVal), free(rightVal);
+		return new_DATA_STRUCT(NULL, boolRes, NULL, NULL, NULL, DT_BOOL);
+	    }
+
+
+
 	}
 	free(leftVal), free(rightVal);
 	long long res_long = *result;
@@ -231,6 +258,10 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 			exit(1);
 		}
 		return DATA_STRUCT_cpy(curIdent->data);
+
+
+	case TT_EQUALS_CMP:
+		return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_EQUALS_CMP, dt_left, dt_right));
 	}
 }
 
@@ -251,6 +282,11 @@ void interpretMainAST(struct AST_Node* root)
 			else if (struct_dt == DT_FLOAT)
 			{
 				printf("%Lf\n", *(printVal_struct->doubleVal));
+			}
+
+			else if (struct_dt == DT_BOOL)
+			{
+				printf("%d\n", *(printVal_struct->boolVal));
 			}
 		}
 
@@ -289,6 +325,8 @@ void interpretMainAST(struct AST_Node* root)
 		{
 			symtable_removeItem(curNode->left->varName);
 		}
+
+
 
 		curNode = curNode->right;
 	}

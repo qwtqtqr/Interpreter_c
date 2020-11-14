@@ -104,7 +104,16 @@ enum
 	TT_IDENT,
 	TT_EQUALS,
 	TT_VAR,
-	TT_UNDEF
+	TT_UNDEF,
+	TT_EQUALS_CMP,
+	TT_AND,
+	TT_OR,
+	TT_ANY_OP,
+	TT_NOT_EQUALS,
+	TT_GREATER,
+	TT_SMALLER,
+	TT_GREATER_EQUALS,
+	TT_SMALLER_EQUALS,
 };
 
 
@@ -165,7 +174,8 @@ static struct TokenIdent singleCharTokens[] =
 	{'^', TT_POW}, {';', TT_OP_END},
 	{'(', TT_LEFT_PAREN}, {')', TT_RIGHT_PAREN},
 	{'{', TT_LEFT_CURLY}, {'}', TT_LEFT_CURLY},
-	{'=', TT_EQUALS}
+	/*{'=', TT_EQUALS}, {'|', TT_OR}, 
+	{'&', TT_AND},*/
 };
 
 static struct Token* newToken(int tokenType, INT_VAL intValue, int line, struct DATA_struct* data)
