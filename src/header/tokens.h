@@ -19,10 +19,11 @@ struct DATA_STRUCT
 	long long* intVal;
 	char* charVal;
 	int dataType;
+	int minusVal;
 };
 
 
-static struct DATA_STRUCT* new_DATA_STRUCT(char* strVal, int* boolVal, long double* doubleVal, long long intVal, char* charVal, int dataType)
+static struct DATA_STRUCT* new_DATA_STRUCT(char* strVal, int* boolVal, long double* doubleVal, long long intVal, char* charVal, int dataType, int minusVal)
 {
 	struct DATA_STRUCT* init = malloc(sizeof(struct DATA_STRUCT));
 	init->strVal = strVal;
@@ -31,6 +32,7 @@ static struct DATA_STRUCT* new_DATA_STRUCT(char* strVal, int* boolVal, long doub
 	init->intVal = intVal;
 	init->charVal = charVal;
 	init->dataType = dataType;
+	init->minusVal = minusVal;
 	return init;
 };
 
@@ -55,6 +57,7 @@ static struct DATA_STRUCT* DATA_STRUCT_cpy(struct DATA_STRUCT* src)
 		*boolVal = *(src->boolVal);
 	}
 	int dt = src->dataType;
+	int minusVal = src->minusVal;
 	char* strVal = NULL;
 	if (src->strVal != NULL)
 	{
@@ -77,7 +80,7 @@ static struct DATA_STRUCT* DATA_STRUCT_cpy(struct DATA_STRUCT* src)
 		intVal = calloc(1, sizeof(long long));
 		*intVal = *(src->intVal);
 	}
-	return new_DATA_STRUCT(strVal, boolVal, doubleVal, intVal, charVal, dt);
+	return new_DATA_STRUCT(strVal, boolVal, doubleVal, intVal, charVal, dt, minusVal);
 }
 
 
@@ -174,7 +177,7 @@ static struct TokenIdent singleCharTokens[] =
 	{'^', TT_POW}, {';', TT_OP_END},
 	{'(', TT_LEFT_PAREN}, {')', TT_RIGHT_PAREN},
 	{'{', TT_LEFT_CURLY}, {'}', TT_LEFT_CURLY},
-	/*{'=', TT_EQUALS}, {'|', TT_OR}, 
+	/*{'=', TT_EQUALS}, {'|', TT_OR},
 	{'&', TT_AND},*/
 };
 

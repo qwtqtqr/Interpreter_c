@@ -29,9 +29,9 @@ void symtable_add(char* varName, struct IDENT_tokenData* data)
 {
     unsigned long long hash = hash_string(varName);
     unsigned int bucket = getBucketVal(hash);
-    
+
     if (globl_symtable[bucket] == NULL)
-    {  
+    {
         globl_symtable[bucket] = newLinkedList();
     }
     LinkedList_add_end(globl_symtable[bucket], data, 0, NULL, varName);
@@ -55,7 +55,7 @@ struct IDENT_tokenData* symtable_getItem(char* varName)
         char* varName_head = curNode_head->varName;
         if (strcmp(varName, varName_head) == 0)
         {
-            return (struct IDENT_tokenData*) curNode_head->data;
+            return (struct IDENT_tokenData*)curNode_head->data;
         }
         char* varName_tail = curNode_tail->varName;
         if (strcmp(varName, varName_tail) == 0)
@@ -120,14 +120,14 @@ int symtable_removeItem(char* varName)
         char* varName_head = curNode_head->varName;
         if (strcmp(varName, varName_head) == 0)
         {
-          //  free(curNode_head->data);
+            //  free(curNode_head->data);
             LinkedList_remove(globl_symtable[bucket], curIndex_head);
             return 0;
         }
         char* varname_tail = curNode_tail->varName;
         if (strcmp(varName, varName_head) == 0)
         {
-          //  free(curNode_tail->data);
+            //  free(curNode_tail->data);
             LinkedList_remove(globl_symtable[bucket], curIndex_tail);
             return 0;
         }

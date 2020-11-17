@@ -128,7 +128,7 @@ static int scan_cmp_operators(int c_)
 		{
 			return TT_EQUALS_CMP;
 		}
-		
+
 		putback(c);
 		return TT_EQUALS;
 
@@ -340,20 +340,20 @@ void scan_curToken()
 			long long* intValPtr = malloc(sizeof(long long));
 			*intValPtr = intVal;
 
-			currentToken = newToken(TT_INT, intVal, Line, new_DATA_STRUCT(NULL, NULL, NULL, intValPtr, NULL, DT_INT));
+			currentToken = newToken(TT_INT, intVal, Line, new_DATA_STRUCT(NULL, NULL, NULL, intValPtr, NULL, DT_INT, 1));
 		}
 		if (numTT == TT_FLOAT)
 		{
 			double floatVal = numStruct.floatVal;
 			long double* floatValPtr = malloc(sizeof(long double));
 			*floatValPtr = floatVal;
-			currentToken = newToken_float(TT_FLOAT, floatVal, Line, new_DATA_STRUCT(NULL, NULL, floatValPtr, NULL, NULL, DT_FLOAT));
+			currentToken = newToken_float(TT_FLOAT, floatVal, Line, new_DATA_STRUCT(NULL, NULL, floatValPtr, NULL, NULL, DT_FLOAT, 1));
 		}
 	}
 
 	else if (isalpha(c) || c == '_')
 	{
-		
+
 		scanident(c, Text, TEXTLEN);
 		struct keyword_returnVal cur_key_ret_val = keyword(Text);
 		int keyword_tt = cur_key_ret_val.TokenType;
@@ -372,7 +372,7 @@ void scan_curToken()
 		LinkedList* strList = newLinkedList();
 		createNewString(c, strList);
 		char* string_final = createFinalString(strList);
-		currentToken = newToken_str(TT_STRING, 0, Line, string_final, new_DATA_STRUCT(string_final, NULL, NULL, NULL, NULL, DT_STRING));
+		currentToken = newToken_str(TT_STRING, 0, Line, string_final, new_DATA_STRUCT(string_final, NULL, NULL, NULL, NULL, DT_STRING, 1));
 
 		free(strList);
 	}
@@ -383,6 +383,6 @@ void scan_curToken()
 		char val = scanChars(c);
 		char* valPtr = malloc(sizeof(char));
 		*valPtr = val;
-		currentToken = newToken_str(TT_CHAR, 0, Line, val, new_DATA_STRUCT(NULL, NULL, NULL, NULL, valPtr, DT_CHAR));
+		currentToken = newToken_str(TT_CHAR, 0, Line, val, new_DATA_STRUCT(NULL, NULL, NULL, NULL, valPtr, DT_CHAR, 1));
 	}
 }

@@ -1,3 +1,3 @@
-print 55 + 5 == 10 * 7;
+print --5 * (5 + 5) >= 50;
 
-// todo:  fix bugs:  (-x) * y  && var q;   q = ...; && undef statement && (1   /2);
+// todo:  fix bugs:  (-x) * y  && var q;   q = ...; && undef statement && (1   /2)  && -1 ^ 2 != 1;

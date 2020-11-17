@@ -6,6 +6,56 @@
 #include "header/symtable.h"
 #include <math.h>
 
+#define DATATYPE_OPERATION_CALC(leftVal, rightVal, dt_left, dt_right, __op__) \
+if (dt_left == DT_FLOAT && dt_right == DT_FLOAT)\
+{\
+	*result = *(leftVal->doubleVal) __op__ *(rightVal->doubleVal);\
+	init = 1;\
+}\
+if (dt_left == DT_INT && dt_right == DT_FLOAT)\
+{\
+	*result = *(leftVal->intVal) __op__ *(rightVal->doubleVal);\
+	init = 1;\
+}\
+if (dt_left == DT_FLOAT && dt_right == DT_INT)\
+{\
+	*result = *(leftVal->doubleVal) __op__ *(rightVal->intVal);\
+	init = 1;\
+}\
+if (dt_left == DT_INT && dt_right == DT_INT)\
+{\
+	long long* result = malloc(sizeof(long long));\
+	*result = *(leftVal->intVal) __op__ *(rightVal->intVal);\
+	free(leftVal), free(rightVal);\
+	return new_DATA_STRUCT(NULL, NULL, NULL, result, NULL, DT_INT, 1);\
+}
+
+#define DATATYPE_OPERATION_CMP(leftVal, rightVal, dt_left, dt_right, __op__) \
+{\
+int* boolRes = malloc(sizeof(int));\
+*boolRes = 0;\
+if (dt_left == DT_FLOAT && dt_right == DT_FLOAT)\
+{\
+	*boolRes = *(leftVal->doubleVal) __op__ *(rightVal->doubleVal);\
+}\
+if (dt_left == DT_INT && dt_right == DT_FLOAT)\
+{\
+	*boolRes = *(leftVal->intVal) __op__ *(rightVal->doubleVal);\
+}\
+if (dt_left == DT_FLOAT && dt_right == DT_INT)\
+{\
+	*boolRes = *(leftVal->doubleVal) __op__ *(rightVal->intVal);\
+}\
+if (dt_left == DT_INT && dt_right == DT_INT)\
+{\
+	*boolRes = *(leftVal->intVal) __op__ *(rightVal->intVal);\
+}\
+free(leftVal), free(rightVal);\
+return new_DATA_STRUCT(NULL, boolRes, NULL, NULL, NULL, DT_BOOL, 1);\
+}
+
+
+
 
 static struct DATA_STRUCT* RETURN_DATATYPE_NUM(struct DATA_STRUCT* leftVal, struct DATA_STRUCT* rightVal, int OP, int dt_left, int dt_right)
 {
@@ -13,105 +63,10 @@ static struct DATA_STRUCT* RETURN_DATATYPE_NUM(struct DATA_STRUCT* leftVal, stru
 	long double* result = malloc(sizeof(long double));
 	switch (OP)
 	{
-	case TT_PLUS:
-		if (dt_left == DT_FLOAT && dt_right == DT_FLOAT) 
-		{
-			*result = *(leftVal->doubleVal) + *(rightVal->doubleVal);
-			init = 1;
-		}
-		if (dt_left == DT_INT && dt_right == DT_FLOAT)
-		{ 
-			*result = *(leftVal->intVal) + *(rightVal->doubleVal);
-			init = 1;
-		}
-		if (dt_left == DT_FLOAT && dt_right == DT_INT)
-		{
-			*result = *(leftVal->doubleVal) + *(rightVal->intVal);
-			init = 1;
-		}
-		if (dt_left == DT_INT && dt_right == DT_INT)
-		{
-			long long* result = malloc(sizeof(long long));
-			*result = *(leftVal->intVal) + *(rightVal->intVal);
-			free(leftVal), free(rightVal);
-			return new_DATA_STRUCT(NULL, NULL, NULL, result, NULL, DT_INT);
-		}
-		break;
-
-	case TT_MINUS:
-		if (dt_left == DT_FLOAT && dt_right == DT_FLOAT)
-		{
-			*result = *(leftVal->doubleVal) - *(rightVal->doubleVal);
-			init = 1;
-		}
-		if (dt_left == DT_INT && dt_right == DT_FLOAT)
-		{
-			*result = *(leftVal->intVal) - *(rightVal->doubleVal);
-			init = 1;
-		}
-		if (dt_left == DT_FLOAT && dt_right == DT_INT)
-		{
-			*result = *(leftVal->doubleVal) - *(rightVal->intVal);
-			init = 1;
-		}
-		if (dt_left == DT_INT && dt_right == DT_INT)
-		{
-			long long* result = malloc(sizeof(long long));
-			*result = *(leftVal->intVal) - *(rightVal->intVal);
-			free(leftVal), free(rightVal);
-			return new_DATA_STRUCT(NULL, NULL, NULL, result, NULL, DT_INT);
-		}
-		break;
-
-	case TT_MUL:
-		if (dt_left == DT_FLOAT && dt_right == DT_FLOAT)
-		{
-			*result = *(leftVal->doubleVal) * *(rightVal->doubleVal);
-			init = 1;
-		}
-		if (dt_left == DT_INT && dt_right == DT_FLOAT)
-		{
-			*result = *(leftVal->intVal) * *(rightVal->doubleVal);
-			init = 1;
-		}
-		if (dt_left == DT_FLOAT && dt_right == DT_INT)
-		{
-			*result = *(leftVal->doubleVal) * *(rightVal->intVal);
-			init = 1;
-		}
-		if (dt_left == DT_INT && dt_right == DT_INT)
-		{
-			long long* result = malloc(sizeof(long long));
-			*result = *(leftVal->intVal) * *(rightVal->intVal);
-			free(leftVal), free(rightVal);
-			return new_DATA_STRUCT(NULL, NULL, NULL, result, NULL, DT_INT);
-		}
-		break;
-
-	case TT_DIV:
-		if (dt_left == DT_FLOAT && dt_right == DT_FLOAT)
-		{
-			*result = *(leftVal->doubleVal) / *(rightVal->doubleVal);
-			init = 1;
-		}
-		if (dt_left == DT_INT && dt_right == DT_FLOAT)
-		{
-			*result = *(leftVal->intVal) / *(rightVal->doubleVal);
-			init = 1;
-		}
-		if (dt_left == DT_FLOAT && dt_right == DT_INT)
-		{
-			*result = *(leftVal->doubleVal) / *(rightVal->intVal);
-			init = 1;
-		}
-		if (dt_left == DT_INT && dt_right == DT_INT)
-		{
-			long double* result = malloc(sizeof(long long));
-			*result =(long double) *(leftVal->intVal) / (long double)*(rightVal->intVal);
-			free(leftVal), free(rightVal);
-			return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
-		}
-		break;
+	case TT_PLUS:   DATATYPE_OPERATION_CALC(leftVal, rightVal, dt_left, dt_right, +); break;
+	case TT_MINUS:  DATATYPE_OPERATION_CALC(leftVal, rightVal, dt_left, dt_right, -); break;
+	case TT_MUL:    DATATYPE_OPERATION_CALC(leftVal, rightVal, dt_left, dt_right, *); break;
+	case TT_DIV:    DATATYPE_OPERATION_CALC(leftVal, rightVal, dt_left, dt_right, /); break;
 
 	case TT_POW:
 		if (dt_left == DT_FLOAT && dt_right == DT_FLOAT)
@@ -134,36 +89,16 @@ static struct DATA_STRUCT* RETURN_DATATYPE_NUM(struct DATA_STRUCT* leftVal, stru
 			long long* result = malloc(sizeof(long long));
 			*result = pow(*(leftVal->intVal), *(rightVal->intVal));
 			free(leftVal), free(rightVal);
-			return new_DATA_STRUCT(NULL, NULL, NULL, result, NULL, DT_INT);
+			return new_DATA_STRUCT(NULL, NULL, NULL, result, NULL, DT_INT, 1);
 		}
 		break;
 
-
-	case TT_EQUALS_CMP:
-	    {
-		int* boolRes = malloc(sizeof(int));
-		*boolRes = 0;
-		if (dt_left == DT_FLOAT && dt_right == DT_FLOAT)
-		{
-			*boolRes = *(leftVal->doubleVal) == *(rightVal->doubleVal);
-		}
-		if (dt_left == DT_INT && dt_right == DT_FLOAT)
-		{
-			*boolRes = *(leftVal->intVal) == *(rightVal->doubleVal);
-		}
-		if (dt_left == DT_FLOAT && dt_right == DT_INT)
-		{
-			*boolRes = *(leftVal->doubleVal) == *(rightVal->intVal);
-		}
-		if (dt_left == DT_INT && dt_right == DT_INT)
-		{
-			*boolRes = *(leftVal->intVal) == *(rightVal->intVal);
-		}
-		free(leftVal), free(rightVal);
-		return new_DATA_STRUCT(NULL, boolRes, NULL, NULL, NULL, DT_BOOL);
-	    }
-
-
+	case TT_EQUALS_CMP:      DATATYPE_OPERATION_CMP(leftVal, rightVal, dt_left, dt_right, == );
+	case TT_NOT_EQUALS:      DATATYPE_OPERATION_CMP(leftVal, rightVal, dt_left, dt_right, != );
+	case TT_GREATER_EQUALS:  DATATYPE_OPERATION_CMP(leftVal, rightVal, dt_left, dt_right, >= );
+	case TT_SMALLER_EQUALS:  DATATYPE_OPERATION_CMP(leftVal, rightVal, dt_left, dt_right, <= );
+	case TT_GREATER:         DATATYPE_OPERATION_CMP(leftVal, rightVal, dt_left, dt_right, > );
+	case TT_SMALLER:         DATATYPE_OPERATION_CMP(leftVal, rightVal, dt_left, dt_right, < );
 
 	}
 	free(leftVal), free(rightVal);
@@ -178,9 +113,9 @@ static struct DATA_STRUCT* RETURN_DATATYPE_NUM(struct DATA_STRUCT* leftVal, stru
 		long long* res_int = malloc(sizeof(long long));
 		*res_int = (long long)*result;
 		free(result);
-		return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT);
+		return new_DATA_STRUCT(NULL, NULL, NULL, res_int, NULL, DT_INT, 1);
 	}
-	return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT);
+	return new_DATA_STRUCT(NULL, NULL, result, NULL, NULL, DT_FLOAT, 1);
 }
 
 
@@ -188,7 +123,7 @@ static struct DATA_STRUCT* RETURN_DATATYPE_NUM(struct DATA_STRUCT* leftVal, stru
 
 struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 {
-	struct DATA_STRUCT *leftVal = NULL, *rightVal = NULL;
+	struct DATA_STRUCT* leftVal = NULL, * rightVal = NULL;
 	struct IDENT_tokenData* curIdent = NULL;
 	struct tableNode* tNode = NULL;
 
@@ -200,7 +135,7 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 		rightVal = interpretAST_int(root->right);
 	}
 
-	int dt_left = -1; 
+	int dt_left = -1;
 	int dt_right = -1;
 
 	if (leftVal != NULL)
@@ -214,28 +149,16 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 
 	switch (root->tokenType)
 	{
-	case TT_PLUS:
-		return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_PLUS, dt_left, dt_right));
+	case TT_PLUS:   return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_PLUS, dt_left, dt_right));
+	case TT_MINUS:  return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_MINUS, dt_left, dt_right));
+	case TT_MUL:    return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_MUL, dt_left, dt_right));
+	case TT_DIV: 	return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_DIV, dt_left, dt_right));
+	case TT_POW:    return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_POW, dt_left, dt_right));
 
-	case TT_MINUS:
-		return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_MINUS, dt_left, dt_right));
-
-	case TT_MUL:
-		return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_MUL, dt_left, dt_right));
-
-	case TT_DIV:
-		return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_DIV, dt_left, dt_right));
-
-	case TT_POW:
-		return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_POW, dt_left, dt_right));
-
-	case TT_INT:
-		return root->data;
-
-	case TT_FLOAT:
-		return root->data;
-
+	case TT_INT:    *(root->data->intVal) *= root->data->minusVal;     return root->data;
+	case TT_FLOAT:  *(root->data->doubleVal) *= root->data->minusVal;  return root->data;
 	case TT_IDENT:
+	{
 		curIdent = (struct IDENT_tokenData*)symtable_getItem(root->varName);
 		if (curIdent == NULL)
 		{
@@ -252,16 +175,22 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 		{
 			*(curIdent->data->doubleVal) *= root->intVal;
 		}
-		else 
+		else
 		{
 			printf("[ERROR] invalid datatype\n");
 			exit(1);
 		}
+	}
 		return DATA_STRUCT_cpy(curIdent->data);
 
 
-	case TT_EQUALS_CMP:
-		return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_EQUALS_CMP, dt_left, dt_right));
+	case TT_EQUALS_CMP:      return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_EQUALS_CMP, dt_left, dt_right));
+	case TT_NOT_EQUALS:      return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_NOT_EQUALS, dt_left, dt_right));
+	case TT_GREATER_EQUALS:  return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_GREATER_EQUALS, dt_left, dt_right));
+	case TT_SMALLER_EQUALS:  return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_SMALLER_EQUALS, dt_left, dt_right));
+	case TT_GREATER:         return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_GREATER, dt_left, dt_right));
+	case TT_SMALLER:         return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_SMALLER, dt_left, dt_right));
+
 	}
 }
 
@@ -286,7 +215,11 @@ void interpretMainAST(struct AST_Node* root)
 
 			else if (struct_dt == DT_BOOL)
 			{
-				printf("%d\n", *(printVal_struct->boolVal));
+				switch (*(printVal_struct->boolVal))
+				{
+				case 0: printf("false\n"); break;
+				case 1: printf("true\n");  break;
+				}
 			}
 		}
 
@@ -297,7 +230,7 @@ void interpretMainAST(struct AST_Node* root)
 			saveVarName = strcpy(saveVarName, curNode->varName);
 			if (curNodeData->init == 0)
 			{
-				symtable_add(saveVarName, newID_token(DT_INT, 0, 0, saveVarName, 1, new_DATA_STRUCT(NULL, NULL, NULL, NULL, NULL, -1)));
+				symtable_add(saveVarName, newID_token(DT_INT, 0, 0, saveVarName, 1, new_DATA_STRUCT(NULL, NULL, NULL, NULL, NULL, -1, 1)));
 			}
 			if (curNodeData->init == 1)
 			{

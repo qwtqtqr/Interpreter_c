@@ -134,7 +134,7 @@ static int getOpPrecedence(struct Token* t)
 
 	case TT_POW:
 		return 25;
-     
+
 	case TT_EQUALS_CMP:
 		return 5;
 
@@ -150,7 +150,7 @@ static int getOpPrecedence(struct Token* t)
 	case TT_GREATER_EQUALS:
 		return 5;
 
-	case TT_SMALLER_EQUALS: 
+	case TT_SMALLER_EQUALS:
 		return 5;
 
 	}
@@ -230,13 +230,16 @@ struct AST_Node* binexpr_int(int ptp)
 		printf("[SYNTAX ERROR] expected a number (Line %d)", Line);
 		exit(1);
 	}
-
+	if (currentToken->data != NULL)
+	{
+		currentToken->data->minusVal = minusVal;
+	}
 	left = mkastnode_const(currentToken->tokenType, currentToken->intValue * minusVal, currentToken->floatVal * minusVal, NULL, currentToken->data);
 	if (currentToken->tokenType == TT_IDENT)
 	{
 		char* saveIdentName = calloc(strlen(currentToken->IdentToken_name), sizeof(char));
 		saveIdentName = strcpy(saveIdentName, currentToken->IdentToken_name);
-		left = mkastnode_ident(TT_IDENT, minusVal, minusVal, NULL, NULL, newID_token(DT_INT, 1, 0, saveIdentName, 0, new_DATA_STRUCT(NULL, NULL, NULL, NULL, NULL, -1)), saveIdentName, NULL);
+		left = mkastnode_ident(TT_IDENT, minusVal, minusVal, NULL, NULL, newID_token(DT_INT, 1, 0, saveIdentName, 0, new_DATA_STRUCT(NULL, NULL, NULL, NULL, NULL, -1, minusVal)), saveIdentName, NULL);
 	}
 	minusVal = 1;
 	int lastLine = Line;
@@ -268,7 +271,7 @@ struct AST_Node* binexpr_int(int ptp)
 		{
 			char* saveIdentName = calloc(strlen(lastToken->IdentToken_name), sizeof(char));
 			saveIdentName = strcpy(saveIdentName, lastToken->IdentToken_name);
-			left = mkastnode_ident(lastToken->tokenType, lastToken->intValue, lastToken->floatVal, left, right, newID_token(DT_INT, 1, 0, saveIdentName, 0, new_DATA_STRUCT(NULL, NULL, NULL, NULL, NULL, -1)), saveIdentName, NULL);
+			left = mkastnode_ident(lastToken->tokenType, lastToken->intValue, lastToken->floatVal, left, right, newID_token(DT_INT, 1, 0, saveIdentName, 0, new_DATA_STRUCT(NULL, NULL, NULL, NULL, NULL, -1, minusVal)), saveIdentName, NULL);
 		}
 
 		rightParenCode();
