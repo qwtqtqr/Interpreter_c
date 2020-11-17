@@ -24,10 +24,39 @@ if (dt_left == DT_FLOAT && dt_right == DT_INT)\
 }\
 if (dt_left == DT_INT && dt_right == DT_INT)\
 {\
-	long long* result = malloc(sizeof(long long));\
-	*result = *(leftVal->intVal) __op__ *(rightVal->intVal);\
-	free(leftVal), free(rightVal);\
-	return new_DATA_STRUCT(NULL, NULL, NULL, result, NULL, DT_INT, 1);\
+    *result =(long double) *(leftVal->intVal) __op__ (long double) *(rightVal->intVal); \
+     init = 1; \
+}\
+\
+if (dt_left == DT_BOOL && dt_right == DT_FLOAT)\
+{\
+    long double bool_val =(long double)*(leftVal->boolVal);\
+    *result = bool_val __op__ *(rightVal->doubleVal);\
+    init = 1;\
+}\
+if (dt_left == DT_FLOAT && dt_right == DT_BOOL)\
+{\
+     long double bool_val =(long double)*(rightVal->boolVal);\
+    *result = bool_val __op__ *(leftVal->doubleVal);\
+     init = 1;\
+}\
+if (dt_left == DT_BOOL && dt_right == DT_INT)\
+{\
+     long double bool_val =(long double)*(leftVal->boolVal);\
+    *result = bool_val __op__ *(rightVal->intVal);\
+	 init = 1;\
+}\
+if (dt_left == DT_INT && dt_right == DT_BOOL)\
+{\
+     long double bool_val =(long double)*(rightVal->boolVal);\
+    *result = bool_val __op__ *(leftVal->intVal);\
+	 init = 1;\
+}\
+if (dt_left == DT_BOOL && dt_right == DT_BOOL)\
+{\
+     long double bool_val_1 = (long double) *(leftVal->boolVal); long double bool_val_2 = (long double) *(rightVal->boolVal);\
+     *result = bool_val_1 __op__ bool_val_2;\
+     init = 1;\
 }
 
 #define DATATYPE_OPERATION_CMP(leftVal, rightVal, dt_left, dt_right, __op__) \
@@ -50,6 +79,34 @@ if (dt_left == DT_INT && dt_right == DT_INT)\
 {\
 	*boolRes = *(leftVal->intVal) __op__ *(rightVal->intVal);\
 }\
+\
+if (dt_left == DT_BOOL && dt_right == DT_FLOAT)\
+{\
+    long double bool_val =(long double)*(leftVal->boolVal);\
+    *boolRes = bool_val __op__ *(rightVal->doubleVal);\
+}\
+if (dt_left == DT_FLOAT && dt_right == DT_BOOL)\
+{\
+     long double bool_val =(long double)*(rightVal->boolVal);\
+    *boolRes = bool_val __op__ *(leftVal->doubleVal);\
+}\
+if (dt_left == DT_BOOL && dt_right == DT_INT)\
+{\
+     long double bool_val =(long double)*(leftVal->boolVal);\
+    *boolRes = bool_val __op__ *(rightVal->intVal);\
+}\
+if (dt_left == DT_INT && dt_right == DT_BOOL)\
+{\
+     long double bool_val =(long double)*(rightVal->boolVal);\
+    *boolRes = bool_val __op__ *(leftVal->intVal);\
+}\
+if (dt_left == DT_BOOL && dt_right == DT_BOOL)\
+{\
+     long double bool_val_1 = (long double) *(leftVal->boolVal); long double bool_val_2 = (long double) *(rightVal->boolVal);\
+     *boolRes = bool_val_1 __op__ bool_val_2;\
+     init = 1;\
+}\
+\
 free(leftVal), free(rightVal);\
 return new_DATA_STRUCT(NULL, boolRes, NULL, NULL, NULL, DT_BOOL, 1);\
 }

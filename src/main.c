@@ -53,11 +53,6 @@ int main(int argc, char* argv[])
 		}
 		*/
 
-		/*long double test = 0.1;
-		//printf("%Lf\n", test);
-		printf("%.27Lg\n", test);*/
-
-
 		exit(0);
 	}
 
