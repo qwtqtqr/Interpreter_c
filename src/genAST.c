@@ -225,7 +225,7 @@ struct AST_Node* binexpr_int(int ptp)
 	}
 	leftParenCode(minusToken);
 
-	if (currentToken->tokenType != TT_INT && currentToken->tokenType != TT_FLOAT && currentToken->tokenType != TT_IDENT)
+	if (currentToken->tokenType != TT_INT && currentToken->tokenType != TT_FLOAT && currentToken->tokenType != TT_IDENT && currentToken->tokenType != TT_BOOL_TRUE && currentToken->tokenType != TT_BOOL_FALSE)
 	{
 		printf("[SYNTAX ERROR] expected a number (Line %d)", Line);
 		exit(1);
@@ -240,6 +240,18 @@ struct AST_Node* binexpr_int(int ptp)
 		char* saveIdentName = calloc(strlen(currentToken->IdentToken_name), sizeof(char));
 		saveIdentName = strcpy(saveIdentName, currentToken->IdentToken_name);
 		left = mkastnode_ident(TT_IDENT, minusVal, minusVal, NULL, NULL, newID_token(DT_INT, 1, 0, saveIdentName, 0, new_DATA_STRUCT(NULL, NULL, NULL, NULL, NULL, -1, minusVal)), saveIdentName, NULL);
+	}
+	if (currentToken->tokenType == TT_BOOL_TRUE)
+	{
+		int* boolVal = malloc(sizeof(int));
+		*boolVal = 1;
+		left = mkastnode(TT_BOOL_TRUE, 0, 0, NULL, NULL, NULL, new_DATA_STRUCT(NULL, boolVal, NULL, NULL, NULL, DT_BOOL, 1));
+	}
+	if (currentToken->tokenType == TT_BOOL_FALSE)
+	{
+		int* boolVal = malloc(sizeof(int));
+		*boolVal = 0;
+		left = mkastnode(TT_BOOL_FALSE, 0, 0, NULL, NULL, NULL, new_DATA_STRUCT(NULL, boolVal, NULL, NULL, NULL, DT_BOOL, 1));
 	}
 	minusVal = 1;
 	int lastLine = Line;
@@ -272,6 +284,14 @@ struct AST_Node* binexpr_int(int ptp)
 			char* saveIdentName = calloc(strlen(lastToken->IdentToken_name), sizeof(char));
 			saveIdentName = strcpy(saveIdentName, lastToken->IdentToken_name);
 			left = mkastnode_ident(lastToken->tokenType, lastToken->intValue, lastToken->floatVal, left, right, newID_token(DT_INT, 1, 0, saveIdentName, 0, new_DATA_STRUCT(NULL, NULL, NULL, NULL, NULL, -1, minusVal)), saveIdentName, NULL);
+		}
+		if (lastToken->tokenType == TT_BOOL_TRUE)
+		{
+			left = mkastnode(TT_BOOL_TRUE, 0, 0, NULL, NULL, NULL, new_DATA_STRUCT(NULL, 1, NULL, NULL, NULL, DT_BOOL, 1));
+		}
+		if (lastToken->tokenType == TT_BOOL_FALSE)
+		{
+			left = mkastnode(TT_BOOL_FALSE, 0, 0, NULL, NULL, NULL, new_DATA_STRUCT(NULL, 0, NULL, NULL, NULL, DT_BOOL, 1));
 		}
 
 		rightParenCode();
@@ -357,7 +377,6 @@ struct AST_Node* genMainAST()
 		right = genMainAST();
 		node = mkastnode(TT_UNDEF, 0, 0, left, right, NULL, NULL);
 		return node;
-
 
 
 	}

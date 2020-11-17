@@ -117,6 +117,8 @@ enum
 	TT_SMALLER,
 	TT_GREATER_EQUALS,
 	TT_SMALLER_EQUALS,
+	TT_BOOL_TRUE,
+	TT_BOOL_FALSE,
 };
 
 
@@ -158,7 +160,8 @@ static struct TokenIdent multicharTokens[] =
 {
 	{"print", TT_PRINT}, {"if", TT_IF},
 	{"while", TT_WHILE}, {"var", TT_VAR},
-	{"undef", TT_UNDEF},
+	{"undef", TT_UNDEF}, {"true", TT_BOOL_TRUE}, 
+	{"false", TT_BOOL_FALSE},
 };
 
 struct NumericVal
@@ -177,8 +180,6 @@ static struct TokenIdent singleCharTokens[] =
 	{'^', TT_POW}, {';', TT_OP_END},
 	{'(', TT_LEFT_PAREN}, {')', TT_RIGHT_PAREN},
 	{'{', TT_LEFT_CURLY}, {'}', TT_LEFT_CURLY},
-	/*{'=', TT_EQUALS}, {'|', TT_OR},
-	{'&', TT_AND},*/
 };
 
 static struct Token* newToken(int tokenType, INT_VAL intValue, int line, struct DATA_struct* data)

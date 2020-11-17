@@ -212,8 +212,10 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 	case TT_DIV: 	return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_DIV, dt_left, dt_right));
 	case TT_POW:    return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_POW, dt_left, dt_right));
 
-	case TT_INT:    *(root->data->intVal) *= root->data->minusVal;     return root->data;
-	case TT_FLOAT:  *(root->data->doubleVal) *= root->data->minusVal;  return root->data;
+	case TT_INT:         *(root->data->intVal) *= root->data->minusVal;     return root->data;
+	case TT_FLOAT:       *(root->data->doubleVal) *= root->data->minusVal;  return root->data; 
+	case TT_BOOL_TRUE:   return root->data;
+	case TT_BOOL_FALSE:  return root->data;
 	case TT_IDENT:
 	{
 		curIdent = (struct IDENT_tokenData*)symtable_getItem(root->varName);
