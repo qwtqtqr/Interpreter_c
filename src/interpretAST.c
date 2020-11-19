@@ -156,6 +156,10 @@ static struct DATA_STRUCT* RETURN_DATATYPE_NUM(struct DATA_STRUCT* leftVal, stru
 	case TT_SMALLER_EQUALS:  DATATYPE_OPERATION_CMP(leftVal, rightVal, dt_left, dt_right, <= );
 	case TT_GREATER:         DATATYPE_OPERATION_CMP(leftVal, rightVal, dt_left, dt_right, > );
 	case TT_SMALLER:         DATATYPE_OPERATION_CMP(leftVal, rightVal, dt_left, dt_right, < );
+	case TT_AND:             DATATYPE_OPERATION_CMP(leftVal, rightVal, dt_left, dt_right, &&);
+	case TT_OR:              DATATYPE_OPERATION_CMP(leftVal, rightVal, dt_left, dt_right, || );
+
+	
 
 	}
 	free(leftVal), free(rightVal);
@@ -234,6 +238,10 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 		{
 			*(curIdent->data->doubleVal) *= root->intVal;
 		}
+		else if (dt == DT_BOOL)
+		{
+			*(curIdent->data->boolVal) *= root->intVal;
+		}
 		else
 		{
 			printf("[ERROR] invalid datatype\n");
@@ -249,6 +257,8 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 	case TT_SMALLER_EQUALS:  return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_SMALLER_EQUALS, dt_left, dt_right));
 	case TT_GREATER:         return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_GREATER, dt_left, dt_right));
 	case TT_SMALLER:         return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_SMALLER, dt_left, dt_right));
+	case TT_AND:             return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_AND, dt_left, dt_right));
+	case TT_OR:              return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_OR, dt_left, dt_right));
 
 	}
 }

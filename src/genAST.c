@@ -7,6 +7,7 @@
 #include <math.h>
 #define PAREN_PRECEDENCE 20
 #define BINEXPR_PTP_STARTVAL 0
+#define INTERRUPT_TOKEN_DEFAULT -1
 
 
 static double math_root(double x, double y)
@@ -14,7 +15,7 @@ static double math_root(double x, double y)
 	return (pow(x, 1 / y));
 }
 
-static int binOperators[] = { TT_PLUS, TT_MINUS, TT_MUL, TT_DIV, TT_OP_END, TT_EOF, TT_POW , TT_EQUALS_CMP, TT_NOT_EQUALS, TT_GREATER, TT_SMALLER, TT_GREATER_EQUALS, TT_SMALLER_EQUALS };
+static int binOperators[] = { TT_PLUS, TT_MINUS, TT_MUL, TT_DIV, TT_OP_END, TT_EOF, TT_POW , TT_EQUALS_CMP, TT_NOT_EQUALS, TT_GREATER, TT_SMALLER, TT_GREATER_EQUALS, TT_SMALLER_EQUALS, TT_AND, TT_OR };
 
 static int leftParenCount = 0;
 static int rightParenCount = 0;
@@ -53,13 +54,28 @@ static void leftParenCode(struct Token* minusToken)
 }
 
 
-static void rightParenCode()
+static int rightParenCode(int interrupt_token)
 {
 	while (currentToken->tokenType == TT_RIGHT_PAREN)
 	{
+		if (interrupt_token != -1)
+		{
+			if (currentToken->tokenType == TT_RIGHT_PAREN)
+			{
+				scan_curToken();
+				if (currentToken->tokenType == interrupt_token)
+				{
+					rightParenCount = 0;
+					leftParenCount = 0;
+					return 1;
+				}
+				putBack_curToken(currentToken);
+			}
+		}
 		rightParenCount++;
 		scan_curToken();
 	}
+
 	if (leftParenCount != rightParenCount)
 	{
 		globl_inParen = PAREN_PRECEDENCE;
@@ -84,6 +100,7 @@ static void rightParenCode()
 		printf("[SYNTAX ERROR] expected a binary operator in Line %d\n", Line);
 		exit(1);
 	}
+	return 0;
 }
 
 static int getParenPrecendece(struct Token* t)
@@ -153,6 +170,10 @@ static int getOpPrecedence(struct Token* t)
 	case TT_SMALLER_EQUALS:
 		return 5;
 
+	case TT_AND: return 2;
+
+	case TT_OR: return 2;
+
 	}
 	return -1;
 }
@@ -211,7 +232,7 @@ struct AST_Node* mkastnode_ident(int tokenType, INT_VAL intVal, double floatVal,
 
 
 
-struct AST_Node* binexpr_int(int ptp)
+struct AST_Node* binexpr_int(int ptp, int interrupt_token)
 {
 	int k = 0;
 	struct  AST_Node* left, * right;
@@ -257,7 +278,13 @@ struct AST_Node* binexpr_int(int ptp)
 	int lastLine = Line;
 	scan_curToken(); // bin operator
 
-	rightParenCode();
+	
+
+	if (rightParenCode(interrupt_token) == 1)
+	{
+		return left;
+	}
+	
 
 	if (tokenIsBinOp(currentToken) == 0)
 	{
@@ -271,13 +298,18 @@ struct AST_Node* binexpr_int(int ptp)
 	}
 	if (currentToken->tokenType == TT_OP_END)
 	{
-		return left;
+		if (interrupt_token == INTERRUPT_TOKEN_DEFAULT)
+		{
+			return left;
+		}
+		printf("[SYNTAX ERROR] cannot use ';' inside an expression (Line %d)\n", Line);
+		exit(1);
 	}
 
 	while (getOpPrecedence(currentToken) + globl_inParen * globl_parenDelta > ptp)
 	{
 		struct Token* lastToken = currentToken;
-		right = binexpr_int(getOpPrecedence(currentToken) + globl_inParen * globl_parenDelta);
+		right = binexpr_int(getOpPrecedence(currentToken) + globl_inParen * globl_parenDelta, interrupt_token);
 		left = mkastnode(lastToken->tokenType, lastToken->intValue, lastToken->floatVal, left, right, NULL, lastToken->data);
 		if (lastToken->tokenType == TT_IDENT)
 		{
@@ -294,7 +326,7 @@ struct AST_Node* binexpr_int(int ptp)
 			left = mkastnode(TT_BOOL_FALSE, 0, 0, NULL, NULL, NULL, new_DATA_STRUCT(NULL, 0, NULL, NULL, NULL, DT_BOOL, 1));
 		}
 
-		rightParenCode();
+		rightParenCode(interrupt_token);
 	}
 	return left;
 }
@@ -344,7 +376,14 @@ struct AST_Node* genMainAST()
 	switch (currentToken->tokenType)
 	{
 	case TT_PRINT:
-		left = binexpr_int(BINEXPR_PTP_STARTVAL);
+
+		scan_curToken();
+		if (currentToken->tokenType != TT_LEFT_PAREN)
+		{
+			printf("[SYNTAX ERROR] '(' is missing in Line %d\n", Line);
+			exit(1);
+		}
+		left = binexpr_int(BINEXPR_PTP_STARTVAL, TT_OP_END);
 		node = mkastnode(t->tokenType, t->intValue, t->floatVal, left, NULL, NULL, NULL);
 		break;
 
@@ -378,6 +417,22 @@ struct AST_Node* genMainAST()
 		node = mkastnode(TT_UNDEF, 0, 0, left, right, NULL, NULL);
 		return node;
 
+
+	case TT_IF:
+		scan_curToken();
+
+		if (currentToken->tokenType != TT_LEFT_PAREN)
+		{
+			printf("[SYNTAX ERROR] '(' is missing in Line %d\n", Line);
+			exit(1);
+		}
+
+		left = mkastnode(TT_ANY_OP, 0, 0, NULL, NULL, NULL, NULL);
+		left->left = binexpr_int(0, TT_LEFT_CURLY);
+		//left->right = genMainAST();   // if scope
+		right = genMainAST();
+		node = mkastnode(TT_IF, 0, 0, left, right, NULL, NULL);
+		return node;
 
 	}
 	if (currentToken->tokenType == TT_EOF)

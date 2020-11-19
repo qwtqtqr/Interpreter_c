@@ -21,6 +21,6 @@ void createNewString(int c, LinkedList* buffList);
 char scanChars(int c);
 void scan_curToken();
 void skip_comments(int c_);
-//void putback_token(struct Token* token)
+void putBack_curToken(struct Token* token);
 
 #endif

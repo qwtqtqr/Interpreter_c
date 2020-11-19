@@ -18,6 +18,7 @@ FILE* Infile = NULL;
 FILE* Outfile = NULL;
 char Text[TEXTLEN + 1] = { NULL };
 LinkedList* globl_symtable[SYMTABLE_SIZE] = { NULL };
+struct Token* globl_putback_token = NULL;
 
 
 static void initGloblVar()
@@ -43,7 +44,6 @@ int main(int argc, char* argv[])
 	{
 		struct AST_Node* ast_root = genMainAST();
 		interpretMainAST(ast_root);
-
 
 		/*
 		int** intArr = calloc(50, sizeof(int));

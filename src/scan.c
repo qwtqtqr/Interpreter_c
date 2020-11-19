@@ -123,7 +123,7 @@ static int scan_cmp_operators(int c_)
 	switch (c)
 	{
 	case '=':
-		c = skip();
+		c = next();
 		if (c == '=')
 		{
 			return TT_EQUALS_CMP;
@@ -133,7 +133,7 @@ static int scan_cmp_operators(int c_)
 		return TT_EQUALS;
 
 	case '!':
-		c = skip();
+		c = next();
 		if (c == '=')
 		{
 			return TT_NOT_EQUALS;
@@ -142,7 +142,7 @@ static int scan_cmp_operators(int c_)
 		exit(1);
 
 	case '>':
-		c = skip();
+		c = next();
 		if (c == '=')
 		{
 			return TT_GREATER_EQUALS;
@@ -151,7 +151,7 @@ static int scan_cmp_operators(int c_)
 		return TT_GREATER;
 
 	case '<':
-		c = skip();
+		c = next();
 		if (c == '=')
 		{
 			return TT_SMALLER_EQUALS;
@@ -159,10 +159,32 @@ static int scan_cmp_operators(int c_)
 		putback(c);
 		return TT_SMALLER;
 
+	case '&':
+		c = next();
+		if (c == '&')
+		{
+			return TT_AND;
+		}
+		printf("[ERROR] unknown token in Line %d\n", Line);
+		exit(1);
+
+	case '|':
+		c = next();
+		if (c == '|')
+		{
+			return TT_OR;
+		}
+		printf("[ERROR] unknown token in Line %d\n", Line);
+		exit(1);
+
 	}
 	return -1;
 }
 
+void putBack_curToken(struct Token* token)
+{
+	globl_putback_token = token;
+}
 
 
 
@@ -303,6 +325,14 @@ void skip_comments(int c_)
 
 void scan_curToken()
 {
+
+	if (globl_putback_token != NULL)
+	{
+		currentToken = globl_putback_token;
+		globl_putback_token = NULL;
+		return;
+	}
+
 	int c = skip();
 	skip_comments(c);
 

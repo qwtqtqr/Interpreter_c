@@ -7,7 +7,7 @@
 #include<stdint.h>
 #include<stdlib.h>
 
-#define GEN_CMP_PTP_INIT -1
+#define INTERRUPT_TOKEN_DEFAULT -1
 
 struct AST_Node
 {
@@ -30,7 +30,7 @@ struct AST_Node* mkastnode_ident(int tokenType, INT_VAL intVal, double floatVal,
 struct AST_Node* binexpr();
 
 struct DATA_STRUCT* interpretAST_int(struct AST_Node* root);
-struct AST_Node* binexpr_int(int ptp);
+struct AST_Node* binexpr_int(int ptp, int interrupt_token);
 
 struct AST_Node* genMainAST();
 void interpretMainAST(struct AST_Node* root);

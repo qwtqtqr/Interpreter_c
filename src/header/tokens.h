@@ -10,6 +10,7 @@
 #include <string.h>
 
 extern struct Token* currentToken;
+extern struct Token* globl_putback_token;
 
 struct DATA_STRUCT
 {
