@@ -29,6 +29,7 @@ static void initGloblVar()
 	currentToken = malloc(sizeof(struct Token));
 }
 
+// todo:  fix bugs:  (-x) * y  && var q;   q = ...; && undef statement && (1   /2);
 
 // todo: free tokens
 
@@ -42,8 +43,13 @@ int main(int argc, char* argv[])
 	Infile = fopen(fileName, "r");
 	if (Infile != NULL)
 	{
-		struct AST_Node* ast_root = genMainAST();
+		struct AST_Node* ast_root = genMainAST(0);
 		interpretMainAST(ast_root);
+
+#if 0
+		struct AST_Node* curNode = ast_root->right;
+		printf("curNode:  %d\n", curNode->tokenType);
+#endif
 
 		/*
 		int** intArr = calloc(50, sizeof(int));

@@ -32,12 +32,11 @@ struct AST_Node* binexpr();
 struct DATA_STRUCT* interpretAST_int(struct AST_Node* root);
 struct AST_Node* binexpr_int(int ptp, int interrupt_token);
 
-struct AST_Node* genMainAST();
+struct AST_Node* genMainAST(int scope_depth);
 void interpretMainAST(struct AST_Node* root);
 
 struct AST_Node* genVarAST();
 struct AST_Node* genIdentAST();
-struct AST_Node* genCMP_AST();
 
 
 

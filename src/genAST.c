@@ -25,8 +25,9 @@ static int globl_parenDelta = 0;
 
 static int mainAST_init = 1;
 
-static int curly_open_count = 0;
-static int curly_closed_count = 0;
+unsigned int globl_open_curly_count = 0;
+unsigned int globl_closed_curly_count = 0;
+int globl_current_depth = 0;
 
 
 static void leftParenCode(struct Token* minusToken)
@@ -67,6 +68,7 @@ static int rightParenCode(int interrupt_token)
 				{
 					rightParenCount = 0;
 					leftParenCount = 0;
+					putBack_curToken(currentToken);
 					return 1;
 				}
 				putBack_curToken(currentToken);
@@ -248,13 +250,13 @@ struct AST_Node* binexpr_int(int ptp, int interrupt_token)
 	int lastLine = Line;
 	scan_curToken(); // bin operator
 
-	
+
 
 	if (rightParenCode(interrupt_token) == 1)
 	{
 		return left;
 	}
-	
+
 
 	if (tokenIsBinOp(currentToken) == 0)
 	{
@@ -335,7 +337,20 @@ struct AST_Node* binexpr()
 }
 
 
-struct AST_Node* genMainAST()
+
+
+static int ignore_tokens()
+{
+	switch (currentToken->tokenType)
+	{
+	case TT_LEFT_CURLY: return 1;
+	case TT_RIGHT_CURLY: return 1;
+	}
+	return 0;
+}
+
+
+struct AST_Node* genMainAST(int scope_depth)
 {
 	struct AST_Node* left = NULL, * right = NULL, * node = NULL;
 	scan_curToken();
@@ -355,16 +370,22 @@ struct AST_Node* genMainAST()
 		}
 		left = binexpr_int(BINEXPR_PTP_STARTVAL, TT_OP_END);
 		node = mkastnode(t->tokenType, t->intValue, t->floatVal, left, NULL, NULL, NULL);
+		scan_curToken();
+		if (currentToken->tokenType != TT_OP_END)
+		{
+			printf("[SYNTAX ERROR] expected an ';' in Line %d\n", Line);
+			exit(1);
+		}
 		break;
 
 	case TT_VAR:
 		node = genVarAST();
-		node->right = genMainAST();
+		node->right = genMainAST(scope_depth);
 		return node;
 
 	case TT_IDENT:
 		node = genIdentAST();
-		node->right = genMainAST();
+		node->right = genMainAST(scope_depth);
 		return node;
 
 	case TT_UNDEF:
@@ -383,26 +404,57 @@ struct AST_Node* genMainAST()
 			printf("[SYNTAX ERROR] expected a ';' in Line %d\n", Line);
 			exit(1);
 		}
-		right = genMainAST();
+		right = genMainAST(scope_depth);
 		node = mkastnode(TT_UNDEF, 0, 0, left, right, NULL, NULL);
 		return node;
 
 
 	case TT_IF:
 		scan_curToken();
-
 		if (currentToken->tokenType != TT_LEFT_PAREN)
 		{
 			printf("[SYNTAX ERROR] '(' is missing in Line %d\n", Line);
 			exit(1);
 		}
-
-		left = mkastnode(TT_ANY_OP, 0, 0, NULL, NULL, NULL, NULL);
-		left->left = binexpr_int(0, TT_LEFT_CURLY);
-		//left->right = genMainAST();   // if scope
-		right = genMainAST();
-		node = mkastnode(TT_IF, 0, 0, left, right, NULL, NULL);
+		node = mkastnode(TT_IF, 0, 0, NULL, NULL, NULL, NULL);
+		node->left = mkastnode(TT_ANY_OP, 0, 0, NULL, NULL, NULL, NULL);
+		node->left->left = binexpr_int(0, TT_LEFT_CURLY);
+		node->left->right = genMainAST(scope_depth);
+		node->right = genMainAST(scope_depth);
 		return node;
+		break;
+     
+
+	///////////////////////////////////////////////////////////////////
+	//    SCOPE
+	///////////////////////////////////////////////////////////////////
+
+	case TT_LEFT_CURLY:
+		globl_open_curly_count++;
+		globl_current_depth = globl_open_curly_count - globl_closed_curly_count;
+		if (globl_current_depth == (scope_depth + 1))
+		{
+			node = mkastnode(TT_SCOPE, 0, 0, NULL, NULL, NULL, NULL);
+			node->left = genMainAST(globl_current_depth);
+			//node->right = genMainAST(scope_depth);
+			return node;
+		}
+		break;
+
+	case TT_RIGHT_CURLY:
+		globl_closed_curly_count++;
+		globl_current_depth = globl_open_curly_count - globl_closed_curly_count;
+		if (globl_current_depth == (scope_depth -1))
+		{
+			globl_open_curly_count -= 1;
+			globl_closed_curly_count -= 1;
+			node = mkastnode(TT_SCOPE_END, 0, 0, NULL, NULL, NULL, NULL);
+			return node;
+		}
+		break;
+
+	/////////////////////////////////////////////////////////////////////
+
 
 	}
 	if (currentToken->tokenType == TT_EOF)
@@ -411,15 +463,11 @@ struct AST_Node* genMainAST()
 	}
 	else
 	{
-		right = genMainAST();
+		right = genMainAST(scope_depth);
 	}
 	node = mkastnode(t->tokenType, t->intValue, t->floatVal, left, right, NULL, NULL);
 	return node;
 }
-
-
-
-
 
 
 

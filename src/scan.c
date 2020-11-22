@@ -138,7 +138,7 @@ static int scan_cmp_operators(int c_)
 		{
 			return TT_NOT_EQUALS;
 		}
-		printf("[ERROR] unknown toekn in Line %d\n", Line);
+		printf("[ERROR] unknown token in Line %d\n", Line);
 		exit(1);
 
 	case '>':

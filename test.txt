@@ -1,8 +1,14 @@
-print (((0 || 1)* 6));
-print (554 * 5);
-print (5);
-var x = 554 * 10;
-print(x && true);
+var x = 4 * 5;
+var boolVal = x < 25 || false;
 
+if (boolVal)
+{
+   print(x);
+   if (true)
+   { 
+      print (101);
+   }
 
-// todo:  fix bugs:  (-x) * y  && var q;   q = ...; && undef statement && (1   /2);
+}
+
+print (-1 * 10);

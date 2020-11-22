@@ -123,7 +123,7 @@ static struct DATA_STRUCT* RETURN_DATATYPE_NUM(struct DATA_STRUCT* leftVal, stru
 	case TT_PLUS:   DATATYPE_OPERATION_CALC(leftVal, rightVal, dt_left, dt_right, +); break;
 	case TT_MINUS:  DATATYPE_OPERATION_CALC(leftVal, rightVal, dt_left, dt_right, -); break;
 	case TT_MUL:    DATATYPE_OPERATION_CALC(leftVal, rightVal, dt_left, dt_right, *); break;
-	case TT_DIV:    DATATYPE_OPERATION_CALC(leftVal, rightVal, dt_left, dt_right, /); break;
+	case TT_DIV:    DATATYPE_OPERATION_CALC(leftVal, rightVal, dt_left, dt_right, / ); break;
 
 	case TT_POW:
 		if (dt_left == DT_FLOAT && dt_right == DT_FLOAT)
@@ -159,7 +159,7 @@ static struct DATA_STRUCT* RETURN_DATATYPE_NUM(struct DATA_STRUCT* leftVal, stru
 	case TT_AND:             DATATYPE_OPERATION_CMP(leftVal, rightVal, dt_left, dt_right, &&);
 	case TT_OR:              DATATYPE_OPERATION_CMP(leftVal, rightVal, dt_left, dt_right, || );
 
-	
+
 
 	}
 	free(leftVal), free(rightVal);
@@ -217,7 +217,7 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 	case TT_POW:    return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_POW, dt_left, dt_right));
 
 	case TT_INT:         *(root->data->intVal) *= root->data->minusVal;     return root->data;
-	case TT_FLOAT:       *(root->data->doubleVal) *= root->data->minusVal;  return root->data; 
+	case TT_FLOAT:       *(root->data->doubleVal) *= root->data->minusVal;  return root->data;
 	case TT_BOOL_TRUE:   return root->data;
 	case TT_BOOL_FALSE:  return root->data;
 	case TT_IDENT:
@@ -248,7 +248,7 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 			exit(1);
 		}
 	}
-		return DATA_STRUCT_cpy(curIdent->data);
+	return DATA_STRUCT_cpy(curIdent->data);
 
 
 	case TT_EQUALS_CMP:      return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_EQUALS_CMP, dt_left, dt_right));
@@ -262,6 +262,9 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 
 	}
 }
+
+
+
 
 
 void interpretMainAST(struct AST_Node* root)
@@ -326,6 +329,36 @@ void interpretMainAST(struct AST_Node* root)
 		else if (curNode->tokenType == TT_UNDEF)
 		{
 			symtable_removeItem(curNode->left->varName);
+		}
+
+
+		else if (curNode->tokenType == TT_IF)
+		{
+		    struct DATA_STRUCT* cmp_expr = interpretAST_int(curNode->left->left);
+			int cmp_expr_dt = cmp_expr->dataType;
+			if (cmp_expr_dt == DT_INT)
+			{
+				if (*(cmp_expr->intVal) == 1)
+				{
+					interpretMainAST(curNode->left->right->left);
+				}
+			}
+
+			else if (cmp_expr_dt == DT_FLOAT)
+			{
+				if (*(cmp_expr->doubleVal) == 1)
+				{
+					interpretMainAST(curNode->left->right->left);
+				}
+			}
+
+			else if (cmp_expr_dt == DT_BOOL)
+			{
+				if (*(cmp_expr->boolVal) == 1)
+				{
+					interpretMainAST(curNode->left->right->left);
+				}
+			}
 		}
 
 
