@@ -89,6 +89,9 @@
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <ExpandAttributedSource>true</ExpandAttributedSource>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -104,6 +107,9 @@
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <ExpandAttributedSource>true</ExpandAttributedSource>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,6 +152,7 @@
     <ClCompile Include="src\list.c" />
     <ClCompile Include="src\main.c" />
     <ClCompile Include="src\scan.c" />
+    <ClCompile Include="src\scope.c" />
     <ClCompile Include="src\symtable.c" />
     <ClCompile Include="src\variable.c" />
   </ItemGroup>

@@ -2,6 +2,7 @@
 #define AST_H
 #include "tokens.h"
 #include "symtable.h"
+#include "data.h"
 #include <stdio.h>
 #include<limits.h>
 #include<stdint.h>
@@ -37,6 +38,13 @@ void interpretMainAST(struct AST_Node* root);
 
 struct AST_Node* genVarAST();
 struct AST_Node* genIdentAST();
+
+
+void varStack_push_frame();
+struct VAR_STACK* varStack_getFrame();
+void stackFrame_add_var(char* varName);
+void varStack_pop_frame();
+struct VAR_STACK* mkVarStack();
 
 
 

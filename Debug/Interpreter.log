@@ -1,1 +1,14 @@
-﻿  Interpreter.vcxproj -> C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\Debug\Interpreter.exe
+﻿  symtable.c
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(33,23): warning C4047: '=': '__int64 *' differs in levels of indirection from '__int64'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(84,59): warning C4047: 'function': '__int64' differs in levels of indirection from '__int64 *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(84,53): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(181,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(182,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(183,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(184,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(185,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(198,24): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(212,28): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(226,30): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(240,24): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+  Interpreter.vcxproj -> C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\Debug\Interpreter.exe

@@ -215,7 +215,6 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 	case TT_MUL:    return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_MUL, dt_left, dt_right));
 	case TT_DIV: 	return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_DIV, dt_left, dt_right));
 	case TT_POW:    return(RETURN_DATATYPE_NUM(leftVal, rightVal, TT_POW, dt_left, dt_right));
-
 	case TT_INT:         *(root->data->intVal) *= root->data->minusVal;     return root->data;
 	case TT_FLOAT:       *(root->data->doubleVal) *= root->data->minusVal;  return root->data;
 	case TT_BOOL_TRUE:   return root->data;
@@ -225,7 +224,7 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 		curIdent = (struct IDENT_tokenData*)symtable_getItem(root->varName);
 		if (curIdent == NULL)
 		{
-			printf("[ERROR] variable does not exist\n");
+			printf("[ERROR] variable does not exist or is out of scope\n");
 			exit(1);
 		}
 		int dt = curIdent->data->dataType;
@@ -300,6 +299,8 @@ void interpretMainAST(struct AST_Node* root)
 			struct IDENT_tokenData* curNodeData = (struct IDENT_tokenData*)curNode->otherData;
 			char* saveVarName = calloc(strlen(curNode->varName), sizeof(char));
 			saveVarName = strcpy(saveVarName, curNode->varName);
+		    stackFrame_add_var(saveVarName);
+
 			if (curNodeData->init == 0)
 			{
 				symtable_add(saveVarName, newID_token(DT_INT, 0, 0, saveVarName, 1, new_DATA_STRUCT(NULL, NULL, NULL, NULL, NULL, -1, 1)));
@@ -361,6 +362,16 @@ void interpretMainAST(struct AST_Node* root)
 			}
 		}
 
+
+		else if (curNode->tokenType == TT_SCOPE)
+		{
+			varStack_push_frame();
+		}
+
+		else if (curNode->tokenType == TT_SCOPE_END)
+		{
+			varStack_pop_frame();
+		}
 
 
 		curNode = curNode->right;

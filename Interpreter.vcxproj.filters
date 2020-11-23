@@ -36,6 +36,9 @@
     <ClCompile Include="src\interpretAST.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\scope.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\header\list.h">

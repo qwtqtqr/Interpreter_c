@@ -19,6 +19,7 @@ FILE* Outfile = NULL;
 char Text[TEXTLEN + 1] = { NULL };
 LinkedList* globl_symtable[SYMTABLE_SIZE] = { NULL };
 struct Token* globl_putback_token = NULL;
+struct VAR_STACK* globl_var_stack = NULL;
 
 
 static void initGloblVar()
@@ -26,7 +27,6 @@ static void initGloblVar()
 	currentToken = malloc(sizeof(struct Token));
 	Line = 1;
 	Putback = 0;
-	currentToken = malloc(sizeof(struct Token));
 }
 
 // todo:  fix bugs:  (-x) * y  && var q;   q = ...; && undef statement && (1   /2);
@@ -43,6 +43,8 @@ int main(int argc, char* argv[])
 	Infile = fopen(fileName, "r");
 	if (Infile != NULL)
 	{
+		globl_var_stack = mkVarStack();
+		varStack_push_frame();  // globl frame
 		struct AST_Node* ast_root = genMainAST(0);
 		interpretMainAST(ast_root);
 

@@ -23,3 +23,5 @@ void symtable_add(char* varName, struct IDENT_tokenData* data);
 struct IDENT_tokenData* symtable_getItem(char* varName);
 struct IDENT_tokenData* newID_token(int dataType, int init, INT_VAL value, char* varName, int var, struct DATA_STRUCT* data);
 int symtable_removeItem(char* varName);
+
+int symtable_removeItem__test(char* varName);

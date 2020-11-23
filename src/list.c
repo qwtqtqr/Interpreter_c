@@ -72,9 +72,13 @@ void LinkedList_remove(LinkedList* list, int index) {
 	int size = LinkedList_size(list);
 	if (index == size - 1)
 	{
-		list->tail = list->tail->last;;
-		list->size--;
-		return;
+		if (list->tail != NULL)
+		{
+
+			list->tail = list->tail->last;
+			list->size--;
+			return;
+		}
 	}
 	if (index == 0)
 	{

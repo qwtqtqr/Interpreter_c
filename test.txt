@@ -1,14 +1,16 @@
 var x = 4 * 5;
 var boolVal = x < 25 || false;
 
-if (boolVal)
+if(boolVal)
 {
-   print(x);
-   if (true)
-   { 
-      print (101);
+   print(boolVal);
+   var l = 33;
+
+   if(true)
+   {
+       print(l);
+       var qw = 435;
    }
 
 }
 
-print (-1 * 10);
