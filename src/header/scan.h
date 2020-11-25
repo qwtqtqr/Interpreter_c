@@ -20,7 +20,9 @@ char* createFinalString(LinkedList* strBufferList);
 void createNewString(int c, LinkedList* buffList);
 char scanChars(int c);
 void scan_curToken();
-void skip_comments(int c_);
+int skip_comments(int c_);
 void putBack_curToken(struct Token* token);
+
+void printToken(int tokenType);
 
 #endif

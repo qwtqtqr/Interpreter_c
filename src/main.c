@@ -21,6 +21,8 @@ LinkedList* globl_symtable[SYMTABLE_SIZE] = { NULL };
 struct Token* globl_putback_token = NULL;
 struct VAR_STACK* globl_var_stack = NULL;
 
+int var_stack_size = 0;
+
 
 static void initGloblVar()
 {
@@ -29,7 +31,7 @@ static void initGloblVar()
 	Putback = 0;
 }
 
-// todo:  fix bugs:  (-x) * y  && var q;   q = ...; && undef statement && (1   /2);
+// todo:  fix bugs:  (-x) * y  && var q;   q = ...; && undef statement;
 
 // todo: free tokens
 
@@ -44,13 +46,13 @@ int main(int argc, char* argv[])
 	if (Infile != NULL)
 	{
 		globl_var_stack = mkVarStack();
+		struct AST_Node* ast_root = genMainAST(0, SCOPE_MODE_DEFAULT);
 		varStack_push_frame();  // globl frame
-		struct AST_Node* ast_root = genMainAST(0);
 		interpretMainAST(ast_root);
 
 #if 0
-		struct AST_Node* curNode = ast_root->right;
-		printf("curNode:  %d\n", curNode->tokenType);
+		struct AST_Node* curNode = ast_root;
+		printf("\n\n\ncurNode:  %d\n", curNode->tokenType);
 #endif
 
 		/*

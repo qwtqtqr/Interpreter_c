@@ -15,6 +15,7 @@ PUBLIC	_Putback
 PUBLIC	_Infile
 PUBLIC	_Outfile
 PUBLIC	_globl_var_stack
+PUBLIC	_var_stack_size
 PUBLIC	_currentToken
 PUBLIC	_globl_putback_token
 PUBLIC	??_C@_05IJDJACGD@print@				; `string'
@@ -33,6 +34,7 @@ _Putback DD	01H DUP (?)
 _Infile	DD	01H DUP (?)
 _Outfile DD	01H DUP (?)
 _globl_var_stack DD 01H DUP (?)
+_var_stack_size DD 01H DUP (?)
 _currentToken DD 01H DUP (?)
 _globl_putback_token DD 01H DUP (?)
 _globl_symtable DD 01388H DUP (?)
@@ -146,7 +148,7 @@ _argc$ = 8						; size = 4
 _argv$ = 12						; size = 4
 _main	PROC						; COMDAT
 
-; 37   : {
+; 39   : {
 
 	push	ebp
 	mov	ebp, esp
@@ -161,22 +163,22 @@ _main	PROC						; COMDAT
 	mov	ecx, OFFSET __D01D7B14_main@c
 	call	@__CheckForDebuggerJustMyCode@4
 
-; 38   : 	initGloblVar();
+; 40   : 	initGloblVar();
 
 	call	_initGloblVar
 
-; 39   : 	const char* fileName = "test.txt";
+; 41   : 	const char* fileName = "test.txt";
 
 	mov	DWORD PTR _fileName$[ebp], OFFSET ??_C@_08OKJMHBIC@test?4txt@
 
-; 40   : 	LinkedList* tokenList = newLinkedList();
+; 42   : 	LinkedList* tokenList = newLinkedList();
 
 	call	_newLinkedList
 	mov	DWORD PTR _tokenList$[ebp], eax
 
-; 41   : 
-; 42   : 
-; 43   : 	Infile = fopen(fileName, "r");
+; 43   : 
+; 44   : 
+; 45   : 	Infile = fopen(fileName, "r");
 
 	mov	esi, esp
 	push	OFFSET ??_C@_01KDCPPGHE@r@
@@ -188,50 +190,51 @@ _main	PROC						; COMDAT
 	call	__RTC_CheckEsp
 	mov	DWORD PTR _Infile, eax
 
-; 44   : 	if (Infile != NULL)
+; 46   : 	if (Infile != NULL)
 
 	cmp	DWORD PTR _Infile, 0
 	je	SHORT $LN2@main
 
-; 45   : 	{
-; 46   : 		globl_var_stack = mkVarStack();
+; 47   : 	{
+; 48   : 		globl_var_stack = mkVarStack();
 
 	call	_mkVarStack
 	mov	DWORD PTR _globl_var_stack, eax
 
-; 47   : 		varStack_push_frame();  // globl frame
+; 49   : 		struct AST_Node* ast_root = genMainAST(0, SCOPE_MODE_DEFAULT);
+
+	push	0
+	push	0
+	call	_genMainAST
+	add	esp, 8
+	mov	DWORD PTR _ast_root$1[ebp], eax
+
+; 50   : 		varStack_push_frame();  // globl frame
 
 	call	_varStack_push_frame
 
-; 48   : 		struct AST_Node* ast_root = genMainAST(0);
-
-	push	0
-	call	_genMainAST
-	add	esp, 4
-	mov	DWORD PTR _ast_root$1[ebp], eax
-
-; 49   : 		interpretMainAST(ast_root);
+; 51   : 		interpretMainAST(ast_root);
 
 	mov	eax, DWORD PTR _ast_root$1[ebp]
 	push	eax
 	call	_interpretMainAST
 	add	esp, 4
 
-; 50   : 
-; 51   : #if 0
-; 52   : 		struct AST_Node* curNode = ast_root->right;
-; 53   : 		printf("curNode:  %d\n", curNode->tokenType);
-; 54   : #endif
-; 55   : 
-; 56   : 		/*
-; 57   : 		int** intArr = calloc(50, sizeof(int));
-; 58   : 		if (intArr[65] == NULL)
-; 59   : 		{
-; 60   : 			printf("NULL\n");
-; 61   : 		}
-; 62   : 		*/
-; 63   : 
-; 64   : 		exit(0);
+; 52   : 
+; 53   : #if 0
+; 54   : 		struct AST_Node* curNode = ast_root;
+; 55   : 		printf("\n\n\ncurNode:  %d\n", curNode->tokenType);
+; 56   : #endif
+; 57   : 
+; 58   : 		/*
+; 59   : 		int** intArr = calloc(50, sizeof(int));
+; 60   : 		if (intArr[65] == NULL)
+; 61   : 		{
+; 62   : 			printf("NULL\n");
+; 63   : 		}
+; 64   : 		*/
+; 65   : 
+; 66   : 		exit(0);
 
 	mov	esi, esp
 	push	0
@@ -240,9 +243,9 @@ _main	PROC						; COMDAT
 	call	__RTC_CheckEsp
 $LN2@main:
 
-; 65   : 	}
-; 66   : 
-; 67   : 	printf("[ERROR] could not open file '%s'\n", fileName);
+; 67   : 	}
+; 68   : 
+; 69   : 	printf("[ERROR] could not open file '%s'\n", fileName);
 
 	mov	eax, DWORD PTR _fileName$[ebp]
 	push	eax
@@ -250,8 +253,8 @@ $LN2@main:
 	call	_printf
 	add	esp, 8
 
-; 68   : 
-; 69   : 	exit(1);
+; 70   : 
+; 71   : 	exit(1);
 
 	mov	esi, esp
 	push	1
@@ -260,7 +263,7 @@ $LN2@main:
 	call	__RTC_CheckEsp
 $LN3@main:
 
-; 70   : }
+; 72   : }
 
 	pop	edi
 	pop	esi
@@ -279,7 +282,7 @@ _TEXT	ENDS
 _TEXT	SEGMENT
 _initGloblVar PROC					; COMDAT
 
-; 26   : {
+; 28   : {
 
 	push	ebp
 	mov	ebp, esp
@@ -294,7 +297,7 @@ _initGloblVar PROC					; COMDAT
 	mov	ecx, OFFSET __D01D7B14_main@c
 	call	@__CheckForDebuggerJustMyCode@4
 
-; 27   : 	currentToken = malloc(sizeof(struct Token));
+; 29   : 	currentToken = malloc(sizeof(struct Token));
 
 	mov	esi, esp
 	push	56					; 00000038H
@@ -304,15 +307,15 @@ _initGloblVar PROC					; COMDAT
 	call	__RTC_CheckEsp
 	mov	DWORD PTR _currentToken, eax
 
-; 28   : 	Line = 1;
+; 30   : 	Line = 1;
 
 	mov	DWORD PTR _Line, 1
 
-; 29   : 	Putback = 0;
+; 31   : 	Putback = 0;
 
 	mov	DWORD PTR _Putback, 0
 
-; 30   : }
+; 32   : }
 
 	pop	edi
 	pop	esi

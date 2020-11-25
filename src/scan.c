@@ -305,7 +305,7 @@ void scan_tokens(LinkedList* tokenList, struct Token* t)
 	}
 }
 
-void skip_comments(int c_)
+int skip_comments(int c_)
 {
 	int c = c_;
 	if (c == '/')
@@ -318,8 +318,94 @@ void skip_comments(int c_)
 				c = next();
 			}
 		}
+		else {
+			putback(c);
+			return -1;
+		}
+	}
+	return 1;
+}
+
+/*
+TT_PLUS,
+	TT_MINUS,
+	TT_MUL,
+	TT_DIV,
+	TT_POW,
+	TT_INT,
+	TT_OP_END,
+	TT_PRINT,
+	TT_IF,
+	TT_LEFT_PAREN,
+	TT_RIGHT_PAREN,
+	TT_LEFT_CURLY,
+	TT_RIGHT_CURLY,
+	TT_STRING,
+	TT_WHILE,
+	TT_CHAR,
+	TT_FLOAT,
+	TT_EOF,
+	TT_IDENT,
+	TT_EQUALS,
+	TT_VAR,
+	TT_UNDEF,
+	TT_EQUALS_CMP,
+	TT_AND,
+	TT_OR,
+	TT_ANY_OP,
+	TT_NOT_EQUALS,
+	TT_GREATER,
+	TT_SMALLER,
+	TT_GREATER_EQUALS,
+	TT_SMALLER_EQUALS,
+	TT_BOOL_TRUE,
+	TT_BOOL_FALSE,
+	TT_SCOPE,
+	TT_SCOPE_END,
+*/
+
+
+void printToken(int tokenType)
+{
+	switch (tokenType)
+	{
+	case TT_PLUS:              printf("TT_PLUS"); break;
+	case TT_MINUS:             printf("TT_MINUS"); break;
+	case TT_MUL:               printf("TT_MUL"); break;
+	case TT_DIV:               printf("TT_DIV"); break;
+	case TT_POW:               printf("TT_POW"); break;
+	case TT_INT:               printf("TT_INT"); break;
+	case TT_OP_END:            printf("TT_OP_END"); break;
+	case TT_PRINT:             printf("TT_PRINT"); break;
+	case TT_IF:                printf("TT_IF"); break;
+	case TT_LEFT_PAREN:        printf("TT_LEFT_PAREN"); break;
+	case TT_RIGHT_PAREN:       printf("TT_RIGHT_PAREN"); break;
+	case TT_LEFT_CURLY:        printf("TT_LEFT_CURLY"); break;
+	case TT_RIGHT_CURLY:       printf("TT_RIGHT_CURLY"); break;
+	case TT_STRING:            printf("TT_STRING"); break;
+	case TT_WHILE:             printf("TT_WHILE"); break;
+	case TT_CHAR:              printf("TT_CHAR"); break;
+	case TT_FLOAT:             printf("TT_FLOAT"); break;
+	case TT_EOF:               printf("TT_EOF"); break;
+	case TT_IDENT:             printf("TT_IDENT"); break; 
+	case TT_EQUALS:            printf("TT_EQUALS"); break;
+	case TT_VAR:               printf("TT_VAR"); break;
+	case TT_UNDEF:             printf("TT_UNDEF"); break;
+	case TT_EQUALS_CMP:        printf("TT_EQUALS_CMP"); break;
+	case TT_AND:               printf("TT_AND"); break;
+	case TT_OR:                printf("TT_OR"); break;
+	case TT_ANY_OP:            printf("TT_ANY_OP"); break;
+	case TT_GREATER:           printf("TT_GREATER"); break;
+	case TT_SMALLER:           printf("TT_SMALLER"); break;
+	case TT_GREATER_EQUALS:    printf("TT_GREATER_EQUALS"); break;
+	case TT_SMALLER_EQUALS:    printf("TT_SMALLER_EQUALS"); break;
+	case TT_BOOL_TRUE:         printf("TT_BOOL_TRUE"); break;
+	case TT_BOOL_FALSE:        printf("TT_BOOL_FALSE"); break;
+	case TT_SCOPE:             printf("TT_SCOPE"); break;
+	case TT_SCOPE_END:         printf("TT_SCOPE_END"); break;
 	}
 }
+
 
 
 
@@ -334,7 +420,12 @@ void scan_curToken()
 	}
 
 	int c = skip();
-	skip_comments(c);
+	int x = skip_comments(c);
+	if (x == -1)
+	{
+		currentToken = newToken(TT_DIV, 0, 0, Line, NULL);
+		return;
+	}
 
 	if (c == EOF)
 	{

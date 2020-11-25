@@ -1,16 +1,23 @@
-var x = 4 * 5;
-var boolVal = x < 25 || false;
+var boolVal = true && 1 == 1;
 
-if(boolVal)
 {
-   print(boolVal);
+  var s = 45;
+  print(s);
+}
+
+
+if (boolVal)
+{
+   print(0);
    var l = 33;
 
-   if(true)
+   if(23)
    {
        print(l);
        var qw = 435;
    }
-
 }
+
+print(  10 + 1 /2  );
+print(boolVal);
 

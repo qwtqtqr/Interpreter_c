@@ -1,4 +1,4 @@
-﻿  symtable.c
+﻿  genAST.c
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(33,23): warning C4047: '=': '__int64 *' differs in levels of indirection from '__int64'
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(84,59): warning C4047: 'function': '__int64' differs in levels of indirection from '__int64 *'
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(84,53): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
@@ -11,4 +11,136 @@ C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\h
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(212,28): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(226,30): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
 C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(240,24): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\genAST.c(50,19): warning C4013: 'tokenIsBinOp' undefined; assuming extern returning int
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\genAST.c(236,150): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\genAST.c(236,146): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\genAST.c(242,99): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\genAST.c(242,95): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\genAST.c(248,100): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\genAST.c(248,96): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\genAST.c(291,186): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\genAST.c(291,182): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\genAST.c(295,82): warning C4047: 'function': 'int *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\genAST.c(295,81): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 2
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\genAST.c(295,94): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\genAST.c(295,90): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\genAST.c(299,95): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\genAST.c(299,91): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+  interpretAST.c
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(33,23): warning C4047: '=': '__int64 *' differs in levels of indirection from '__int64'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(84,59): warning C4047: 'function': '__int64' differs in levels of indirection from '__int64 *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(84,53): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(181,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(182,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(183,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(184,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(185,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(198,24): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(212,28): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(226,30): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(240,24): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(137,36): warning C4244: 'function': conversion from '__int64' to 'double', possible loss of data
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(142,60): warning C4244: 'function': conversion from '__int64' to 'double', possible loss of data
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(148,36): warning C4244: 'function': conversion from '__int64' to 'double', possible loss of data
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(148,57): warning C4244: 'function': conversion from '__int64' to 'double', possible loss of data
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(148,58): warning C4244: '=': conversion from 'double' to '__int64', possible loss of data
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(150,51): warning C4047: 'function': '__int64' differs in levels of indirection from '__int64 *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(150,45): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(154,27): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(154,27): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(155,27): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(155,27): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(156,27): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(156,27): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(157,27): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(157,27): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(158,27): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(158,27): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(159,27): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(159,27): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(160,27): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(160,27): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(161,27): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(161,27): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(178,51): warning C4047: 'function': '__int64' differs in levels of indirection from '__int64 *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(178,44): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(180,49): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(180,45): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(167,1): warning C4244: 'initializing': conversion from 'long double' to '__int64', possible loss of data
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(225,69): warning C4090: 'function': different 'const' qualifiers
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(243,46): warning C4244: '*=': conversion from '__int64' to 'int', possible loss of data
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(308,111): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(308,107): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(334,46): warning C4090: 'function': different 'const' qualifiers
+  main.c
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(33,23): warning C4047: '=': '__int64 *' differs in levels of indirection from '__int64'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(84,59): warning C4047: 'function': '__int64' differs in levels of indirection from '__int64 *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(84,53): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(181,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(182,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(183,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(184,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(185,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(198,24): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(212,28): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(226,30): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(240,24): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\main.c(10,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\main.c : message : see previous definition of '_CRT_SECURE_NO_WARNINGS'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\main.c(19,33): warning C4047: 'initializing': 'char' differs in levels of indirection from 'void *'
+  scan.c
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(33,23): warning C4047: '=': '__int64 *' differs in levels of indirection from '__int64'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(84,59): warning C4047: 'function': '__int64' differs in levels of indirection from '__int64 *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(84,53): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(181,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(182,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(183,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(184,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(185,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(198,24): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(212,28): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(226,30): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(240,24): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(15,16): warning C4013: 'isalpha' undefined; assuming extern returning int
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(15,30): warning C4013: 'isdigit' undefined; assuming extern returning int
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(39,2): warning C4091: 'static ': ignored on left of 'keyword_returnVal' when no variable is declared
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(426,45): warning C4047: 'function': 'DATA_struct *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(426,41): warning C4024: 'newToken': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(426,47): warning C4020: 'newToken': too many actual parameters
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(437,29): warning C4047: '==': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(464,93): warning C4047: 'function': '__int64' differs in levels of indirection from '__int64 *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(464,84): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(464,111): warning C4133: 'function': incompatible types - from 'DATA_STRUCT *' to 'DATA_struct *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(471,105): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(471,101): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(471,125): warning C4133: 'function': incompatible types - from 'DATA_STRUCT *' to 'DATA_struct *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(496,111): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(496,107): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(496,132): warning C4133: 'function': incompatible types - from 'DATA_STRUCT *' to 'DATA_struct *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(507,52): warning C4047: 'function': 'char *' differs in levels of indirection from 'char'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(507,49): warning C4024: 'newToken_str': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(507,92): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(507,88): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\scan.c(507,113): warning C4133: 'function': incompatible types - from 'DATA_STRUCT *' to 'DATA_struct *'
+  variable.c
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(33,23): warning C4047: '=': '__int64 *' differs in levels of indirection from '__int64'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(84,59): warning C4047: 'function': '__int64' differs in levels of indirection from '__int64 *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(84,53): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(181,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(182,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(183,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(184,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(185,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(198,24): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(212,28): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(226,30): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\header\tokens.h(240,24): warning C4133: '=': incompatible types - from 'DATA_struct *' to 'DATA_STRUCT *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\variable.c(27,131): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\variable.c(27,127): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\variable.c(33,166): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\variable.c(33,162): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\variable.c(68,165): warning C4047: 'function': '__int64' differs in levels of indirection from 'void *'
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\variable.c(68,161): warning C4024: 'new_DATA_STRUCT': different types for formal and actual parameter 4
+  Generating Code...
+C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c(264): warning C4715: 'interpretAST_int': not all control paths return a value
   Interpreter.vcxproj -> C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\Debug\Interpreter.exe

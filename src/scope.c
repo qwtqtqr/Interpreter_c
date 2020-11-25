@@ -74,7 +74,8 @@ void varStack_remove(struct VAR_STACK* varStack)
 
 void varStack_push_frame()
 {
-	varStack_add(globl_var_stack,(void*) mkVarStack());
+	varStack_add(globl_var_stack, mkVarStack());
+	var_stack_size++;
 }
 
 struct VAR_STACK* varStack_getFrame()
@@ -100,14 +101,12 @@ void varStack_pop_frame()
 	struct VAR_STACK* curSTACK = varStack_getFrame();
 	struct STACK_FRAME* curNode = curSTACK->head;
 
-	
-
 	while (curNode != NULL)
 	{
-		char* curVarName =(char*) curNode->data;
+		char* curVarName = (char*)curNode->data;
 		symtable_removeItem__test(curVarName);
 		curNode = curNode->next;
 	}
 	varStack_remove(curSTACK);
-
+	var_stack_size--;
 }

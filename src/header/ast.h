@@ -9,6 +9,8 @@
 #include<stdlib.h>
 
 #define INTERRUPT_TOKEN_DEFAULT -1
+#define SCOPE_MODE_DEFAULT 0
+#define SCOPE_MODE_STATEMENT 1
 
 struct AST_Node
 {
@@ -33,7 +35,7 @@ struct AST_Node* binexpr();
 struct DATA_STRUCT* interpretAST_int(struct AST_Node* root);
 struct AST_Node* binexpr_int(int ptp, int interrupt_token);
 
-struct AST_Node* genMainAST(int scope_depth);
+struct AST_Node* genMainAST(int scope_depth, int scope_mode);
 void interpretMainAST(struct AST_Node* root);
 
 struct AST_Node* genVarAST();

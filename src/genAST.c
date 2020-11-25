@@ -10,6 +10,7 @@
 #define INTERRUPT_TOKEN_DEFAULT -1
 
 
+
 static double math_root(double x, double y)
 {
 	return (pow(x, 1 / y));
@@ -350,7 +351,7 @@ static int ignore_tokens()
 }
 
 
-struct AST_Node* genMainAST(int scope_depth)
+struct AST_Node* genMainAST(int scope_depth, int scope_mode)
 {
 	struct AST_Node* left = NULL, * right = NULL, * node = NULL;
 	scan_curToken();
@@ -380,12 +381,12 @@ struct AST_Node* genMainAST(int scope_depth)
 
 	case TT_VAR:
 		node = genVarAST();
-		node->right = genMainAST(scope_depth);
+		node->right = genMainAST(scope_depth, SCOPE_MODE_DEFAULT);
 		return node;
 
 	case TT_IDENT:
 		node = genIdentAST();
-		node->right = genMainAST(scope_depth);
+		node->right = genMainAST(scope_depth, SCOPE_MODE_DEFAULT);
 		return node;
 
 	case TT_UNDEF:
@@ -404,7 +405,7 @@ struct AST_Node* genMainAST(int scope_depth)
 			printf("[SYNTAX ERROR] expected a ';' in Line %d\n", Line);
 			exit(1);
 		}
-		right = genMainAST(scope_depth);
+		right = genMainAST(scope_depth, scope_mode);
 		node = mkastnode(TT_UNDEF, 0, 0, left, right, NULL, NULL);
 		return node;
 
@@ -419,8 +420,8 @@ struct AST_Node* genMainAST(int scope_depth)
 		node = mkastnode(TT_IF, 0, 0, NULL, NULL, NULL, NULL);
 		node->left = mkastnode(TT_ANY_OP, 0, 0, NULL, NULL, NULL, NULL);
 		node->left->left = binexpr_int(0, TT_LEFT_CURLY);
-		node->left->right = genMainAST(scope_depth);
-		node->right = genMainAST(scope_depth);
+		node->left->right = genMainAST(scope_depth, SCOPE_MODE_STATEMENT);
+		node->right = genMainAST(scope_depth, scope_mode);
 		return node;
 		break;
      
@@ -435,8 +436,11 @@ struct AST_Node* genMainAST(int scope_depth)
 		if (globl_current_depth == (scope_depth + 1))
 		{
 			node = mkastnode(TT_SCOPE, 0, 0, NULL, NULL, NULL, NULL);
-			node->left = genMainAST(globl_current_depth);
-			//node->right = genMainAST(scope_depth);
+			node->left = genMainAST(globl_current_depth, SCOPE_MODE_DEFAULT);
+			if (scope_mode == SCOPE_MODE_DEFAULT)
+			{
+				node->right = genMainAST(globl_current_depth, scope_mode);
+			}
 			return node;
 		}
 		break;
@@ -463,7 +467,7 @@ struct AST_Node* genMainAST(int scope_depth)
 	}
 	else
 	{
-		right = genMainAST(scope_depth);
+		right = genMainAST(scope_depth, scope_mode);
 	}
 	node = mkastnode(t->tokenType, t->intValue, t->floatVal, left, right, NULL, NULL);
 	return node;

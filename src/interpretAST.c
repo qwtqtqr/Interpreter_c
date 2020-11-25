@@ -6,6 +6,7 @@
 #include "header/symtable.h"
 #include <math.h>
 
+
 #define DATATYPE_OPERATION_CALC(leftVal, rightVal, dt_left, dt_right, __op__) \
 if (dt_left == DT_FLOAT && dt_right == DT_FLOAT)\
 {\
@@ -269,6 +270,7 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 void interpretMainAST(struct AST_Node* root)
 {
 	struct AST_Node* curNode = root;
+	int in_new_scope = 0;
 	while (curNode != NULL)
 	{
 		if (curNode->tokenType == TT_PRINT)
@@ -299,7 +301,7 @@ void interpretMainAST(struct AST_Node* root)
 			struct IDENT_tokenData* curNodeData = (struct IDENT_tokenData*)curNode->otherData;
 			char* saveVarName = calloc(strlen(curNode->varName), sizeof(char));
 			saveVarName = strcpy(saveVarName, curNode->varName);
-		    stackFrame_add_var(saveVarName);
+			stackFrame_add_var(saveVarName);
 
 			if (curNodeData->init == 0)
 			{
@@ -339,25 +341,25 @@ void interpretMainAST(struct AST_Node* root)
 			int cmp_expr_dt = cmp_expr->dataType;
 			if (cmp_expr_dt == DT_INT)
 			{
-				if (*(cmp_expr->intVal) == 1)
+				if (*(cmp_expr->intVal) != 0)
 				{
-					interpretMainAST(curNode->left->right->left);
+					interpretMainAST(curNode->left->right);
 				}
 			}
 
 			else if (cmp_expr_dt == DT_FLOAT)
 			{
-				if (*(cmp_expr->doubleVal) == 1)
+				if (*(cmp_expr->doubleVal) != 1)
 				{
-					interpretMainAST(curNode->left->right->left);
+					interpretMainAST(curNode->left->right);
 				}
 			}
 
 			else if (cmp_expr_dt == DT_BOOL)
 			{
-				if (*(cmp_expr->boolVal) == 1)
+				if (*(cmp_expr->boolVal) != 0)
 				{
-					interpretMainAST(curNode->left->right->left);
+					interpretMainAST(curNode->left->right);
 				}
 			}
 		}
@@ -366,6 +368,7 @@ void interpretMainAST(struct AST_Node* root)
 		else if (curNode->tokenType == TT_SCOPE)
 		{
 			varStack_push_frame();
+			interpretMainAST(curNode->left);
 		}
 
 		else if (curNode->tokenType == TT_SCOPE_END)

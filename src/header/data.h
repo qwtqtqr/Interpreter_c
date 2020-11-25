@@ -26,5 +26,6 @@ extern unsigned int globl_open_curly_count;
 extern unsigned int globl_closed_curly_count;
 extern int globl_current_depth;
 extern struct VAR_STACK* globl_var_stack;
+extern int var_stack_size;
 
 #endif

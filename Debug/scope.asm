@@ -70,6 +70,7 @@ EXTRN	__RTC_CheckEsp:PROC
 EXTRN	__RTC_InitBase:PROC
 EXTRN	__RTC_Shutdown:PROC
 EXTRN	_globl_var_stack:DWORD
+EXTRN	_var_stack_size:DWORD
 ;	COMDAT rtc$TMZ
 rtc$TMZ	SEGMENT
 __RTC_Shutdown.rtc$TMZ DD FLAT:__RTC_Shutdown
@@ -439,7 +440,7 @@ _curNode$ = -20						; size = 4
 _curSTACK$ = -8						; size = 4
 _varStack_pop_frame PROC				; COMDAT
 
-; 99   : {
+; 100  : {
 
 	push	ebp
 	mov	ebp, esp
@@ -454,60 +455,63 @@ _varStack_pop_frame PROC				; COMDAT
 	mov	ecx, OFFSET __B2063919_scope@c
 	call	@__CheckForDebuggerJustMyCode@4
 
-; 100  : 	struct VAR_STACK* curSTACK = varStack_getFrame();
+; 101  : 	struct VAR_STACK* curSTACK = varStack_getFrame();
 
 	call	_varStack_getFrame
 	mov	DWORD PTR _curSTACK$[ebp], eax
 
-; 101  : 	struct STACK_FRAME* curNode = curSTACK->head;
+; 102  : 	struct STACK_FRAME* curNode = curSTACK->head;
 
 	mov	eax, DWORD PTR _curSTACK$[ebp]
 	mov	ecx, DWORD PTR [eax]
 	mov	DWORD PTR _curNode$[ebp], ecx
 $LN2@varStack_p:
 
-; 102  : 
-; 103  : 	
-; 104  : 
-; 105  : 	while (curNode != NULL)
+; 103  : 
+; 104  : 	while (curNode != NULL)
 
 	cmp	DWORD PTR _curNode$[ebp], 0
 	je	SHORT $LN3@varStack_p
 
-; 106  : 	{
-; 107  : 		char* curVarName =(char*) curNode->data;
+; 105  : 	{
+; 106  : 		char* curVarName = (char*)curNode->data;
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax+4]
 	mov	DWORD PTR _curVarName$1[ebp], ecx
 
-; 108  : 		symtable_removeItem__test(curVarName);
+; 107  : 		symtable_removeItem__test(curVarName);
 
 	mov	eax, DWORD PTR _curVarName$1[ebp]
 	push	eax
 	call	_symtable_removeItem__test
 	add	esp, 4
 
-; 109  : 		curNode = curNode->next;
+; 108  : 		curNode = curNode->next;
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax]
 	mov	DWORD PTR _curNode$[ebp], ecx
 
-; 110  : 	}
+; 109  : 	}
 
 	jmp	SHORT $LN2@varStack_p
 $LN3@varStack_p:
 
-; 111  : 	varStack_remove(curSTACK);
+; 110  : 	varStack_remove(curSTACK);
 
 	mov	eax, DWORD PTR _curSTACK$[ebp]
 	push	eax
 	call	_varStack_remove
 	add	esp, 4
 
-; 112  : 
-; 113  : }
+; 111  : 	var_stack_size--;
+
+	mov	eax, DWORD PTR _var_stack_size
+	sub	eax, 1
+	mov	DWORD PTR _var_stack_size, eax
+
+; 112  : }
 
 	pop	edi
 	pop	esi
@@ -527,7 +531,7 @@ _TEXT	SEGMENT
 _varName$ = 8						; size = 4
 _stackFrame_add_var PROC				; COMDAT
 
-; 93   : {
+; 94   : {
 
 	push	ebp
 	mov	ebp, esp
@@ -542,7 +546,7 @@ _stackFrame_add_var PROC				; COMDAT
 	mov	ecx, OFFSET __B2063919_scope@c
 	call	@__CheckForDebuggerJustMyCode@4
 
-; 94   : 	varStack_add(varStack_getFrame(), varName);
+; 95   : 	varStack_add(varStack_getFrame(), varName);
 
 	mov	eax, DWORD PTR _varName$[ebp]
 	push	eax
@@ -551,7 +555,7 @@ _stackFrame_add_var PROC				; COMDAT
 	call	_varStack_add
 	add	esp, 8
 
-; 95   : }
+; 96   : }
 
 	pop	edi
 	pop	esi
@@ -571,7 +575,7 @@ _TEXT	SEGMENT
 _curNode$ = -8						; size = 4
 _varStack_getFrame PROC					; COMDAT
 
-; 81   : {
+; 82   : {
 
 	push	ebp
 	mov	ebp, esp
@@ -586,38 +590,38 @@ _varStack_getFrame PROC					; COMDAT
 	mov	ecx, OFFSET __B2063919_scope@c
 	call	@__CheckForDebuggerJustMyCode@4
 
-; 82   : 	struct STACK_FRAME* curNode = globl_var_stack->head;
+; 83   : 	struct STACK_FRAME* curNode = globl_var_stack->head;
 
 	mov	eax, DWORD PTR _globl_var_stack
 	mov	ecx, DWORD PTR [eax]
 	mov	DWORD PTR _curNode$[ebp], ecx
 $LN2@varStack_g:
 
-; 83   : 	while (curNode->next != NULL)
+; 84   : 	while (curNode->next != NULL)
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	cmp	DWORD PTR [eax], 0
 	je	SHORT $LN3@varStack_g
 
-; 84   : 	{
-; 85   : 
-; 86   : 		curNode = curNode->next;
+; 85   : 	{
+; 86   : 
+; 87   : 		curNode = curNode->next;
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax]
 	mov	DWORD PTR _curNode$[ebp], ecx
 
-; 87   : 	}
+; 88   : 	}
 
 	jmp	SHORT $LN2@varStack_g
 $LN3@varStack_g:
 
-; 88   : 	return curNode->data;
+; 89   : 	return curNode->data;
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	eax, DWORD PTR [eax+4]
 
-; 89   : }
+; 90   : }
 
 	pop	edi
 	pop	esi
@@ -651,7 +655,7 @@ _varStack_push_frame PROC				; COMDAT
 	mov	ecx, OFFSET __B2063919_scope@c
 	call	@__CheckForDebuggerJustMyCode@4
 
-; 77   : 	varStack_add(globl_var_stack,(void*) mkVarStack());
+; 77   : 	varStack_add(globl_var_stack, mkVarStack());
 
 	call	_mkVarStack
 	push	eax
@@ -660,7 +664,13 @@ _varStack_push_frame PROC				; COMDAT
 	call	_varStack_add
 	add	esp, 8
 
-; 78   : }
+; 78   : 	var_stack_size++;
+
+	mov	eax, DWORD PTR _var_stack_size
+	add	eax, 1
+	mov	DWORD PTR _var_stack_size, eax
+
+; 79   : }
 
 	pop	edi
 	pop	esi
