@@ -73,7 +73,7 @@ EXTRN	_strcpy:PROC
 EXTRN	_strlen:PROC
 EXTRN	_newID_token:PROC
 EXTRN	_mkastnode_ident:PROC
-EXTRN	_binexpr_int:PROC
+EXTRN	_binexpr:PROC
 EXTRN	_scan_curToken:PROC
 EXTRN	@__CheckForDebuggerJustMyCode@4:PROC
 EXTRN	__RTC_CheckEsp:PROC
@@ -243,7 +243,7 @@ $LN3@genIdentAS:
 	jne	SHORT $LN4@genIdentAS
 
 ; 67   : 	{
-; 68   : 		node = mkastnode_ident(TT_IDENT, 0, 0, binexpr_int(0, INTERRUPT_TOKEN_DEFAULT), NULL, newID_token(DT_INT, 1, 0, varName, 0, new_DATA_STRUCT(NULL, NULL, NULL, NULL, NULL, -1, 1)), varName, NULL);
+; 68   : 		node = mkastnode_ident(TT_IDENT, 0, 0, binexpr(0, INTERRUPT_TOKEN_DEFAULT), NULL, newID_token(DT_INT, 1, 0, varName, 0, new_DATA_STRUCT(NULL, NULL, NULL, NULL, NULL, -1, 1)), varName, NULL);
 
 	push	0
 	mov	eax, DWORD PTR _varName$[ebp]
@@ -272,7 +272,7 @@ $LN3@genIdentAS:
 	push	0
 	push	-1
 	push	0
-	call	_binexpr_int
+	call	_binexpr
 	add	esp, 8
 	push	eax
 	sub	esp, 8
@@ -495,7 +495,7 @@ $LN4@genVarAST:
 	jne	SHORT $LN6@genVarAST
 
 ; 32   : 		{
-; 33   : 			node = mkastnode_ident(TT_IDENT, 0, 0, binexpr_int(0, INTERRUPT_TOKEN_DEFAULT), NULL, newID_token(DT_INT, 1, 0, varName, 1, new_DATA_STRUCT(NULL, NULL, NULL, NULL, NULL, -1, 1)), varName, NULL);
+; 33   : 			node = mkastnode_ident(TT_IDENT, 0, 0, binexpr(0, INTERRUPT_TOKEN_DEFAULT), NULL, newID_token(DT_INT, 1, 0, varName, 1, new_DATA_STRUCT(NULL, NULL, NULL, NULL, NULL, -1, 1)), varName, NULL);
 
 	push	0
 	mov	eax, DWORD PTR _varName$1[ebp]
@@ -524,7 +524,7 @@ $LN4@genVarAST:
 	push	0
 	push	-1
 	push	0
-	call	_binexpr_int
+	call	_binexpr
 	add	esp, 8
 	push	eax
 	sub	esp, 8

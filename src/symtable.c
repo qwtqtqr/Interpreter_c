@@ -120,14 +120,14 @@ int symtable_removeItem(char* varName)
         char* varName_head = curNode_head->varName;
         if (strcmp(varName, varName_head) == 0)
         {
-           // free(curNode_head->data);
+            free(curNode_head->data);
             LinkedList_remove(globl_symtable[bucket], curIndex_head);
             return 0;
         }
         char* varname_tail = curNode_tail->varName;
         if (strcmp(varName, varName_head) == 0)
         {
-            //free(curNode_tail->data);
+            free(curNode_tail->data);
             LinkedList_remove(globl_symtable[bucket], curIndex_tail);
             return 0;
         }

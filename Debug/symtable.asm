@@ -62,6 +62,7 @@ PUBLIC	_symtable_removeItem__test
 PUBLIC	_getBucketVal
 PUBLIC	_symtable_setItemVal
 PUBLIC	__JustMyCode_Default
+EXTRN	__imp__free:PROC
 EXTRN	__imp__malloc:PROC
 EXTRN	_newLinkedList:PROC
 EXTRN	_LinkedList_add_end:PROC
@@ -743,7 +744,17 @@ $LN2@symtable_r:
 	jne	SHORT $LN5@symtable_r
 
 ; 122  :         {
-; 123  :            // free(curNode_head->data);
+; 123  :             free(curNode_head->data);
+
+	mov	esi, esp
+	mov	eax, DWORD PTR _curNode_head$[ebp]
+	mov	ecx, DWORD PTR [eax]
+	push	ecx
+	call	DWORD PTR __imp__free
+	add	esp, 4
+	cmp	esi, esp
+	call	__RTC_CheckEsp
+
 ; 124  :             LinkedList_remove(globl_symtable[bucket], curIndex_head);
 
 	mov	eax, DWORD PTR _curIndex_head$[ebp]
@@ -779,7 +790,17 @@ $LN5@symtable_r:
 	jne	SHORT $LN6@symtable_r
 
 ; 129  :         {
-; 130  :             //free(curNode_tail->data);
+; 130  :             free(curNode_tail->data);
+
+	mov	esi, esp
+	mov	eax, DWORD PTR _curNode_tail$[ebp]
+	mov	ecx, DWORD PTR [eax]
+	push	ecx
+	call	DWORD PTR __imp__free
+	add	esp, 4
+	cmp	esi, esp
+	call	__RTC_CheckEsp
+
 ; 131  :             LinkedList_remove(globl_symtable[bucket], curIndex_tail);
 
 	mov	eax, DWORD PTR _curIndex_tail$[ebp]

@@ -30,10 +30,9 @@ struct AST_Node* mkastnode_const(int tokenType, INT_VAL intVal, double floatVal,
 struct AST_Node* mkastnode_left(int tokenType, INT_VAL intVal, double floatVal, struct AST_Node* left, void* otherData, struct DATA_STRUCT* data);
 struct AST_Node* mkastnode_ident(int tokenType, INT_VAL intVal, double floatVal, struct AST_Node* left, struct AST_Node* right, void* otherData, const char* varName, struct DATA_STRUCT* data);
 
-struct AST_Node* binexpr();
 
-struct DATA_STRUCT* interpretAST_int(struct AST_Node* root);
-struct AST_Node* binexpr_int(int ptp, int interrupt_token);
+struct DATA_STRUCT* interpretAST_binexpr(struct AST_Node* root);
+struct AST_Node* binexpr(int ptp, int interrupt_token);
 
 struct AST_Node* genMainAST(int scope_depth, int scope_mode);
 void interpretMainAST(struct AST_Node* root);

@@ -71,7 +71,6 @@ PUBLIC	_mkastnode_const
 PUBLIC	_mkastnode_left
 PUBLIC	_mkastnode_ident
 PUBLIC	_binexpr
-PUBLIC	_binexpr_int
 PUBLIC	_genMainAST
 PUBLIC	__JustMyCode_Default
 PUBLIC	??_C@_0BI@COOHKODO@?$FLSYNTAX?5ERROR?$FN?5Line?5?$CFd?6@ ; `string'
@@ -82,7 +81,6 @@ PUBLIC	??_C@_0CL@IONHGKCI@?$FLSYNTAX?5ERROR?$FN?5expected?5a?5numbe@ ; `string'
 PUBLIC	??_C@_0DM@DMODEJOA@?$FLSYNTAX?5ERROR?$FN?5expected?5a?5binar@ ; `string'
 PUBLIC	??_C@_0CK@CCJBDENI@?$FLSYNTAX?5ERROR?$FN?5expected?5a?5?8?$DL?8?5i@ ; `string'
 PUBLIC	??_C@_0DO@IELMIDFA@?$FLSYNTAX?5ERROR?$FN?5cannot?5use?5?8?$DL?8?5i@ ; `string'
-PUBLIC	??_C@_0DF@NLEHDODD@?$FLSYNTAX?5ERROR?$FN?5expected?5a?5binar@ ; `string'
 PUBLIC	??_C@_0CK@IKFFBBDD@?$FLSYNTAX?5ERROR?$FN?5?8?$CI?8?5is?5missing?5i@ ; `string'
 PUBLIC	??_C@_0CL@ODPNLPMO@?$FLSYNTAX?5ERROR?$FN?5expected?5an?5?8?$DL?8?5@ ; `string'
 PUBLIC	??_C@_0DB@LJCGOJNF@?$FLSYNTAX?5ERROR?$FN?5expected?5an?5iden@ ; `string'
@@ -137,11 +135,6 @@ CONST	ENDS
 CONST	SEGMENT
 ??_C@_0CK@IKFFBBDD@?$FLSYNTAX?5ERROR?$FN?5?8?$CI?8?5is?5missing?5i@ DB '['
 	DB	'SYNTAX ERROR] ''('' is missing in Line %d', 0aH, 00H ; `string'
-CONST	ENDS
-;	COMDAT ??_C@_0DF@NLEHDODD@?$FLSYNTAX?5ERROR?$FN?5expected?5a?5binar@
-CONST	SEGMENT
-??_C@_0DF@NLEHDODD@?$FLSYNTAX?5ERROR?$FN?5expected?5a?5binar@ DB '[SYNTAX'
-	DB	' ERROR] expected a binary operator (Line %d)', 0aH, 00H ; `string'
 CONST	ENDS
 ;	COMDAT ??_C@_0DO@IELMIDFA@?$FLSYNTAX?5ERROR?$FN?5cannot?5use?5?8?$DL?8?5i@
 CONST	SEGMENT
@@ -875,7 +868,7 @@ _scope_depth$ = 8					; size = 4
 _scope_mode$ = 12					; size = 4
 _genMainAST PROC					; COMDAT
 
-; 355  : {
+; 321  : {
 
 	push	ebp
 	mov	ebp, esp
@@ -890,25 +883,25 @@ _genMainAST PROC					; COMDAT
 	mov	ecx, OFFSET __B5AFADD0_genAST@c
 	call	@__CheckForDebuggerJustMyCode@4
 
-; 356  : 	struct AST_Node* left = NULL, * right = NULL, * node = NULL;
+; 322  : 	struct AST_Node* left = NULL, * right = NULL, * node = NULL;
 
 	mov	DWORD PTR _left$[ebp], 0
 	mov	DWORD PTR _right$[ebp], 0
 	mov	DWORD PTR _node$[ebp], 0
 
-; 357  : 	scan_curToken();
+; 323  : 	scan_curToken();
 
 	call	_scan_curToken
 
-; 358  : 
-; 359  : 
-; 360  : 	struct Token* t = currentToken;
+; 324  : 
+; 325  : 
+; 326  : 	struct Token* t = currentToken;
 
 	mov	eax, DWORD PTR _currentToken
 	mov	DWORD PTR _t$[ebp], eax
 
-; 361  : 
-; 362  : 	switch (currentToken->tokenType)
+; 327  : 
+; 328  : 	switch (currentToken->tokenType)
 
 	mov	eax, DWORD PTR _currentToken
 	mov	ecx, DWORD PTR [eax]
@@ -923,21 +916,21 @@ _genMainAST PROC					; COMDAT
 	jmp	DWORD PTR $LN23@genMainAST[ecx*4]
 $LN4@genMainAST:
 
-; 363  : 	{
-; 364  : 	case TT_PRINT:
-; 365  : 
-; 366  : 		scan_curToken();
+; 329  : 	{
+; 330  : 	case TT_PRINT:
+; 331  : 
+; 332  : 		scan_curToken();
 
 	call	_scan_curToken
 
-; 367  : 		if (currentToken->tokenType != TT_LEFT_PAREN)
+; 333  : 		if (currentToken->tokenType != TT_LEFT_PAREN)
 
 	mov	eax, DWORD PTR _currentToken
 	cmp	DWORD PTR [eax], 9
 	je	SHORT $LN5@genMainAST
 
-; 368  : 		{
-; 369  : 			printf("[SYNTAX ERROR] '(' is missing in Line %d\n", Line);
+; 334  : 		{
+; 335  : 			printf("[SYNTAX ERROR] '(' is missing in Line %d\n", Line);
 
 	mov	eax, DWORD PTR _Line
 	push	eax
@@ -945,7 +938,7 @@ $LN4@genMainAST:
 	call	_printf
 	add	esp, 8
 
-; 370  : 			exit(1);
+; 336  : 			exit(1);
 
 	mov	esi, esp
 	push	1
@@ -954,16 +947,16 @@ $LN4@genMainAST:
 	call	__RTC_CheckEsp
 $LN5@genMainAST:
 
-; 371  : 		}
-; 372  : 		left = binexpr_int(BINEXPR_PTP_STARTVAL, TT_OP_END);
+; 337  : 		}
+; 338  : 		left = binexpr(BINEXPR_PTP_STARTVAL, TT_OP_END);
 
 	push	6
 	push	0
-	call	_binexpr_int
+	call	_binexpr
 	add	esp, 8
 	mov	DWORD PTR _left$[ebp], eax
 
-; 373  : 		node = mkastnode(t->tokenType, t->intValue, t->floatVal, left, NULL, NULL, NULL);
+; 339  : 		node = mkastnode(t->tokenType, t->intValue, t->floatVal, left, NULL, NULL, NULL);
 
 	push	0
 	push	0
@@ -986,18 +979,18 @@ $LN5@genMainAST:
 	add	esp, 36					; 00000024H
 	mov	DWORD PTR _node$[ebp], eax
 
-; 374  : 		scan_curToken();
+; 340  : 		scan_curToken();
 
 	call	_scan_curToken
 
-; 375  : 		if (currentToken->tokenType != TT_OP_END)
+; 341  : 		if (currentToken->tokenType != TT_OP_END)
 
 	mov	eax, DWORD PTR _currentToken
 	cmp	DWORD PTR [eax], 6
 	je	SHORT $LN6@genMainAST
 
-; 376  : 		{
-; 377  : 			printf("[SYNTAX ERROR] expected an ';' in Line %d\n", Line);
+; 342  : 		{
+; 343  : 			printf("[SYNTAX ERROR] expected an ';' in Line %d\n", Line);
 
 	mov	eax, DWORD PTR _Line
 	push	eax
@@ -1005,7 +998,7 @@ $LN5@genMainAST:
 	call	_printf
 	add	esp, 8
 
-; 378  : 			exit(1);
+; 344  : 			exit(1);
 
 	mov	esi, esp
 	push	1
@@ -1014,20 +1007,20 @@ $LN5@genMainAST:
 	call	__RTC_CheckEsp
 $LN6@genMainAST:
 
-; 379  : 		}
-; 380  : 		break;
+; 345  : 		}
+; 346  : 		break;
 
 	jmp	$LN2@genMainAST
 $LN7@genMainAST:
 
-; 381  : 
-; 382  : 	case TT_VAR:
-; 383  : 		node = genVarAST();
+; 347  : 
+; 348  : 	case TT_VAR:
+; 349  : 		node = genVarAST();
 
 	call	_genVarAST
 	mov	DWORD PTR _node$[ebp], eax
 
-; 384  : 		node->right = genMainAST(scope_depth, SCOPE_MODE_DEFAULT);
+; 350  : 		node->right = genMainAST(scope_depth, SCOPE_MODE_DEFAULT);
 
 	push	0
 	mov	eax, DWORD PTR _scope_depth$[ebp]
@@ -1037,20 +1030,20 @@ $LN7@genMainAST:
 	mov	ecx, DWORD PTR _node$[ebp]
 	mov	DWORD PTR [ecx+24], eax
 
-; 385  : 		return node;
+; 351  : 		return node;
 
 	mov	eax, DWORD PTR _node$[ebp]
 	jmp	$LN1@genMainAST
 $LN8@genMainAST:
 
-; 386  : 
-; 387  : 	case TT_IDENT:
-; 388  : 		node = genIdentAST();
+; 352  : 
+; 353  : 	case TT_IDENT:
+; 354  : 		node = genIdentAST();
 
 	call	_genIdentAST
 	mov	DWORD PTR _node$[ebp], eax
 
-; 389  : 		node->right = genMainAST(scope_depth, SCOPE_MODE_DEFAULT);
+; 355  : 		node->right = genMainAST(scope_depth, SCOPE_MODE_DEFAULT);
 
 	push	0
 	mov	eax, DWORD PTR _scope_depth$[ebp]
@@ -1060,26 +1053,26 @@ $LN8@genMainAST:
 	mov	ecx, DWORD PTR _node$[ebp]
 	mov	DWORD PTR [ecx+24], eax
 
-; 390  : 		return node;
+; 356  : 		return node;
 
 	mov	eax, DWORD PTR _node$[ebp]
 	jmp	$LN1@genMainAST
 $LN9@genMainAST:
 
-; 391  : 
-; 392  : 	case TT_UNDEF:
-; 393  : 		scan_curToken();
+; 357  : 
+; 358  : 	case TT_UNDEF:
+; 359  : 		scan_curToken();
 
 	call	_scan_curToken
 
-; 394  : 		if (currentToken->tokenType != TT_IDENT)
+; 360  : 		if (currentToken->tokenType != TT_IDENT)
 
 	mov	eax, DWORD PTR _currentToken
 	cmp	DWORD PTR [eax], 18			; 00000012H
 	je	SHORT $LN10@genMainAST
 
-; 395  : 		{
-; 396  : 			printf("[SYNTAX ERROR] expected an identifier (Line %d)\n", Line);
+; 361  : 		{
+; 362  : 			printf("[SYNTAX ERROR] expected an identifier (Line %d)\n", Line);
 
 	mov	eax, DWORD PTR _Line
 	push	eax
@@ -1087,7 +1080,7 @@ $LN9@genMainAST:
 	call	_printf
 	add	esp, 8
 
-; 397  : 			exit(1);
+; 363  : 			exit(1);
 
 	mov	esi, esp
 	push	1
@@ -1096,8 +1089,8 @@ $LN9@genMainAST:
 	call	__RTC_CheckEsp
 $LN10@genMainAST:
 
-; 398  : 		}
-; 399  : 		char* varName_save = calloc(strlen(currentToken->IdentToken_name), sizeof(char));
+; 364  : 		}
+; 365  : 		char* varName_save = calloc(strlen(currentToken->IdentToken_name), sizeof(char));
 
 	mov	esi, esp
 	push	1
@@ -1113,7 +1106,7 @@ $LN10@genMainAST:
 	call	__RTC_CheckEsp
 	mov	DWORD PTR _varName_save$1[ebp], eax
 
-; 400  : 		varName_save = strcpy(varName_save, currentToken->IdentToken_name);
+; 366  : 		varName_save = strcpy(varName_save, currentToken->IdentToken_name);
 
 	mov	eax, DWORD PTR _currentToken
 	mov	ecx, DWORD PTR [eax+32]
@@ -1124,7 +1117,7 @@ $LN10@genMainAST:
 	add	esp, 8
 	mov	DWORD PTR _varName_save$1[ebp], eax
 
-; 401  : 		left = mkastnode_ident(TT_IDENT, currentToken->intValue, currentToken->floatVal, NULL, NULL, NULL, varName_save, NULL);
+; 367  : 		left = mkastnode_ident(TT_IDENT, currentToken->intValue, currentToken->floatVal, NULL, NULL, NULL, varName_save, NULL);
 
 	push	0
 	mov	eax, DWORD PTR _varName_save$1[ebp]
@@ -1146,18 +1139,18 @@ $LN10@genMainAST:
 	add	esp, 40					; 00000028H
 	mov	DWORD PTR _left$[ebp], eax
 
-; 402  : 		scan_curToken();
+; 368  : 		scan_curToken();
 
 	call	_scan_curToken
 
-; 403  : 		if (currentToken->tokenType != TT_OP_END)
+; 369  : 		if (currentToken->tokenType != TT_OP_END)
 
 	mov	eax, DWORD PTR _currentToken
 	cmp	DWORD PTR [eax], 6
 	je	SHORT $LN11@genMainAST
 
-; 404  : 		{
-; 405  : 			printf("[SYNTAX ERROR] expected a ';' in Line %d\n", Line);
+; 370  : 		{
+; 371  : 			printf("[SYNTAX ERROR] expected a ';' in Line %d\n", Line);
 
 	mov	eax, DWORD PTR _Line
 	push	eax
@@ -1165,7 +1158,7 @@ $LN10@genMainAST:
 	call	_printf
 	add	esp, 8
 
-; 406  : 			exit(1);
+; 372  : 			exit(1);
 
 	mov	esi, esp
 	push	1
@@ -1174,8 +1167,8 @@ $LN10@genMainAST:
 	call	__RTC_CheckEsp
 $LN11@genMainAST:
 
-; 407  : 		}
-; 408  : 		right = genMainAST(scope_depth, scope_mode);
+; 373  : 		}
+; 374  : 		right = genMainAST(scope_depth, scope_mode);
 
 	mov	eax, DWORD PTR _scope_mode$[ebp]
 	push	eax
@@ -1185,7 +1178,7 @@ $LN11@genMainAST:
 	add	esp, 8
 	mov	DWORD PTR _right$[ebp], eax
 
-; 409  : 		node = mkastnode(TT_UNDEF, 0, 0, left, right, NULL, NULL);
+; 375  : 		node = mkastnode(TT_UNDEF, 0, 0, left, right, NULL, NULL);
 
 	push	0
 	push	0
@@ -1203,27 +1196,27 @@ $LN11@genMainAST:
 	add	esp, 36					; 00000024H
 	mov	DWORD PTR _node$[ebp], eax
 
-; 410  : 		return node;
+; 376  : 		return node;
 
 	mov	eax, DWORD PTR _node$[ebp]
 	jmp	$LN1@genMainAST
 $LN12@genMainAST:
 
-; 411  : 
-; 412  : 
-; 413  : 	case TT_IF:
-; 414  : 		scan_curToken();
+; 377  : 
+; 378  : 
+; 379  : 	case TT_IF:
+; 380  : 		scan_curToken();
 
 	call	_scan_curToken
 
-; 415  : 		if (currentToken->tokenType != TT_LEFT_PAREN)
+; 381  : 		if (currentToken->tokenType != TT_LEFT_PAREN)
 
 	mov	eax, DWORD PTR _currentToken
 	cmp	DWORD PTR [eax], 9
 	je	SHORT $LN13@genMainAST
 
-; 416  : 		{
-; 417  : 			printf("[SYNTAX ERROR] '(' is missing in Line %d\n", Line);
+; 382  : 		{
+; 383  : 			printf("[SYNTAX ERROR] '(' is missing in Line %d\n", Line);
 
 	mov	eax, DWORD PTR _Line
 	push	eax
@@ -1231,7 +1224,7 @@ $LN12@genMainAST:
 	call	_printf
 	add	esp, 8
 
-; 418  : 			exit(1);
+; 384  : 			exit(1);
 
 	mov	esi, esp
 	push	1
@@ -1240,8 +1233,8 @@ $LN12@genMainAST:
 	call	__RTC_CheckEsp
 $LN13@genMainAST:
 
-; 419  : 		}
-; 420  : 		node = mkastnode(TT_IF, 0, 0, NULL, NULL, NULL, NULL);
+; 385  : 		}
+; 386  : 		node = mkastnode(TT_IF, 0, 0, NULL, NULL, NULL, NULL);
 
 	push	0
 	push	0
@@ -1257,7 +1250,7 @@ $LN13@genMainAST:
 	add	esp, 36					; 00000024H
 	mov	DWORD PTR _node$[ebp], eax
 
-; 421  : 		node->left = mkastnode(TT_ANY_OP, 0, 0, NULL, NULL, NULL, NULL);
+; 387  : 		node->left = mkastnode(TT_ANY_OP, 0, 0, NULL, NULL, NULL, NULL);
 
 	push	0
 	push	0
@@ -1274,17 +1267,17 @@ $LN13@genMainAST:
 	mov	ecx, DWORD PTR _node$[ebp]
 	mov	DWORD PTR [ecx+20], eax
 
-; 422  : 		node->left->left = binexpr_int(0, TT_LEFT_CURLY);
+; 388  : 		node->left->left = binexpr(0, TT_LEFT_CURLY);
 
 	push	11					; 0000000bH
 	push	0
-	call	_binexpr_int
+	call	_binexpr
 	add	esp, 8
 	mov	ecx, DWORD PTR _node$[ebp]
 	mov	edx, DWORD PTR [ecx+20]
 	mov	DWORD PTR [edx+20], eax
 
-; 423  : 		node->left->right = genMainAST(scope_depth, SCOPE_MODE_STATEMENT);
+; 389  : 		node->left->right = genMainAST(scope_depth, SCOPE_MODE_STATEMENT);
 
 	push	1
 	mov	eax, DWORD PTR _scope_depth$[ebp]
@@ -1295,7 +1288,7 @@ $LN13@genMainAST:
 	mov	edx, DWORD PTR [ecx+20]
 	mov	DWORD PTR [edx+24], eax
 
-; 424  : 		node->right = genMainAST(scope_depth, scope_mode);
+; 390  : 		node->right = genMainAST(scope_depth, scope_mode);
 
 	mov	eax, DWORD PTR _scope_mode$[ebp]
 	push	eax
@@ -1306,44 +1299,44 @@ $LN13@genMainAST:
 	mov	edx, DWORD PTR _node$[ebp]
 	mov	DWORD PTR [edx+24], eax
 
-; 425  : 		return node;
+; 391  : 		return node;
 
 	mov	eax, DWORD PTR _node$[ebp]
 	jmp	$LN1@genMainAST
 
-; 426  : 		break;
+; 392  : 		break;
 
 	jmp	$LN2@genMainAST
 $LN14@genMainAST:
 
-; 427  :      
-; 428  : 
-; 429  : 	///////////////////////////////////////////////////////////////////
-; 430  : 	//    SCOPE
-; 431  : 	///////////////////////////////////////////////////////////////////
-; 432  : 
-; 433  : 	case TT_LEFT_CURLY:
-; 434  : 		globl_open_curly_count++;
+; 393  :      
+; 394  : 
+; 395  : 	///////////////////////////////////////////////////////////////////
+; 396  : 	//    SCOPE
+; 397  : 	///////////////////////////////////////////////////////////////////
+; 398  : 
+; 399  : 	case TT_LEFT_CURLY:
+; 400  : 		globl_open_curly_count++;
 
 	mov	eax, DWORD PTR _globl_open_curly_count
 	add	eax, 1
 	mov	DWORD PTR _globl_open_curly_count, eax
 
-; 435  : 		globl_current_depth = globl_open_curly_count - globl_closed_curly_count;
+; 401  : 		globl_current_depth = globl_open_curly_count - globl_closed_curly_count;
 
 	mov	eax, DWORD PTR _globl_open_curly_count
 	sub	eax, DWORD PTR _globl_closed_curly_count
 	mov	DWORD PTR _globl_current_depth, eax
 
-; 436  : 		if (globl_current_depth == (scope_depth + 1))
+; 402  : 		if (globl_current_depth == (scope_depth + 1))
 
 	mov	eax, DWORD PTR _scope_depth$[ebp]
 	add	eax, 1
 	cmp	DWORD PTR _globl_current_depth, eax
 	jne	SHORT $LN15@genMainAST
 
-; 437  : 		{
-; 438  : 			node = mkastnode(TT_SCOPE, 0, 0, NULL, NULL, NULL, NULL);
+; 403  : 		{
+; 404  : 			node = mkastnode(TT_SCOPE, 0, 0, NULL, NULL, NULL, NULL);
 
 	push	0
 	push	0
@@ -1359,7 +1352,7 @@ $LN14@genMainAST:
 	add	esp, 36					; 00000024H
 	mov	DWORD PTR _node$[ebp], eax
 
-; 439  : 			node->left = genMainAST(globl_current_depth, SCOPE_MODE_DEFAULT);
+; 405  : 			node->left = genMainAST(globl_current_depth, SCOPE_MODE_DEFAULT);
 
 	push	0
 	mov	eax, DWORD PTR _globl_current_depth
@@ -1369,13 +1362,13 @@ $LN14@genMainAST:
 	mov	ecx, DWORD PTR _node$[ebp]
 	mov	DWORD PTR [ecx+20], eax
 
-; 440  : 			if (scope_mode == SCOPE_MODE_DEFAULT)
+; 406  : 			if (scope_mode == SCOPE_MODE_DEFAULT)
 
 	cmp	DWORD PTR _scope_mode$[ebp], 0
 	jne	SHORT $LN16@genMainAST
 
-; 441  : 			{
-; 442  : 				node->right = genMainAST(globl_current_depth, scope_mode);
+; 407  : 			{
+; 408  : 				node->right = genMainAST(globl_current_depth, scope_mode);
 
 	mov	eax, DWORD PTR _scope_mode$[ebp]
 	push	eax
@@ -1387,54 +1380,54 @@ $LN14@genMainAST:
 	mov	DWORD PTR [edx+24], eax
 $LN16@genMainAST:
 
-; 443  : 			}
-; 444  : 			return node;
+; 409  : 			}
+; 410  : 			return node;
 
 	mov	eax, DWORD PTR _node$[ebp]
 	jmp	$LN1@genMainAST
 $LN15@genMainAST:
 
-; 445  : 		}
-; 446  : 		break;
+; 411  : 		}
+; 412  : 		break;
 
 	jmp	SHORT $LN2@genMainAST
 $LN17@genMainAST:
 
-; 447  : 
-; 448  : 	case TT_RIGHT_CURLY:
-; 449  : 		globl_closed_curly_count++;
+; 413  : 
+; 414  : 	case TT_RIGHT_CURLY:
+; 415  : 		globl_closed_curly_count++;
 
 	mov	eax, DWORD PTR _globl_closed_curly_count
 	add	eax, 1
 	mov	DWORD PTR _globl_closed_curly_count, eax
 
-; 450  : 		globl_current_depth = globl_open_curly_count - globl_closed_curly_count;
+; 416  : 		globl_current_depth = globl_open_curly_count - globl_closed_curly_count;
 
 	mov	eax, DWORD PTR _globl_open_curly_count
 	sub	eax, DWORD PTR _globl_closed_curly_count
 	mov	DWORD PTR _globl_current_depth, eax
 
-; 451  : 		if (globl_current_depth == (scope_depth -1))
+; 417  : 		if (globl_current_depth == (scope_depth -1))
 
 	mov	eax, DWORD PTR _scope_depth$[ebp]
 	sub	eax, 1
 	cmp	DWORD PTR _globl_current_depth, eax
 	jne	SHORT $LN18@genMainAST
 
-; 452  : 		{
-; 453  : 			globl_open_curly_count -= 1;
+; 418  : 		{
+; 419  : 			globl_open_curly_count -= 1;
 
 	mov	eax, DWORD PTR _globl_open_curly_count
 	sub	eax, 1
 	mov	DWORD PTR _globl_open_curly_count, eax
 
-; 454  : 			globl_closed_curly_count -= 1;
+; 420  : 			globl_closed_curly_count -= 1;
 
 	mov	eax, DWORD PTR _globl_closed_curly_count
 	sub	eax, 1
 	mov	DWORD PTR _globl_closed_curly_count, eax
 
-; 455  : 			node = mkastnode(TT_SCOPE_END, 0, 0, NULL, NULL, NULL, NULL);
+; 421  : 			node = mkastnode(TT_SCOPE_END, 0, 0, NULL, NULL, NULL, NULL);
 
 	push	0
 	push	0
@@ -1450,39 +1443,39 @@ $LN17@genMainAST:
 	add	esp, 36					; 00000024H
 	mov	DWORD PTR _node$[ebp], eax
 
-; 456  : 			return node;
+; 422  : 			return node;
 
 	mov	eax, DWORD PTR _node$[ebp]
 	jmp	SHORT $LN1@genMainAST
 $LN18@genMainAST:
 $LN2@genMainAST:
 
-; 457  : 		}
-; 458  : 		break;
-; 459  : 
-; 460  : 	/////////////////////////////////////////////////////////////////////
-; 461  : 
-; 462  : 
-; 463  : 	}
-; 464  : 	if (currentToken->tokenType == TT_EOF)
+; 423  : 		}
+; 424  : 		break;
+; 425  : 
+; 426  : 	/////////////////////////////////////////////////////////////////////
+; 427  : 
+; 428  : 
+; 429  : 	}
+; 430  : 	if (currentToken->tokenType == TT_EOF)
 
 	mov	eax, DWORD PTR _currentToken
 	cmp	DWORD PTR [eax], 17			; 00000011H
 	jne	SHORT $LN19@genMainAST
 
-; 465  : 	{
-; 466  : 		right = NULL;
+; 431  : 	{
+; 432  : 		right = NULL;
 
 	mov	DWORD PTR _right$[ebp], 0
 
-; 467  : 	}
+; 433  : 	}
 
 	jmp	SHORT $LN20@genMainAST
 $LN19@genMainAST:
 
-; 468  : 	else
-; 469  : 	{
-; 470  : 		right = genMainAST(scope_depth, scope_mode);
+; 434  : 	else
+; 435  : 	{
+; 436  : 		right = genMainAST(scope_depth, scope_mode);
 
 	mov	eax, DWORD PTR _scope_mode$[ebp]
 	push	eax
@@ -1493,8 +1486,8 @@ $LN19@genMainAST:
 	mov	DWORD PTR _right$[ebp], eax
 $LN20@genMainAST:
 
-; 471  : 	}
-; 472  : 	node = mkastnode(t->tokenType, t->intValue, t->floatVal, left, right, NULL, NULL);
+; 437  : 	}
+; 438  : 	node = mkastnode(t->tokenType, t->intValue, t->floatVal, left, right, NULL, NULL);
 
 	push	0
 	push	0
@@ -1518,12 +1511,12 @@ $LN20@genMainAST:
 	add	esp, 36					; 00000024H
 	mov	DWORD PTR _node$[ebp], eax
 
-; 473  : 	return node;
+; 439  : 	return node;
 
 	mov	eax, DWORD PTR _node$[ebp]
 $LN1@genMainAST:
 
-; 474  : }
+; 440  : }
 
 	pop	edi
 	pop	esi
@@ -1564,7 +1557,7 @@ _genMainAST ENDP
 _TEXT	ENDS
 ; Function compile flags: /Odtp /RTCsu /ZI
 ; File C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\genAST.c
-;	COMDAT _binexpr_int
+;	COMDAT _binexpr
 _TEXT	SEGMENT
 _saveIdentName$1 = -128					; size = 4
 _lastToken$2 = -116					; size = 4
@@ -1579,7 +1572,7 @@ _left$ = -20						; size = 4
 _k$ = -8						; size = 4
 _ptp$ = 8						; size = 4
 _interrupt_token$ = 12					; size = 4
-_binexpr_int PROC					; COMDAT
+_binexpr PROC						; COMDAT
 
 ; 209  : {
 
@@ -1613,13 +1606,13 @@ _binexpr_int PROC					; COMDAT
 
 	mov	eax, DWORD PTR _currentToken
 	mov	DWORD PTR _minusToken$[ebp], eax
-$LN2@binexpr_in:
+$LN2@binexpr:
 
 ; 215  : 	while (currentToken->tokenType == TT_MINUS)
 
 	mov	eax, DWORD PTR _currentToken
 	cmp	DWORD PTR [eax], 1
-	jne	SHORT $LN3@binexpr_in
+	jne	SHORT $LN3@binexpr
 
 ; 216  : 	{
 ; 217  : 		minusVal *= -1;
@@ -1633,8 +1626,8 @@ $LN2@binexpr_in:
 
 ; 219  : 	}
 
-	jmp	SHORT $LN2@binexpr_in
-$LN3@binexpr_in:
+	jmp	SHORT $LN2@binexpr
+$LN3@binexpr:
 
 ; 220  : 	leftParenCode(minusToken);
 
@@ -1648,19 +1641,19 @@ $LN3@binexpr_in:
 
 	mov	eax, DWORD PTR _currentToken
 	cmp	DWORD PTR [eax], 5
-	je	SHORT $LN6@binexpr_in
+	je	SHORT $LN6@binexpr
 	mov	eax, DWORD PTR _currentToken
 	cmp	DWORD PTR [eax], 16			; 00000010H
-	je	SHORT $LN6@binexpr_in
+	je	SHORT $LN6@binexpr
 	mov	eax, DWORD PTR _currentToken
 	cmp	DWORD PTR [eax], 18			; 00000012H
-	je	SHORT $LN6@binexpr_in
+	je	SHORT $LN6@binexpr
 	mov	eax, DWORD PTR _currentToken
 	cmp	DWORD PTR [eax], 31			; 0000001fH
-	je	SHORT $LN6@binexpr_in
+	je	SHORT $LN6@binexpr
 	mov	eax, DWORD PTR _currentToken
 	cmp	DWORD PTR [eax], 32			; 00000020H
-	je	SHORT $LN6@binexpr_in
+	je	SHORT $LN6@binexpr
 
 ; 223  : 	{
 ; 224  : 		printf("[SYNTAX ERROR] expected a number (Line %d)", Line);
@@ -1678,14 +1671,14 @@ $LN3@binexpr_in:
 	call	DWORD PTR __imp__exit
 	cmp	esi, esp
 	call	__RTC_CheckEsp
-$LN6@binexpr_in:
+$LN6@binexpr:
 
 ; 226  : 	}
 ; 227  : 	if (currentToken->data != NULL)
 
 	mov	eax, DWORD PTR _currentToken
 	cmp	DWORD PTR [eax+48], 0
-	je	SHORT $LN7@binexpr_in
+	je	SHORT $LN7@binexpr
 
 ; 228  : 	{
 ; 229  : 		currentToken->data->minusVal = minusVal;
@@ -1694,7 +1687,7 @@ $LN6@binexpr_in:
 	mov	ecx, DWORD PTR [eax+48]
 	mov	edx, DWORD PTR _minusVal$[ebp]
 	mov	DWORD PTR [ecx+24], edx
-$LN7@binexpr_in:
+$LN7@binexpr:
 
 ; 230  : 	}
 ; 231  : 	left = mkastnode_const(currentToken->tokenType, currentToken->intValue * minusVal, currentToken->floatVal * minusVal, NULL, currentToken->data);
@@ -1731,7 +1724,7 @@ $LN7@binexpr_in:
 
 	mov	eax, DWORD PTR _currentToken
 	cmp	DWORD PTR [eax], 18			; 00000012H
-	jne	$LN8@binexpr_in
+	jne	$LN8@binexpr
 
 ; 233  : 	{
 ; 234  : 		char* saveIdentName = calloc(strlen(currentToken->IdentToken_name), sizeof(char));
@@ -1801,14 +1794,14 @@ $LN7@binexpr_in:
 	call	_mkastnode_ident
 	add	esp, 40					; 00000028H
 	mov	DWORD PTR _left$[ebp], eax
-$LN8@binexpr_in:
+$LN8@binexpr:
 
 ; 237  : 	}
 ; 238  : 	if (currentToken->tokenType == TT_BOOL_TRUE)
 
 	mov	eax, DWORD PTR _currentToken
 	cmp	DWORD PTR [eax], 31			; 0000001fH
-	jne	SHORT $LN9@binexpr_in
+	jne	SHORT $LN9@binexpr
 
 ; 239  : 	{
 ; 240  : 		int* boolVal = malloc(sizeof(int));
@@ -1852,14 +1845,14 @@ $LN8@binexpr_in:
 	call	_mkastnode
 	add	esp, 36					; 00000024H
 	mov	DWORD PTR _left$[ebp], eax
-$LN9@binexpr_in:
+$LN9@binexpr:
 
 ; 243  : 	}
 ; 244  : 	if (currentToken->tokenType == TT_BOOL_FALSE)
 
 	mov	eax, DWORD PTR _currentToken
 	cmp	DWORD PTR [eax], 32			; 00000020H
-	jne	SHORT $LN10@binexpr_in
+	jne	SHORT $LN10@binexpr
 
 ; 245  : 	{
 ; 246  : 		int* boolVal = malloc(sizeof(int));
@@ -1903,7 +1896,7 @@ $LN9@binexpr_in:
 	call	_mkastnode
 	add	esp, 36					; 00000024H
 	mov	DWORD PTR _left$[ebp], eax
-$LN10@binexpr_in:
+$LN10@binexpr:
 
 ; 249  : 	}
 ; 250  : 	minusVal = 1;
@@ -1929,14 +1922,14 @@ $LN10@binexpr_in:
 	call	_rightParenCode
 	add	esp, 4
 	cmp	eax, 1
-	jne	SHORT $LN11@binexpr_in
+	jne	SHORT $LN11@binexpr
 
 ; 257  : 	{
 ; 258  : 		return left;
 
 	mov	eax, DWORD PTR _left$[ebp]
-	jmp	$LN1@binexpr_in
-$LN11@binexpr_in:
+	jmp	$LN1@binexpr
+$LN11@binexpr:
 
 ; 259  : 	}
 ; 260  : 
@@ -1948,7 +1941,7 @@ $LN11@binexpr_in:
 	call	_tokenIsBinOp
 	add	esp, 4
 	test	eax, eax
-	jne	SHORT $LN12@binexpr_in
+	jne	SHORT $LN12@binexpr
 
 ; 263  : 	{
 ; 264  : 		printf("[SYNTAX ERROR] expected a binary operator or ';' (Line %d)\n", lastLine);
@@ -1966,14 +1959,14 @@ $LN11@binexpr_in:
 	call	DWORD PTR __imp__exit
 	cmp	esi, esp
 	call	__RTC_CheckEsp
-$LN12@binexpr_in:
+$LN12@binexpr:
 
 ; 266  : 	}
 ; 267  : 	if (currentToken->tokenType == TT_EOF)
 
 	mov	eax, DWORD PTR _currentToken
 	cmp	DWORD PTR [eax], 17			; 00000011H
-	jne	SHORT $LN13@binexpr_in
+	jne	SHORT $LN13@binexpr
 
 ; 268  : 	{
 ; 269  : 		printf("[SYNTAX ERROR] expected a ';' in Line %d\n", lastLine);
@@ -1991,27 +1984,27 @@ $LN12@binexpr_in:
 	call	DWORD PTR __imp__exit
 	cmp	esi, esp
 	call	__RTC_CheckEsp
-$LN13@binexpr_in:
+$LN13@binexpr:
 
 ; 271  : 	}
 ; 272  : 	if (currentToken->tokenType == TT_OP_END)
 
 	mov	eax, DWORD PTR _currentToken
 	cmp	DWORD PTR [eax], 6
-	jne	SHORT $LN14@binexpr_in
+	jne	SHORT $LN14@binexpr
 
 ; 273  : 	{
 ; 274  : 		if (interrupt_token == INTERRUPT_TOKEN_DEFAULT)
 
 	cmp	DWORD PTR _interrupt_token$[ebp], -1
-	jne	SHORT $LN15@binexpr_in
+	jne	SHORT $LN15@binexpr
 
 ; 275  : 		{
 ; 276  : 			return left;
 
 	mov	eax, DWORD PTR _left$[ebp]
-	jmp	$LN1@binexpr_in
-$LN15@binexpr_in:
+	jmp	$LN1@binexpr
+$LN15@binexpr:
 
 ; 277  : 		}
 ; 278  : 		printf("[SYNTAX ERROR] cannot use ';' inside an expression (Line %d)\n", Line);
@@ -2029,7 +2022,7 @@ $LN15@binexpr_in:
 	call	DWORD PTR __imp__exit
 	cmp	esi, esp
 	call	__RTC_CheckEsp
-$LN14@binexpr_in:
+$LN14@binexpr:
 
 ; 280  : 	}
 ; 281  : 
@@ -2043,7 +2036,7 @@ $LN14@binexpr_in:
 	imul	ecx, DWORD PTR _globl_parenDelta
 	add	eax, ecx
 	cmp	eax, DWORD PTR _ptp$[ebp]
-	jle	$LN5@binexpr_in
+	jle	$LN5@binexpr
 
 ; 283  : 	{
 ; 284  : 		struct Token* lastToken = currentToken;
@@ -2051,7 +2044,7 @@ $LN14@binexpr_in:
 	mov	eax, DWORD PTR _currentToken
 	mov	DWORD PTR _lastToken$2[ebp], eax
 
-; 285  : 		right = binexpr_int(getOpPrecedence(currentToken) + globl_inParen * globl_parenDelta, interrupt_token);
+; 285  : 		right = binexpr(getOpPrecedence(currentToken) + globl_inParen * globl_parenDelta, interrupt_token);
 
 	mov	eax, DWORD PTR _interrupt_token$[ebp]
 	push	eax
@@ -2063,7 +2056,7 @@ $LN14@binexpr_in:
 	imul	edx, DWORD PTR _globl_parenDelta
 	add	eax, edx
 	push	eax
-	call	_binexpr_int
+	call	_binexpr
 	add	esp, 8
 	mov	DWORD PTR _right$[ebp], eax
 
@@ -2097,7 +2090,7 @@ $LN14@binexpr_in:
 
 	mov	eax, DWORD PTR _lastToken$2[ebp]
 	cmp	DWORD PTR [eax], 18			; 00000012H
-	jne	$LN16@binexpr_in
+	jne	$LN16@binexpr
 
 ; 288  : 		{
 ; 289  : 			char* saveIdentName = calloc(strlen(lastToken->IdentToken_name), sizeof(char));
@@ -2173,14 +2166,14 @@ $LN14@binexpr_in:
 	call	_mkastnode_ident
 	add	esp, 40					; 00000028H
 	mov	DWORD PTR _left$[ebp], eax
-$LN16@binexpr_in:
+$LN16@binexpr:
 
 ; 292  : 		}
 ; 293  : 		if (lastToken->tokenType == TT_BOOL_TRUE)
 
 	mov	eax, DWORD PTR _lastToken$2[ebp]
 	cmp	DWORD PTR [eax], 31			; 0000001fH
-	jne	SHORT $LN17@binexpr_in
+	jne	SHORT $LN17@binexpr
 
 ; 294  : 		{
 ; 295  : 			left = mkastnode(TT_BOOL_TRUE, 0, 0, NULL, NULL, NULL, new_DATA_STRUCT(NULL, 1, NULL, NULL, NULL, DT_BOOL, 1));
@@ -2208,14 +2201,14 @@ $LN16@binexpr_in:
 	call	_mkastnode
 	add	esp, 36					; 00000024H
 	mov	DWORD PTR _left$[ebp], eax
-$LN17@binexpr_in:
+$LN17@binexpr:
 
 ; 296  : 		}
 ; 297  : 		if (lastToken->tokenType == TT_BOOL_FALSE)
 
 	mov	eax, DWORD PTR _lastToken$2[ebp]
 	cmp	DWORD PTR [eax], 32			; 00000020H
-	jne	SHORT $LN18@binexpr_in
+	jne	SHORT $LN18@binexpr
 
 ; 298  : 		{
 ; 299  : 			left = mkastnode(TT_BOOL_FALSE, 0, 0, NULL, NULL, NULL, new_DATA_STRUCT(NULL, 0, NULL, NULL, NULL, DT_BOOL, 1));
@@ -2243,7 +2236,7 @@ $LN17@binexpr_in:
 	call	_mkastnode
 	add	esp, 36					; 00000024H
 	mov	DWORD PTR _left$[ebp], eax
-$LN18@binexpr_in:
+$LN18@binexpr:
 
 ; 300  : 		}
 ; 301  : 
@@ -2256,13 +2249,13 @@ $LN18@binexpr_in:
 
 ; 303  : 	}
 
-	jmp	$LN14@binexpr_in
-$LN5@binexpr_in:
+	jmp	$LN14@binexpr
+$LN5@binexpr:
 
 ; 304  : 	return left;
 
 	mov	eax, DWORD PTR _left$[ebp]
-$LN1@binexpr_in:
+$LN1@binexpr:
 
 ; 305  : }
 
@@ -2270,207 +2263,6 @@ $LN1@binexpr_in:
 	pop	esi
 	pop	ebx
 	add	esp, 324				; 00000144H
-	cmp	ebp, esp
-	call	__RTC_CheckEsp
-	mov	esp, ebp
-	pop	ebp
-	ret	0
-_binexpr_int ENDP
-_TEXT	ENDS
-; Function compile flags: /Odtp /RTCsu /ZI
-; File C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\genAST.c
-;	COMDAT _binexpr
-_TEXT	SEGMENT
-_thisToken$ = -44					; size = 4
-_node$ = -32						; size = 4
-_right$ = -20						; size = 4
-_left$ = -8						; size = 4
-_binexpr PROC						; COMDAT
-
-; 310  : {
-
-	push	ebp
-	mov	ebp, esp
-	sub	esp, 240				; 000000f0H
-	push	ebx
-	push	esi
-	push	edi
-	lea	edi, DWORD PTR [ebp-240]
-	mov	ecx, 60					; 0000003cH
-	mov	eax, -858993460				; ccccccccH
-	rep stosd
-	mov	ecx, OFFSET __B5AFADD0_genAST@c
-	call	@__CheckForDebuggerJustMyCode@4
-
-; 311  : 	struct AST_Node* left, * right, * node;
-; 312  : 	scan_curToken();
-
-	call	_scan_curToken
-
-; 313  : 	if (currentToken->tokenType != TT_INT && currentToken->tokenType != TT_FLOAT)
-
-	mov	eax, DWORD PTR _currentToken
-	cmp	DWORD PTR [eax], 5
-	je	SHORT $LN2@binexpr
-	mov	eax, DWORD PTR _currentToken
-	cmp	DWORD PTR [eax], 16			; 00000010H
-	je	SHORT $LN2@binexpr
-
-; 314  : 	{
-; 315  : 		printf("[SYNTAX ERROR] expected a number (Line %d)", Line);
-
-	mov	eax, DWORD PTR _Line
-	push	eax
-	push	OFFSET ??_C@_0CL@IONHGKCI@?$FLSYNTAX?5ERROR?$FN?5expected?5a?5numbe@
-	call	_printf
-	add	esp, 8
-
-; 316  : 		exit(1);
-
-	mov	esi, esp
-	push	1
-	call	DWORD PTR __imp__exit
-	cmp	esi, esp
-	call	__RTC_CheckEsp
-$LN2@binexpr:
-
-; 317  : 	}
-; 318  : 	left = mkastnode_const(currentToken->tokenType, currentToken->intValue, currentToken->floatVal, NULL, NULL);
-
-	push	0
-	push	0
-	mov	eax, DWORD PTR _currentToken
-	sub	esp, 8
-	movsd	xmm0, QWORD PTR [eax+24]
-	movsd	QWORD PTR [esp], xmm0
-	mov	ecx, DWORD PTR _currentToken
-	mov	edx, DWORD PTR [ecx+12]
-	push	edx
-	mov	eax, DWORD PTR [ecx+8]
-	push	eax
-	mov	ecx, DWORD PTR _currentToken
-	mov	edx, DWORD PTR [ecx]
-	push	edx
-	call	_mkastnode_const
-	add	esp, 28					; 0000001cH
-	mov	DWORD PTR _left$[ebp], eax
-
-; 319  : 	scan_curToken();
-
-	call	_scan_curToken
-
-; 320  : 	if (tokenIsBinOp(currentToken) == 0)
-
-	mov	eax, DWORD PTR _currentToken
-	push	eax
-	call	_tokenIsBinOp
-	add	esp, 4
-	test	eax, eax
-	jne	SHORT $LN3@binexpr
-
-; 321  : 	{
-; 322  : 		printf("[SYNTAX ERROR] expected a binary operator (Line %d)\n", Line);
-
-	mov	eax, DWORD PTR _Line
-	push	eax
-	push	OFFSET ??_C@_0DF@NLEHDODD@?$FLSYNTAX?5ERROR?$FN?5expected?5a?5binar@
-	call	_printf
-	add	esp, 8
-
-; 323  : 		exit(1);
-
-	mov	esi, esp
-	push	1
-	call	DWORD PTR __imp__exit
-	cmp	esi, esp
-	call	__RTC_CheckEsp
-$LN3@binexpr:
-
-; 324  : 	}
-; 325  : 	struct Token* thisToken = currentToken;
-
-	mov	eax, DWORD PTR _currentToken
-	mov	DWORD PTR _thisToken$[ebp], eax
-
-; 326  : 	if (thisToken->tokenType == TT_OP_END)
-
-	mov	eax, DWORD PTR _thisToken$[ebp]
-	cmp	DWORD PTR [eax], 6
-	jne	SHORT $LN4@binexpr
-
-; 327  : 	{
-; 328  : 		return left;
-
-	mov	eax, DWORD PTR _left$[ebp]
-	jmp	SHORT $LN1@binexpr
-$LN4@binexpr:
-
-; 329  : 	}
-; 330  : 	if (currentToken->tokenType == TT_EOF)
-
-	mov	eax, DWORD PTR _currentToken
-	cmp	DWORD PTR [eax], 17			; 00000011H
-	jne	SHORT $LN5@binexpr
-
-; 331  : 	{
-; 332  : 		printf("[SYNTAX ERROR] expected a ';' in Line %d\n", Line);
-
-	mov	eax, DWORD PTR _Line
-	push	eax
-	push	OFFSET ??_C@_0CK@CCJBDENI@?$FLSYNTAX?5ERROR?$FN?5expected?5a?5?8?$DL?8?5i@
-	call	_printf
-	add	esp, 8
-
-; 333  : 		exit(1);
-
-	mov	esi, esp
-	push	1
-	call	DWORD PTR __imp__exit
-	cmp	esi, esp
-	call	__RTC_CheckEsp
-$LN5@binexpr:
-
-; 334  : 	}
-; 335  : 	right = binexpr();
-
-	call	_binexpr
-	mov	DWORD PTR _right$[ebp], eax
-
-; 336  : 	node = mkastnode(thisToken->tokenType, thisToken->intValue, thisToken->floatVal, left, right, NULL, NULL);
-
-	push	0
-	push	0
-	mov	eax, DWORD PTR _right$[ebp]
-	push	eax
-	mov	ecx, DWORD PTR _left$[ebp]
-	push	ecx
-	mov	edx, DWORD PTR _thisToken$[ebp]
-	sub	esp, 8
-	movsd	xmm0, QWORD PTR [edx+24]
-	movsd	QWORD PTR [esp], xmm0
-	mov	eax, DWORD PTR _thisToken$[ebp]
-	mov	ecx, DWORD PTR [eax+12]
-	push	ecx
-	mov	edx, DWORD PTR [eax+8]
-	push	edx
-	mov	eax, DWORD PTR _thisToken$[ebp]
-	mov	ecx, DWORD PTR [eax]
-	push	ecx
-	call	_mkastnode
-	add	esp, 36					; 00000024H
-	mov	DWORD PTR _node$[ebp], eax
-
-; 337  : 	return node;
-
-	mov	eax, DWORD PTR _node$[ebp]
-$LN1@binexpr:
-
-; 338  : }
-
-	pop	edi
-	pop	esi
-	pop	ebx
-	add	esp, 240				; 000000f0H
 	cmp	ebp, esp
 	call	__RTC_CheckEsp
 	mov	esp, ebp

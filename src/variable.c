@@ -30,7 +30,7 @@ struct AST_Node* genVarAST()
 		}
 		else if (currentToken->tokenType == TT_EQUALS)
 		{
-			node = mkastnode_ident(TT_IDENT, 0, 0, binexpr_int(0, INTERRUPT_TOKEN_DEFAULT), NULL, newID_token(DT_INT, 1, 0, varName, 1, new_DATA_STRUCT(NULL, NULL, NULL, NULL, NULL, -1, 1)), varName, NULL);
+			node = mkastnode_ident(TT_IDENT, 0, 0, binexpr(0, INTERRUPT_TOKEN_DEFAULT), NULL, newID_token(DT_INT, 1, 0, varName, 1, new_DATA_STRUCT(NULL, NULL, NULL, NULL, NULL, -1, 1)), varName, NULL);
 			return node;
 		}
 
@@ -65,7 +65,7 @@ struct AST_Node* genIdentAST()
 	}
 	if (currentToken->tokenType == TT_EQUALS)
 	{
-		node = mkastnode_ident(TT_IDENT, 0, 0, binexpr_int(0, INTERRUPT_TOKEN_DEFAULT), NULL, newID_token(DT_INT, 1, 0, varName, 0, new_DATA_STRUCT(NULL, NULL, NULL, NULL, NULL, -1, 1)), varName, NULL);
+		node = mkastnode_ident(TT_IDENT, 0, 0, binexpr(0, INTERRUPT_TOKEN_DEFAULT), NULL, newID_token(DT_INT, 1, 0, varName, 0, new_DATA_STRUCT(NULL, NULL, NULL, NULL, NULL, -1, 1)), varName, NULL);
 		return node;
 	}
 

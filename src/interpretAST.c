@@ -183,7 +183,7 @@ static struct DATA_STRUCT* RETURN_DATATYPE_NUM(struct DATA_STRUCT* leftVal, stru
 
 
 
-struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
+struct DATA_STRUCT* interpretAST_binexpr(struct AST_Node* root)
 {
 	struct DATA_STRUCT* leftVal = NULL, * rightVal = NULL;
 	struct IDENT_tokenData* curIdent = NULL;
@@ -191,10 +191,10 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 
 	if (root->left != NULL)
 	{
-		leftVal = interpretAST_int(root->left);
+		leftVal = interpretAST_binexpr(root->left);
 	}
 	if (root->right != NULL) {
-		rightVal = interpretAST_int(root->right);
+		rightVal = interpretAST_binexpr(root->right);
 	}
 
 	int dt_left = -1;
@@ -224,6 +224,11 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 	{
 		curIdent = (struct IDENT_tokenData*)symtable_getItem(root->varName);
 		if (curIdent == NULL)
+		{
+			printf("[ERROR] variable '%s' does not exist or is out of scope\n", root->varName);
+			exit(1);
+		}
+		if(curIdent->data == NULL)
 		{
 			printf("[ERROR] variable '%s' does not exist or is out of scope\n", root->varName);
 			exit(1);
@@ -275,7 +280,7 @@ void interpretMainAST(struct AST_Node* root)
 	{
 		if (curNode->tokenType == TT_PRINT)
 		{
-			struct DATA_STRUCT* printVal_struct = interpretAST_int(curNode->left);
+			struct DATA_STRUCT* printVal_struct = interpretAST_binexpr(curNode->left);
 			int struct_dt = printVal_struct->dataType;
 			if (struct_dt == DT_INT)
 			{
@@ -315,7 +320,7 @@ void interpretMainAST(struct AST_Node* root)
 					struct IDENT_tokenData* id_token = newID_token(DT_INT, 1, 0, saveVarName, 1, NULL);
 					node_t* node = symtable_add(saveVarName, id_token);
 					struct IDENT_tokenData* curID = symtable_getItem(saveVarName);
-					curID->data = interpretAST_int(curNode->left);
+					curID->data = interpretAST_binexpr(curNode->left);
 				}
 				else if (curNodeData->var == 0)
 				{
@@ -325,7 +330,7 @@ void interpretMainAST(struct AST_Node* root)
 						printf("[SYNTAX ERROR] variable '%s' has not been initialized\n", curNodeData->varName);
 						exit(1);
 					}
-					curID->data = interpretAST_int(curNode->left);
+					curID->data = interpretAST_binexpr(curNode->left);
 				}
 			}
 
@@ -341,7 +346,7 @@ void interpretMainAST(struct AST_Node* root)
 
 		else if (curNode->tokenType == TT_IF)
 		{
-		    struct DATA_STRUCT* cmp_expr = interpretAST_int(curNode->left->left);
+		    struct DATA_STRUCT* cmp_expr = interpretAST_binexpr(curNode->left->left);
 			int cmp_expr_dt = cmp_expr->dataType;
 			if (cmp_expr_dt == DT_INT)
 			{
