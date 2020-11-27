@@ -39,11 +39,6 @@ void varStack_add(struct VAR_STACK* varStack, void* data)
 		varStack->last = node;
 		return;
 	}
-
-	/*while (curNode->next != NULL)
-	{
-		curNode = curNode->next;
-	}*/
 	struct STACK_FRAME* last_last = varStack->last;
 	varStack->last->next = node;
 	varStack->last = varStack->last->next;
