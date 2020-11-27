@@ -80,40 +80,40 @@ PUBLIC	??_C@_0BN@DJPDDNIE@identifier?5too?5long?5line?5?$CFd?6@ ; `string'
 PUBLIC	??_C@_0CO@PNNFFEBH@?$FLSYNTAX?5ERROR?$FN?5?5a?5?8?$CFc?8?5is?5missi@ ; `string'
 PUBLIC	??_C@_0CC@IFAJDNJA@?$FLERROR?$FN?5unknown?5token?5in?5Line?5?$CF@ ; `string'
 PUBLIC	??_C@_0L@FPFMPDDA@0123456789@			; `string'
-PUBLIC	??_C@_07HDMDGAKO@TT_PLUS@			; `string'
-PUBLIC	??_C@_08FELGHBAB@TT_MINUS@			; `string'
-PUBLIC	??_C@_06MHJAJDGM@TT_MUL@			; `string'
-PUBLIC	??_C@_06BPIJHMCJ@TT_DIV@			; `string'
-PUBLIC	??_C@_06NNGEPBBC@TT_POW@			; `string'
-PUBLIC	??_C@_06NKJKNAPD@TT_INT@			; `string'
-PUBLIC	??_C@_09EJGHJHBC@TT_OP_END@			; `string'
-PUBLIC	??_C@_08DOCLCEDI@TT_PRINT@			; `string'
-PUBLIC	??_C@_05FOLHDMIO@TT_IF@				; `string'
-PUBLIC	??_C@_0O@IKDFJAIA@TT_LEFT_PAREN@		; `string'
-PUBLIC	??_C@_0P@EMLOHCFB@TT_RIGHT_PAREN@		; `string'
-PUBLIC	??_C@_0O@JAEFGOOO@TT_LEFT_CURLY@		; `string'
-PUBLIC	??_C@_0P@FGMOIMDP@TT_RIGHT_CURLY@		; `string'
-PUBLIC	??_C@_09OLODALHE@TT_STRING@			; `string'
-PUBLIC	??_C@_08FJCDGMNN@TT_WHILE@			; `string'
-PUBLIC	??_C@_07NJNFCAEG@TT_CHAR@			; `string'
-PUBLIC	??_C@_08BKEDPELM@TT_FLOAT@			; `string'
-PUBLIC	??_C@_06OJHKHFKP@TT_EOF@			; `string'
-PUBLIC	??_C@_08LPIEKKPB@TT_IDENT@			; `string'
-PUBLIC	??_C@_09OFJOMEPH@TT_EQUALS@			; `string'
-PUBLIC	??_C@_06IPOGHHIB@TT_VAR@			; `string'
-PUBLIC	??_C@_08ENDNIIOH@TT_UNDEF@			; `string'
-PUBLIC	??_C@_0O@EDKOENOP@TT_EQUALS_CMP@		; `string'
-PUBLIC	??_C@_06FFOMOKEN@TT_AND@			; `string'
-PUBLIC	??_C@_05HEJEJHGJ@TT_OR@				; `string'
-PUBLIC	??_C@_09LPAMHAJN@TT_ANY_OP@			; `string'
-PUBLIC	??_C@_0L@FGKMHJGE@TT_GREATER@			; `string'
-PUBLIC	??_C@_0L@MJGHFDEF@TT_SMALLER@			; `string'
-PUBLIC	??_C@_0BC@GOMPHDCA@TT_GREATER_EQUALS@		; `string'
-PUBLIC	??_C@_0BC@NKNEEPGA@TT_SMALLER_EQUALS@		; `string'
-PUBLIC	??_C@_0N@LDMHDLBH@TT_BOOL_TRUE@			; `string'
-PUBLIC	??_C@_0O@FCIKHAKJ@TT_BOOL_FALSE@		; `string'
-PUBLIC	??_C@_08IFDFBKBC@TT_SCOPE@			; `string'
-PUBLIC	??_C@_0N@CMNKNGHF@TT_SCOPE_END@			; `string'
+PUBLIC	??_C@_08MLPCKFAF@TT_PLUS?6@			; `string'
+PUBLIC	??_C@_09INLMGOGN@TT_MINUS?6@			; `string'
+PUBLIC	??_C@_07LOCMFFGK@TT_MUL?6@			; `string'
+PUBLIC	??_C@_07LIECPJJK@TT_DIV?6@			; `string'
+PUBLIC	??_C@_07JILPNDD@TT_POW?6@			; `string'
+PUBLIC	??_C@_07NOIBNBPM@TT_INT?6@			; `string'
+PUBLIC	??_C@_0L@JBPPOFF@TT_OP_END?6@			; `string'
+PUBLIC	??_C@_09NCNDHLDA@TT_PRINT?6@			; `string'
+PUBLIC	??_C@_06PALBPBJB@TT_IF?6@			; `string'
+PUBLIC	??_C@_0P@BHNNFODK@TT_LEFT_PAREN?6@		; `string'
+PUBLIC	??_C@_0BA@OGMPDHJK@TT_RIGHT_PAREN?6@		; `string'
+PUBLIC	??_C@_0P@LNMNGCJL@TT_LEFT_CURLY?6@		; `string'
+PUBLIC	??_C@_0BA@EMNPALDL@TT_RIGHT_CURLY?6@		; `string'
+PUBLIC	??_C@_0L@KNGMLOKE@TT_STRING?6@			; `string'
+PUBLIC	??_C@_09CNEGFIP@TT_WHILE?6@			; `string'
+PUBLIC	??_C@_08GFIJNJAP@TT_CHAR?6@			; `string'
+PUBLIC	??_C@_09DICCFENJ@TT_FLOAT?6@			; `string'
+PUBLIC	??_C@_07LMGPCMIG@TT_EOF?6@			; `string'
+PUBLIC	??_C@_09DAOKKOKK@TT_IDENT?6@			; `string'
+PUBLIC	??_C@_0L@NJNDBBPB@TT_EQUALS?6@			; `string'
+PUBLIC	??_C@_07GANPLNEL@TT_VAR?6@			; `string'
+PUBLIC	??_C@_09MEMMKCNJ@TT_UNDEF?6@			; `string'
+PUBLIC	??_C@_0P@MKBJLJCO@TT_EQUALS_CMP?6@		; `string'
+PUBLIC	??_C@_07PCNHDJEN@TT_AND?6@			; `string'
+PUBLIC	??_C@_06MOPFKFOB@TT_OR?6@			; `string'
+PUBLIC	??_C@_0L@HEOOALAD@TT_ANY_OP?6@			; `string'
+PUBLIC	??_C@_0M@LAGGOBLC@TT_GREATER?6@			; `string'
+PUBLIC	??_C@_0M@PMJADKMG@TT_SMALLER?6@			; `string'
+PUBLIC	??_C@_0BD@MBOPAHDB@TT_GREATER_EQUALS?6@		; `string'
+PUBLIC	??_C@_0BD@LHIHFNJN@TT_SMALLER_EQUALS?6@		; `string'
+PUBLIC	??_C@_0O@HJIPKKHG@TT_BOOL_TRUE?6@		; `string'
+PUBLIC	??_C@_0P@FFLHHJLG@TT_BOOL_FALSE?6@		; `string'
+PUBLIC	??_C@_09JNDKMNI@TT_SCOPE?6@			; `string'
+PUBLIC	??_C@_0O@NKKMLHOP@TT_SCOPE_END?6@		; `string'
 PUBLIC	??_C@_01GEODFPGF@?8@				; `string'
 PUBLIC	__real@4024000000000000
 EXTRN	__imp____acrt_iob_func:PROC
@@ -168,141 +168,141 @@ rtc$IMZ	ENDS
 CONST	SEGMENT
 ??_C@_01GEODFPGF@?8@ DB '''', 00H			; `string'
 CONST	ENDS
-;	COMDAT ??_C@_0N@CMNKNGHF@TT_SCOPE_END@
+;	COMDAT ??_C@_0O@NKKMLHOP@TT_SCOPE_END?6@
 CONST	SEGMENT
-??_C@_0N@CMNKNGHF@TT_SCOPE_END@ DB 'TT_SCOPE_END', 00H	; `string'
+??_C@_0O@NKKMLHOP@TT_SCOPE_END?6@ DB 'TT_SCOPE_END', 0aH, 00H ; `string'
 CONST	ENDS
-;	COMDAT ??_C@_08IFDFBKBC@TT_SCOPE@
+;	COMDAT ??_C@_09JNDKMNI@TT_SCOPE?6@
 CONST	SEGMENT
-??_C@_08IFDFBKBC@TT_SCOPE@ DB 'TT_SCOPE', 00H		; `string'
+??_C@_09JNDKMNI@TT_SCOPE?6@ DB 'TT_SCOPE', 0aH, 00H	; `string'
 CONST	ENDS
-;	COMDAT ??_C@_0O@FCIKHAKJ@TT_BOOL_FALSE@
+;	COMDAT ??_C@_0P@FFLHHJLG@TT_BOOL_FALSE?6@
 CONST	SEGMENT
-??_C@_0O@FCIKHAKJ@TT_BOOL_FALSE@ DB 'TT_BOOL_FALSE', 00H ; `string'
+??_C@_0P@FFLHHJLG@TT_BOOL_FALSE?6@ DB 'TT_BOOL_FALSE', 0aH, 00H ; `string'
 CONST	ENDS
-;	COMDAT ??_C@_0N@LDMHDLBH@TT_BOOL_TRUE@
+;	COMDAT ??_C@_0O@HJIPKKHG@TT_BOOL_TRUE?6@
 CONST	SEGMENT
-??_C@_0N@LDMHDLBH@TT_BOOL_TRUE@ DB 'TT_BOOL_TRUE', 00H	; `string'
+??_C@_0O@HJIPKKHG@TT_BOOL_TRUE?6@ DB 'TT_BOOL_TRUE', 0aH, 00H ; `string'
 CONST	ENDS
-;	COMDAT ??_C@_0BC@NKNEEPGA@TT_SMALLER_EQUALS@
+;	COMDAT ??_C@_0BD@LHIHFNJN@TT_SMALLER_EQUALS?6@
 CONST	SEGMENT
-??_C@_0BC@NKNEEPGA@TT_SMALLER_EQUALS@ DB 'TT_SMALLER_EQUALS', 00H ; `string'
+??_C@_0BD@LHIHFNJN@TT_SMALLER_EQUALS?6@ DB 'TT_SMALLER_EQUALS', 0aH, 00H ; `string'
 CONST	ENDS
-;	COMDAT ??_C@_0BC@GOMPHDCA@TT_GREATER_EQUALS@
+;	COMDAT ??_C@_0BD@MBOPAHDB@TT_GREATER_EQUALS?6@
 CONST	SEGMENT
-??_C@_0BC@GOMPHDCA@TT_GREATER_EQUALS@ DB 'TT_GREATER_EQUALS', 00H ; `string'
+??_C@_0BD@MBOPAHDB@TT_GREATER_EQUALS?6@ DB 'TT_GREATER_EQUALS', 0aH, 00H ; `string'
 CONST	ENDS
-;	COMDAT ??_C@_0L@MJGHFDEF@TT_SMALLER@
+;	COMDAT ??_C@_0M@PMJADKMG@TT_SMALLER?6@
 CONST	SEGMENT
-??_C@_0L@MJGHFDEF@TT_SMALLER@ DB 'TT_SMALLER', 00H	; `string'
+??_C@_0M@PMJADKMG@TT_SMALLER?6@ DB 'TT_SMALLER', 0aH, 00H ; `string'
 CONST	ENDS
-;	COMDAT ??_C@_0L@FGKMHJGE@TT_GREATER@
+;	COMDAT ??_C@_0M@LAGGOBLC@TT_GREATER?6@
 CONST	SEGMENT
-??_C@_0L@FGKMHJGE@TT_GREATER@ DB 'TT_GREATER', 00H	; `string'
+??_C@_0M@LAGGOBLC@TT_GREATER?6@ DB 'TT_GREATER', 0aH, 00H ; `string'
 CONST	ENDS
-;	COMDAT ??_C@_09LPAMHAJN@TT_ANY_OP@
+;	COMDAT ??_C@_0L@HEOOALAD@TT_ANY_OP?6@
 CONST	SEGMENT
-??_C@_09LPAMHAJN@TT_ANY_OP@ DB 'TT_ANY_OP', 00H		; `string'
+??_C@_0L@HEOOALAD@TT_ANY_OP?6@ DB 'TT_ANY_OP', 0aH, 00H	; `string'
 CONST	ENDS
-;	COMDAT ??_C@_05HEJEJHGJ@TT_OR@
+;	COMDAT ??_C@_06MOPFKFOB@TT_OR?6@
 CONST	SEGMENT
-??_C@_05HEJEJHGJ@TT_OR@ DB 'TT_OR', 00H			; `string'
+??_C@_06MOPFKFOB@TT_OR?6@ DB 'TT_OR', 0aH, 00H		; `string'
 CONST	ENDS
-;	COMDAT ??_C@_06FFOMOKEN@TT_AND@
+;	COMDAT ??_C@_07PCNHDJEN@TT_AND?6@
 CONST	SEGMENT
-??_C@_06FFOMOKEN@TT_AND@ DB 'TT_AND', 00H		; `string'
+??_C@_07PCNHDJEN@TT_AND?6@ DB 'TT_AND', 0aH, 00H	; `string'
 CONST	ENDS
-;	COMDAT ??_C@_0O@EDKOENOP@TT_EQUALS_CMP@
+;	COMDAT ??_C@_0P@MKBJLJCO@TT_EQUALS_CMP?6@
 CONST	SEGMENT
-??_C@_0O@EDKOENOP@TT_EQUALS_CMP@ DB 'TT_EQUALS_CMP', 00H ; `string'
+??_C@_0P@MKBJLJCO@TT_EQUALS_CMP?6@ DB 'TT_EQUALS_CMP', 0aH, 00H ; `string'
 CONST	ENDS
-;	COMDAT ??_C@_08ENDNIIOH@TT_UNDEF@
+;	COMDAT ??_C@_09MEMMKCNJ@TT_UNDEF?6@
 CONST	SEGMENT
-??_C@_08ENDNIIOH@TT_UNDEF@ DB 'TT_UNDEF', 00H		; `string'
+??_C@_09MEMMKCNJ@TT_UNDEF?6@ DB 'TT_UNDEF', 0aH, 00H	; `string'
 CONST	ENDS
-;	COMDAT ??_C@_06IPOGHHIB@TT_VAR@
+;	COMDAT ??_C@_07GANPLNEL@TT_VAR?6@
 CONST	SEGMENT
-??_C@_06IPOGHHIB@TT_VAR@ DB 'TT_VAR', 00H		; `string'
+??_C@_07GANPLNEL@TT_VAR?6@ DB 'TT_VAR', 0aH, 00H	; `string'
 CONST	ENDS
-;	COMDAT ??_C@_09OFJOMEPH@TT_EQUALS@
+;	COMDAT ??_C@_0L@NJNDBBPB@TT_EQUALS?6@
 CONST	SEGMENT
-??_C@_09OFJOMEPH@TT_EQUALS@ DB 'TT_EQUALS', 00H		; `string'
+??_C@_0L@NJNDBBPB@TT_EQUALS?6@ DB 'TT_EQUALS', 0aH, 00H	; `string'
 CONST	ENDS
-;	COMDAT ??_C@_08LPIEKKPB@TT_IDENT@
+;	COMDAT ??_C@_09DAOKKOKK@TT_IDENT?6@
 CONST	SEGMENT
-??_C@_08LPIEKKPB@TT_IDENT@ DB 'TT_IDENT', 00H		; `string'
+??_C@_09DAOKKOKK@TT_IDENT?6@ DB 'TT_IDENT', 0aH, 00H	; `string'
 CONST	ENDS
-;	COMDAT ??_C@_06OJHKHFKP@TT_EOF@
+;	COMDAT ??_C@_07LMGPCMIG@TT_EOF?6@
 CONST	SEGMENT
-??_C@_06OJHKHFKP@TT_EOF@ DB 'TT_EOF', 00H		; `string'
+??_C@_07LMGPCMIG@TT_EOF?6@ DB 'TT_EOF', 0aH, 00H	; `string'
 CONST	ENDS
-;	COMDAT ??_C@_08BKEDPELM@TT_FLOAT@
+;	COMDAT ??_C@_09DICCFENJ@TT_FLOAT?6@
 CONST	SEGMENT
-??_C@_08BKEDPELM@TT_FLOAT@ DB 'TT_FLOAT', 00H		; `string'
+??_C@_09DICCFENJ@TT_FLOAT?6@ DB 'TT_FLOAT', 0aH, 00H	; `string'
 CONST	ENDS
-;	COMDAT ??_C@_07NJNFCAEG@TT_CHAR@
+;	COMDAT ??_C@_08GFIJNJAP@TT_CHAR?6@
 CONST	SEGMENT
-??_C@_07NJNFCAEG@TT_CHAR@ DB 'TT_CHAR', 00H		; `string'
+??_C@_08GFIJNJAP@TT_CHAR?6@ DB 'TT_CHAR', 0aH, 00H	; `string'
 CONST	ENDS
-;	COMDAT ??_C@_08FJCDGMNN@TT_WHILE@
+;	COMDAT ??_C@_09CNEGFIP@TT_WHILE?6@
 CONST	SEGMENT
-??_C@_08FJCDGMNN@TT_WHILE@ DB 'TT_WHILE', 00H		; `string'
+??_C@_09CNEGFIP@TT_WHILE?6@ DB 'TT_WHILE', 0aH, 00H	; `string'
 CONST	ENDS
-;	COMDAT ??_C@_09OLODALHE@TT_STRING@
+;	COMDAT ??_C@_0L@KNGMLOKE@TT_STRING?6@
 CONST	SEGMENT
-??_C@_09OLODALHE@TT_STRING@ DB 'TT_STRING', 00H		; `string'
+??_C@_0L@KNGMLOKE@TT_STRING?6@ DB 'TT_STRING', 0aH, 00H	; `string'
 CONST	ENDS
-;	COMDAT ??_C@_0P@FGMOIMDP@TT_RIGHT_CURLY@
+;	COMDAT ??_C@_0BA@EMNPALDL@TT_RIGHT_CURLY?6@
 CONST	SEGMENT
-??_C@_0P@FGMOIMDP@TT_RIGHT_CURLY@ DB 'TT_RIGHT_CURLY', 00H ; `string'
+??_C@_0BA@EMNPALDL@TT_RIGHT_CURLY?6@ DB 'TT_RIGHT_CURLY', 0aH, 00H ; `string'
 CONST	ENDS
-;	COMDAT ??_C@_0O@JAEFGOOO@TT_LEFT_CURLY@
+;	COMDAT ??_C@_0P@LNMNGCJL@TT_LEFT_CURLY?6@
 CONST	SEGMENT
-??_C@_0O@JAEFGOOO@TT_LEFT_CURLY@ DB 'TT_LEFT_CURLY', 00H ; `string'
+??_C@_0P@LNMNGCJL@TT_LEFT_CURLY?6@ DB 'TT_LEFT_CURLY', 0aH, 00H ; `string'
 CONST	ENDS
-;	COMDAT ??_C@_0P@EMLOHCFB@TT_RIGHT_PAREN@
+;	COMDAT ??_C@_0BA@OGMPDHJK@TT_RIGHT_PAREN?6@
 CONST	SEGMENT
-??_C@_0P@EMLOHCFB@TT_RIGHT_PAREN@ DB 'TT_RIGHT_PAREN', 00H ; `string'
+??_C@_0BA@OGMPDHJK@TT_RIGHT_PAREN?6@ DB 'TT_RIGHT_PAREN', 0aH, 00H ; `string'
 CONST	ENDS
-;	COMDAT ??_C@_0O@IKDFJAIA@TT_LEFT_PAREN@
+;	COMDAT ??_C@_0P@BHNNFODK@TT_LEFT_PAREN?6@
 CONST	SEGMENT
-??_C@_0O@IKDFJAIA@TT_LEFT_PAREN@ DB 'TT_LEFT_PAREN', 00H ; `string'
+??_C@_0P@BHNNFODK@TT_LEFT_PAREN?6@ DB 'TT_LEFT_PAREN', 0aH, 00H ; `string'
 CONST	ENDS
-;	COMDAT ??_C@_05FOLHDMIO@TT_IF@
+;	COMDAT ??_C@_06PALBPBJB@TT_IF?6@
 CONST	SEGMENT
-??_C@_05FOLHDMIO@TT_IF@ DB 'TT_IF', 00H			; `string'
+??_C@_06PALBPBJB@TT_IF?6@ DB 'TT_IF', 0aH, 00H		; `string'
 CONST	ENDS
-;	COMDAT ??_C@_08DOCLCEDI@TT_PRINT@
+;	COMDAT ??_C@_09NCNDHLDA@TT_PRINT?6@
 CONST	SEGMENT
-??_C@_08DOCLCEDI@TT_PRINT@ DB 'TT_PRINT', 00H		; `string'
+??_C@_09NCNDHLDA@TT_PRINT?6@ DB 'TT_PRINT', 0aH, 00H	; `string'
 CONST	ENDS
-;	COMDAT ??_C@_09EJGHJHBC@TT_OP_END@
+;	COMDAT ??_C@_0L@JBPPOFF@TT_OP_END?6@
 CONST	SEGMENT
-??_C@_09EJGHJHBC@TT_OP_END@ DB 'TT_OP_END', 00H		; `string'
+??_C@_0L@JBPPOFF@TT_OP_END?6@ DB 'TT_OP_END', 0aH, 00H	; `string'
 CONST	ENDS
-;	COMDAT ??_C@_06NKJKNAPD@TT_INT@
+;	COMDAT ??_C@_07NOIBNBPM@TT_INT?6@
 CONST	SEGMENT
-??_C@_06NKJKNAPD@TT_INT@ DB 'TT_INT', 00H		; `string'
+??_C@_07NOIBNBPM@TT_INT?6@ DB 'TT_INT', 0aH, 00H	; `string'
 CONST	ENDS
-;	COMDAT ??_C@_06NNGEPBBC@TT_POW@
+;	COMDAT ??_C@_07JILPNDD@TT_POW?6@
 CONST	SEGMENT
-??_C@_06NNGEPBBC@TT_POW@ DB 'TT_POW', 00H		; `string'
+??_C@_07JILPNDD@TT_POW?6@ DB 'TT_POW', 0aH, 00H		; `string'
 CONST	ENDS
-;	COMDAT ??_C@_06BPIJHMCJ@TT_DIV@
+;	COMDAT ??_C@_07LIECPJJK@TT_DIV?6@
 CONST	SEGMENT
-??_C@_06BPIJHMCJ@TT_DIV@ DB 'TT_DIV', 00H		; `string'
+??_C@_07LIECPJJK@TT_DIV?6@ DB 'TT_DIV', 0aH, 00H	; `string'
 CONST	ENDS
-;	COMDAT ??_C@_06MHJAJDGM@TT_MUL@
+;	COMDAT ??_C@_07LOCMFFGK@TT_MUL?6@
 CONST	SEGMENT
-??_C@_06MHJAJDGM@TT_MUL@ DB 'TT_MUL', 00H		; `string'
+??_C@_07LOCMFFGK@TT_MUL?6@ DB 'TT_MUL', 0aH, 00H	; `string'
 CONST	ENDS
-;	COMDAT ??_C@_08FELGHBAB@TT_MINUS@
+;	COMDAT ??_C@_09INLMGOGN@TT_MINUS?6@
 CONST	SEGMENT
-??_C@_08FELGHBAB@TT_MINUS@ DB 'TT_MINUS', 00H		; `string'
+??_C@_09INLMGOGN@TT_MINUS?6@ DB 'TT_MINUS', 0aH, 00H	; `string'
 CONST	ENDS
-;	COMDAT ??_C@_07HDMDGAKO@TT_PLUS@
+;	COMDAT ??_C@_08MLPCKFAF@TT_PLUS?6@
 CONST	SEGMENT
-??_C@_07HDMDGAKO@TT_PLUS@ DB 'TT_PLUS', 00H		; `string'
+??_C@_08MLPCKFAF@TT_PLUS?6@ DB 'TT_PLUS', 0aH, 00H	; `string'
 CONST	ENDS
 ;	COMDAT ??_C@_0L@FPFMPDDA@0123456789@
 CONST	SEGMENT
@@ -910,7 +910,7 @@ tv64 = -196						; size = 4
 _tokenType$ = 8						; size = 4
 _printToken PROC					; COMDAT
 
-; 369  : {
+; 331  : {
 
 	push	ebp
 	mov	ebp, esp
@@ -925,7 +925,7 @@ _printToken PROC					; COMDAT
 	mov	ecx, OFFSET __56B56370_scan@c
 	call	@__CheckForDebuggerJustMyCode@4
 
-; 370  : 	switch (tokenType)
+; 332  : 	switch (tokenType)
 
 	mov	eax, DWORD PTR _tokenType$[ebp]
 	mov	DWORD PTR tv64[ebp], eax
@@ -935,280 +935,280 @@ _printToken PROC					; COMDAT
 	jmp	DWORD PTR $LN39@printToken[ecx*4]
 $LN4@printToken:
 
-; 371  : 	{
-; 372  : 	case TT_PLUS:              printf("TT_PLUS"); break;
+; 333  : 	{
+; 334  : 	case TT_PLUS:              printf("TT_PLUS\n"); break;
 
-	push	OFFSET ??_C@_07HDMDGAKO@TT_PLUS@
+	push	OFFSET ??_C@_08MLPCKFAF@TT_PLUS?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN5@printToken:
 
-; 373  : 	case TT_MINUS:             printf("TT_MINUS"); break;
+; 335  : 	case TT_MINUS:             printf("TT_MINUS\n"); break;
 
-	push	OFFSET ??_C@_08FELGHBAB@TT_MINUS@
+	push	OFFSET ??_C@_09INLMGOGN@TT_MINUS?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN6@printToken:
 
-; 374  : 	case TT_MUL:               printf("TT_MUL"); break;
+; 336  : 	case TT_MUL:               printf("TT_MUL\n"); break;
 
-	push	OFFSET ??_C@_06MHJAJDGM@TT_MUL@
+	push	OFFSET ??_C@_07LOCMFFGK@TT_MUL?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN7@printToken:
 
-; 375  : 	case TT_DIV:               printf("TT_DIV"); break;
+; 337  : 	case TT_DIV:               printf("TT_DIV\n"); break;
 
-	push	OFFSET ??_C@_06BPIJHMCJ@TT_DIV@
+	push	OFFSET ??_C@_07LIECPJJK@TT_DIV?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN8@printToken:
 
-; 376  : 	case TT_POW:               printf("TT_POW"); break;
+; 338  : 	case TT_POW:               printf("TT_POW\n"); break;
 
-	push	OFFSET ??_C@_06NNGEPBBC@TT_POW@
+	push	OFFSET ??_C@_07JILPNDD@TT_POW?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN9@printToken:
 
-; 377  : 	case TT_INT:               printf("TT_INT"); break;
+; 339  : 	case TT_INT:               printf("TT_INT\n"); break;
 
-	push	OFFSET ??_C@_06NKJKNAPD@TT_INT@
+	push	OFFSET ??_C@_07NOIBNBPM@TT_INT?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN10@printToken:
 
-; 378  : 	case TT_OP_END:            printf("TT_OP_END"); break;
+; 340  : 	case TT_OP_END:            printf("TT_OP_END\n"); break;
 
-	push	OFFSET ??_C@_09EJGHJHBC@TT_OP_END@
+	push	OFFSET ??_C@_0L@JBPPOFF@TT_OP_END?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN11@printToken:
 
-; 379  : 	case TT_PRINT:             printf("TT_PRINT"); break;
+; 341  : 	case TT_PRINT:             printf("TT_PRINT\n"); break;
 
-	push	OFFSET ??_C@_08DOCLCEDI@TT_PRINT@
+	push	OFFSET ??_C@_09NCNDHLDA@TT_PRINT?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN12@printToken:
 
-; 380  : 	case TT_IF:                printf("TT_IF"); break;
+; 342  : 	case TT_IF:                printf("TT_IF\n"); break;
 
-	push	OFFSET ??_C@_05FOLHDMIO@TT_IF@
+	push	OFFSET ??_C@_06PALBPBJB@TT_IF?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN13@printToken:
 
-; 381  : 	case TT_LEFT_PAREN:        printf("TT_LEFT_PAREN"); break;
+; 343  : 	case TT_LEFT_PAREN:        printf("TT_LEFT_PAREN\n"); break;
 
-	push	OFFSET ??_C@_0O@IKDFJAIA@TT_LEFT_PAREN@
+	push	OFFSET ??_C@_0P@BHNNFODK@TT_LEFT_PAREN?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN14@printToken:
 
-; 382  : 	case TT_RIGHT_PAREN:       printf("TT_RIGHT_PAREN"); break;
+; 344  : 	case TT_RIGHT_PAREN:       printf("TT_RIGHT_PAREN\n"); break;
 
-	push	OFFSET ??_C@_0P@EMLOHCFB@TT_RIGHT_PAREN@
+	push	OFFSET ??_C@_0BA@OGMPDHJK@TT_RIGHT_PAREN?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN15@printToken:
 
-; 383  : 	case TT_LEFT_CURLY:        printf("TT_LEFT_CURLY"); break;
+; 345  : 	case TT_LEFT_CURLY:        printf("TT_LEFT_CURLY\n"); break;
 
-	push	OFFSET ??_C@_0O@JAEFGOOO@TT_LEFT_CURLY@
+	push	OFFSET ??_C@_0P@LNMNGCJL@TT_LEFT_CURLY?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN16@printToken:
 
-; 384  : 	case TT_RIGHT_CURLY:       printf("TT_RIGHT_CURLY"); break;
+; 346  : 	case TT_RIGHT_CURLY:       printf("TT_RIGHT_CURLY\n"); break;
 
-	push	OFFSET ??_C@_0P@FGMOIMDP@TT_RIGHT_CURLY@
+	push	OFFSET ??_C@_0BA@EMNPALDL@TT_RIGHT_CURLY?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN17@printToken:
 
-; 385  : 	case TT_STRING:            printf("TT_STRING"); break;
+; 347  : 	case TT_STRING:            printf("TT_STRING\n"); break;
 
-	push	OFFSET ??_C@_09OLODALHE@TT_STRING@
+	push	OFFSET ??_C@_0L@KNGMLOKE@TT_STRING?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN18@printToken:
 
-; 386  : 	case TT_WHILE:             printf("TT_WHILE"); break;
+; 348  : 	case TT_WHILE:             printf("TT_WHILE\n"); break;
 
-	push	OFFSET ??_C@_08FJCDGMNN@TT_WHILE@
+	push	OFFSET ??_C@_09CNEGFIP@TT_WHILE?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN19@printToken:
 
-; 387  : 	case TT_CHAR:              printf("TT_CHAR"); break;
+; 349  : 	case TT_CHAR:              printf("TT_CHAR\n"); break;
 
-	push	OFFSET ??_C@_07NJNFCAEG@TT_CHAR@
+	push	OFFSET ??_C@_08GFIJNJAP@TT_CHAR?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN20@printToken:
 
-; 388  : 	case TT_FLOAT:             printf("TT_FLOAT"); break;
+; 350  : 	case TT_FLOAT:             printf("TT_FLOAT\n"); break;
 
-	push	OFFSET ??_C@_08BKEDPELM@TT_FLOAT@
+	push	OFFSET ??_C@_09DICCFENJ@TT_FLOAT?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN21@printToken:
 
-; 389  : 	case TT_EOF:               printf("TT_EOF"); break;
+; 351  : 	case TT_EOF:               printf("TT_EOF\n"); break;
 
-	push	OFFSET ??_C@_06OJHKHFKP@TT_EOF@
+	push	OFFSET ??_C@_07LMGPCMIG@TT_EOF?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN22@printToken:
 
-; 390  : 	case TT_IDENT:             printf("TT_IDENT"); break; 
+; 352  : 	case TT_IDENT:             printf("TT_IDENT\n"); break; 
 
-	push	OFFSET ??_C@_08LPIEKKPB@TT_IDENT@
+	push	OFFSET ??_C@_09DAOKKOKK@TT_IDENT?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN23@printToken:
 
-; 391  : 	case TT_EQUALS:            printf("TT_EQUALS"); break;
+; 353  : 	case TT_EQUALS:            printf("TT_EQUALS\n"); break;
 
-	push	OFFSET ??_C@_09OFJOMEPH@TT_EQUALS@
+	push	OFFSET ??_C@_0L@NJNDBBPB@TT_EQUALS?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN24@printToken:
 
-; 392  : 	case TT_VAR:               printf("TT_VAR"); break;
+; 354  : 	case TT_VAR:               printf("TT_VAR\n"); break;
 
-	push	OFFSET ??_C@_06IPOGHHIB@TT_VAR@
+	push	OFFSET ??_C@_07GANPLNEL@TT_VAR?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN25@printToken:
 
-; 393  : 	case TT_UNDEF:             printf("TT_UNDEF"); break;
+; 355  : 	case TT_UNDEF:             printf("TT_UNDEF\n"); break;
 
-	push	OFFSET ??_C@_08ENDNIIOH@TT_UNDEF@
+	push	OFFSET ??_C@_09MEMMKCNJ@TT_UNDEF?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN26@printToken:
 
-; 394  : 	case TT_EQUALS_CMP:        printf("TT_EQUALS_CMP"); break;
+; 356  : 	case TT_EQUALS_CMP:        printf("TT_EQUALS_CMP\n"); break;
 
-	push	OFFSET ??_C@_0O@EDKOENOP@TT_EQUALS_CMP@
+	push	OFFSET ??_C@_0P@MKBJLJCO@TT_EQUALS_CMP?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN27@printToken:
 
-; 395  : 	case TT_AND:               printf("TT_AND"); break;
+; 357  : 	case TT_AND:               printf("TT_AND\n"); break;
 
-	push	OFFSET ??_C@_06FFOMOKEN@TT_AND@
+	push	OFFSET ??_C@_07PCNHDJEN@TT_AND?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN28@printToken:
 
-; 396  : 	case TT_OR:                printf("TT_OR"); break;
+; 358  : 	case TT_OR:                printf("TT_OR\n"); break;
 
-	push	OFFSET ??_C@_05HEJEJHGJ@TT_OR@
+	push	OFFSET ??_C@_06MOPFKFOB@TT_OR?6@
 	call	_printf
 	add	esp, 4
 	jmp	$LN1@printToken
 $LN29@printToken:
 
-; 397  : 	case TT_ANY_OP:            printf("TT_ANY_OP"); break;
+; 359  : 	case TT_ANY_OP:            printf("TT_ANY_OP\n"); break;
 
-	push	OFFSET ??_C@_09LPAMHAJN@TT_ANY_OP@
+	push	OFFSET ??_C@_0L@HEOOALAD@TT_ANY_OP?6@
 	call	_printf
 	add	esp, 4
 	jmp	SHORT $LN1@printToken
 $LN30@printToken:
 
-; 398  : 	case TT_GREATER:           printf("TT_GREATER"); break;
+; 360  : 	case TT_GREATER:           printf("TT_GREATER\n"); break;
 
-	push	OFFSET ??_C@_0L@FGKMHJGE@TT_GREATER@
+	push	OFFSET ??_C@_0M@LAGGOBLC@TT_GREATER?6@
 	call	_printf
 	add	esp, 4
 	jmp	SHORT $LN1@printToken
 $LN31@printToken:
 
-; 399  : 	case TT_SMALLER:           printf("TT_SMALLER"); break;
+; 361  : 	case TT_SMALLER:           printf("TT_SMALLER\n"); break;
 
-	push	OFFSET ??_C@_0L@MJGHFDEF@TT_SMALLER@
+	push	OFFSET ??_C@_0M@PMJADKMG@TT_SMALLER?6@
 	call	_printf
 	add	esp, 4
 	jmp	SHORT $LN1@printToken
 $LN32@printToken:
 
-; 400  : 	case TT_GREATER_EQUALS:    printf("TT_GREATER_EQUALS"); break;
+; 362  : 	case TT_GREATER_EQUALS:    printf("TT_GREATER_EQUALS\n"); break;
 
-	push	OFFSET ??_C@_0BC@GOMPHDCA@TT_GREATER_EQUALS@
+	push	OFFSET ??_C@_0BD@MBOPAHDB@TT_GREATER_EQUALS?6@
 	call	_printf
 	add	esp, 4
 	jmp	SHORT $LN1@printToken
 $LN33@printToken:
 
-; 401  : 	case TT_SMALLER_EQUALS:    printf("TT_SMALLER_EQUALS"); break;
+; 363  : 	case TT_SMALLER_EQUALS:    printf("TT_SMALLER_EQUALS\n"); break;
 
-	push	OFFSET ??_C@_0BC@NKNEEPGA@TT_SMALLER_EQUALS@
+	push	OFFSET ??_C@_0BD@LHIHFNJN@TT_SMALLER_EQUALS?6@
 	call	_printf
 	add	esp, 4
 	jmp	SHORT $LN1@printToken
 $LN34@printToken:
 
-; 402  : 	case TT_BOOL_TRUE:         printf("TT_BOOL_TRUE"); break;
+; 364  : 	case TT_BOOL_TRUE:         printf("TT_BOOL_TRUE\n"); break;
 
-	push	OFFSET ??_C@_0N@LDMHDLBH@TT_BOOL_TRUE@
+	push	OFFSET ??_C@_0O@HJIPKKHG@TT_BOOL_TRUE?6@
 	call	_printf
 	add	esp, 4
 	jmp	SHORT $LN1@printToken
 $LN35@printToken:
 
-; 403  : 	case TT_BOOL_FALSE:        printf("TT_BOOL_FALSE"); break;
+; 365  : 	case TT_BOOL_FALSE:        printf("TT_BOOL_FALSE\n"); break;
 
-	push	OFFSET ??_C@_0O@FCIKHAKJ@TT_BOOL_FALSE@
+	push	OFFSET ??_C@_0P@FFLHHJLG@TT_BOOL_FALSE?6@
 	call	_printf
 	add	esp, 4
 	jmp	SHORT $LN1@printToken
 $LN36@printToken:
 
-; 404  : 	case TT_SCOPE:             printf("TT_SCOPE"); break;
+; 366  : 	case TT_SCOPE:             printf("TT_SCOPE\n"); break;
 
-	push	OFFSET ??_C@_08IFDFBKBC@TT_SCOPE@
+	push	OFFSET ??_C@_09JNDKMNI@TT_SCOPE?6@
 	call	_printf
 	add	esp, 4
 	jmp	SHORT $LN1@printToken
 $LN37@printToken:
 
-; 405  : 	case TT_SCOPE_END:         printf("TT_SCOPE_END"); break;
+; 367  : 	case TT_SCOPE_END:         printf("TT_SCOPE_END\n"); break;
 
-	push	OFFSET ??_C@_0N@CMNKNGHF@TT_SCOPE_END@
+	push	OFFSET ??_C@_0O@NKKMLHOP@TT_SCOPE_END?6@
 	call	_printf
 	add	esp, 4
 $LN1@printToken:
 
-; 406  : 	}
-; 407  : }
+; 368  : 	}
+; 369  : }
 
 	pop	edi
 	pop	esi
@@ -1427,7 +1427,7 @@ _c$ = -12						; size = 4
 __$ArrayPad$ = -4					; size = 4
 _scan_curToken PROC					; COMDAT
 
-; 413  : {
+; 375  : {
 
 	push	ebp
 	mov	ebp, esp
@@ -1445,35 +1445,35 @@ _scan_curToken PROC					; COMDAT
 	mov	ecx, OFFSET __56B56370_scan@c
 	call	@__CheckForDebuggerJustMyCode@4
 
-; 414  : 
-; 415  : 	if (globl_putback_token != NULL)
+; 376  : 
+; 377  : 	if (globl_putback_token != NULL)
 
 	cmp	DWORD PTR _globl_putback_token, 0
 	je	SHORT $LN5@scan_curTo
 
-; 416  : 	{
-; 417  : 		currentToken = globl_putback_token;
+; 378  : 	{
+; 379  : 		currentToken = globl_putback_token;
 
 	mov	eax, DWORD PTR _globl_putback_token
 	mov	DWORD PTR _currentToken, eax
 
-; 418  : 		globl_putback_token = NULL;
+; 380  : 		globl_putback_token = NULL;
 
 	mov	DWORD PTR _globl_putback_token, 0
 
-; 419  : 		return;
+; 381  : 		return;
 
 	jmp	$LN19@scan_curTo
 $LN5@scan_curTo:
 
-; 420  : 	}
-; 421  : 
-; 422  : 	int c = skip();
+; 382  : 	}
+; 383  : 
+; 384  : 	int c = skip();
 
 	call	_skip
 	mov	DWORD PTR _c$[ebp], eax
 
-; 423  : 	int x = skip_comments(c);
+; 385  : 	int x = skip_comments(c);
 
 	mov	eax, DWORD PTR _c$[ebp]
 	push	eax
@@ -1481,13 +1481,13 @@ $LN5@scan_curTo:
 	add	esp, 4
 	mov	DWORD PTR _x$[ebp], eax
 
-; 424  : 	if (x == -1)
+; 386  : 	if (x == -1)
 
 	cmp	DWORD PTR _x$[ebp], -1
 	jne	SHORT $LN6@scan_curTo
 
-; 425  : 	{
-; 426  : 		currentToken = newToken(TT_DIV, 0, 0, Line, NULL);
+; 387  : 	{
+; 388  : 		currentToken = newToken(TT_DIV, 0, 0, Line, NULL);
 
 	push	0
 	mov	eax, DWORD PTR _Line
@@ -1500,20 +1500,20 @@ $LN5@scan_curTo:
 	add	esp, 24					; 00000018H
 	mov	DWORD PTR _currentToken, eax
 
-; 427  : 		return;
+; 389  : 		return;
 
 	jmp	$LN19@scan_curTo
 $LN6@scan_curTo:
 
-; 428  : 	}
-; 429  : 
-; 430  : 	if (c == EOF)
+; 390  : 	}
+; 391  : 
+; 392  : 	if (c == EOF)
 
 	cmp	DWORD PTR _c$[ebp], -1
 	jne	SHORT $LN7@scan_curTo
 
-; 431  : 	{
-; 432  : 		currentToken = newToken(TT_EOF, 0, Line, NULL);
+; 393  : 	{
+; 394  : 		currentToken = newToken(TT_EOF, 0, Line, NULL);
 
 	push	0
 	mov	eax, DWORD PTR _Line
@@ -1526,8 +1526,8 @@ $LN6@scan_curTo:
 	mov	DWORD PTR _currentToken, eax
 $LN7@scan_curTo:
 
-; 433  : 	}
-; 434  : 	for (size_t i = 0; i < arraySize(singleCharTokens); i++)
+; 395  : 	}
+; 396  : 	for (size_t i = 0; i < arraySize(singleCharTokens); i++)
 
 	mov	DWORD PTR _i$15[ebp], 0
 	jmp	SHORT $LN4@scan_curTo
@@ -1539,8 +1539,8 @@ $LN4@scan_curTo:
 	cmp	DWORD PTR _i$15[ebp], 10		; 0000000aH
 	jae	SHORT $LN3@scan_curTo
 
-; 435  : 	{
-; 436  : 		struct TokenIdent curIdent = singleCharTokens[i];
+; 397  : 	{
+; 398  : 		struct TokenIdent curIdent = singleCharTokens[i];
 
 	mov	eax, DWORD PTR _i$15[ebp]
 	mov	ecx, DWORD PTR _singleCharTokens[eax*8]
@@ -1548,14 +1548,14 @@ $LN4@scan_curTo:
 	mov	DWORD PTR _curIdent$14[ebp], ecx
 	mov	DWORD PTR _curIdent$14[ebp+4], edx
 
-; 437  : 		if (curIdent.tokenStr == c)
+; 399  : 		if (curIdent.tokenStr == c)
 
 	mov	eax, DWORD PTR _curIdent$14[ebp]
 	cmp	eax, DWORD PTR _c$[ebp]
 	jne	SHORT $LN8@scan_curTo
 
-; 438  : 		{
-; 439  : 			currentToken = newToken(curIdent.tokenType, 0, Line, NULL);
+; 400  : 		{
+; 401  : 			currentToken = newToken(curIdent.tokenType, 0, Line, NULL);
 
 	push	0
 	mov	eax, DWORD PTR _Line
@@ -1568,25 +1568,25 @@ $LN4@scan_curTo:
 	add	esp, 20					; 00000014H
 	mov	DWORD PTR _currentToken, eax
 
-; 440  : 			putback(' ');
+; 402  : 			putback(' ');
 
 	push	32					; 00000020H
 	call	_putback
 	add	esp, 4
 
-; 441  : 			return;
+; 403  : 			return;
 
 	jmp	$LN19@scan_curTo
 $LN8@scan_curTo:
 
-; 442  : 		}
-; 443  : 	}
+; 404  : 		}
+; 405  : 	}
 
 	jmp	SHORT $LN2@scan_curTo
 $LN3@scan_curTo:
 
-; 444  : 
-; 445  : 	int cmp_op = scan_cmp_operators(c);
+; 406  : 
+; 407  : 	int cmp_op = scan_cmp_operators(c);
 
 	mov	eax, DWORD PTR _c$[ebp]
 	push	eax
@@ -1594,13 +1594,13 @@ $LN3@scan_curTo:
 	add	esp, 4
 	mov	DWORD PTR _cmp_op$[ebp], eax
 
-; 446  : 	if (cmp_op != -1)
+; 408  : 	if (cmp_op != -1)
 
 	cmp	DWORD PTR _cmp_op$[ebp], -1
 	je	SHORT $LN9@scan_curTo
 
-; 447  : 	{
-; 448  : 		currentToken = newToken(cmp_op, 0, Line, NULL);
+; 409  : 	{
+; 410  : 		currentToken = newToken(cmp_op, 0, Line, NULL);
 
 	push	0
 	mov	eax, DWORD PTR _Line
@@ -1613,15 +1613,15 @@ $LN3@scan_curTo:
 	add	esp, 20					; 00000014H
 	mov	DWORD PTR _currentToken, eax
 
-; 449  : 		return;
+; 411  : 		return;
 
 	jmp	$LN19@scan_curTo
 $LN9@scan_curTo:
 
-; 450  : 
-; 451  : 	}
-; 452  : 
-; 453  : 	if (isdigit(c))
+; 412  : 
+; 413  : 	}
+; 414  : 
+; 415  : 	if (isdigit(c))
 
 	mov	eax, DWORD PTR _c$[ebp]
 	push	eax
@@ -1630,8 +1630,8 @@ $LN9@scan_curTo:
 	test	eax, eax
 	je	$LN10@scan_curTo
 
-; 454  : 	{
-; 455  : 		struct NumericVal numStruct = scanIntAndFloat(c);
+; 416  : 	{
+; 417  : 		struct NumericVal numStruct = scanIntAndFloat(c);
 
 	mov	eax, DWORD PTR _c$[ebp]
 	push	eax
@@ -1652,26 +1652,26 @@ $LN9@scan_curTo:
 	mov	eax, DWORD PTR [eax+20]
 	mov	DWORD PTR _numStruct$13[ebp+20], eax
 
-; 456  : 		int numTT = numStruct.tokenType;
+; 418  : 		int numTT = numStruct.tokenType;
 
 	mov	eax, DWORD PTR _numStruct$13[ebp+16]
 	mov	DWORD PTR _numTT$12[ebp], eax
 
-; 457  : 
-; 458  : 		if (numTT == TT_INT)
+; 419  : 
+; 420  : 		if (numTT == TT_INT)
 
 	cmp	DWORD PTR _numTT$12[ebp], 5
 	jne	SHORT $LN12@scan_curTo
 
-; 459  : 		{
-; 460  : 			INT_VAL intVal = numStruct.intVal;
+; 421  : 		{
+; 422  : 			INT_VAL intVal = numStruct.intVal;
 
 	mov	eax, DWORD PTR _numStruct$13[ebp]
 	mov	DWORD PTR _intVal$11[ebp], eax
 	mov	ecx, DWORD PTR _numStruct$13[ebp+4]
 	mov	DWORD PTR _intVal$11[ebp+4], ecx
 
-; 461  : 			long long* intValPtr = malloc(sizeof(long long));
+; 423  : 			long long* intValPtr = malloc(sizeof(long long));
 
 	mov	esi, esp
 	push	8
@@ -1681,7 +1681,7 @@ $LN9@scan_curTo:
 	call	__RTC_CheckEsp
 	mov	DWORD PTR _intValPtr$10[ebp], eax
 
-; 462  : 			*intValPtr = intVal;
+; 424  : 			*intValPtr = intVal;
 
 	mov	eax, DWORD PTR _intValPtr$10[ebp]
 	mov	ecx, DWORD PTR _intVal$11[ebp]
@@ -1689,8 +1689,8 @@ $LN9@scan_curTo:
 	mov	edx, DWORD PTR _intVal$11[ebp+4]
 	mov	DWORD PTR [eax+4], edx
 
-; 463  : 
-; 464  : 			currentToken = newToken(TT_INT, intVal, Line, new_DATA_STRUCT(NULL, NULL, NULL, intValPtr, NULL, DT_INT, 1));
+; 425  : 
+; 426  : 			currentToken = newToken(TT_INT, intVal, Line, new_DATA_STRUCT(NULL, NULL, NULL, intValPtr, NULL, DT_INT, 1));
 
 	push	1
 	push	0
@@ -1717,19 +1717,19 @@ $LN9@scan_curTo:
 	mov	DWORD PTR _currentToken, eax
 $LN12@scan_curTo:
 
-; 465  : 		}
-; 466  : 		if (numTT == TT_FLOAT)
+; 427  : 		}
+; 428  : 		if (numTT == TT_FLOAT)
 
 	cmp	DWORD PTR _numTT$12[ebp], 16		; 00000010H
 	jne	SHORT $LN13@scan_curTo
 
-; 467  : 		{
-; 468  : 			double floatVal = numStruct.floatVal;
+; 429  : 		{
+; 430  : 			double floatVal = numStruct.floatVal;
 
 	movsd	xmm0, QWORD PTR _numStruct$13[ebp+8]
 	movsd	QWORD PTR _floatVal$9[ebp], xmm0
 
-; 469  : 			long double* floatValPtr = malloc(sizeof(long double));
+; 431  : 			long double* floatValPtr = malloc(sizeof(long double));
 
 	mov	esi, esp
 	push	8
@@ -1739,13 +1739,13 @@ $LN12@scan_curTo:
 	call	__RTC_CheckEsp
 	mov	DWORD PTR _floatValPtr$8[ebp], eax
 
-; 470  : 			*floatValPtr = floatVal;
+; 432  : 			*floatValPtr = floatVal;
 
 	mov	eax, DWORD PTR _floatValPtr$8[ebp]
 	movsd	xmm0, QWORD PTR _floatVal$9[ebp]
 	movsd	QWORD PTR [eax], xmm0
 
-; 471  : 			currentToken = newToken_float(TT_FLOAT, floatVal, Line, new_DATA_STRUCT(NULL, NULL, floatValPtr, NULL, NULL, DT_FLOAT, 1));
+; 433  : 			currentToken = newToken_float(TT_FLOAT, floatVal, Line, new_DATA_STRUCT(NULL, NULL, floatValPtr, NULL, NULL, DT_FLOAT, 1));
 
 	push	1
 	push	2
@@ -1770,14 +1770,14 @@ $LN12@scan_curTo:
 	mov	DWORD PTR _currentToken, eax
 $LN13@scan_curTo:
 
-; 472  : 		}
-; 473  : 	}
+; 434  : 		}
+; 435  : 	}
 
 	jmp	$LN17@scan_curTo
 $LN10@scan_curTo:
 
-; 474  : 
-; 475  : 	else if (isalpha(c) || c == '_')
+; 436  : 
+; 437  : 	else if (isalpha(c) || c == '_')
 
 	mov	eax, DWORD PTR _c$[ebp]
 	push	eax
@@ -1789,9 +1789,9 @@ $LN10@scan_curTo:
 	jne	$LN17@scan_curTo
 $LN15@scan_curTo:
 
-; 476  : 	{
-; 477  : 
-; 478  : 		scanident(c, Text, TEXTLEN);
+; 438  : 	{
+; 439  : 
+; 440  : 		scanident(c, Text, TEXTLEN);
 
 	push	512					; 00000200H
 	push	OFFSET _Text
@@ -1800,7 +1800,7 @@ $LN15@scan_curTo:
 	call	_scanident
 	add	esp, 12					; 0000000cH
 
-; 479  : 		struct keyword_returnVal cur_key_ret_val = keyword(Text);
+; 441  : 		struct keyword_returnVal cur_key_ret_val = keyword(Text);
 
 	push	OFFSET _Text
 	call	_keyword
@@ -1808,18 +1808,18 @@ $LN15@scan_curTo:
 	mov	DWORD PTR _cur_key_ret_val$7[ebp], eax
 	mov	DWORD PTR _cur_key_ret_val$7[ebp+4], edx
 
-; 480  : 		int keyword_tt = cur_key_ret_val.TokenType;
+; 442  : 		int keyword_tt = cur_key_ret_val.TokenType;
 
 	mov	eax, DWORD PTR _cur_key_ret_val$7[ebp]
 	mov	DWORD PTR _keyword_tt$6[ebp], eax
 
-; 481  : 		if (keyword_tt != TT_IDENT)
+; 443  : 		if (keyword_tt != TT_IDENT)
 
 	cmp	DWORD PTR _keyword_tt$6[ebp], 18	; 00000012H
 	je	SHORT $LN16@scan_curTo
 
-; 482  : 		{
-; 483  : 			currentToken = newToken(keyword_tt, 0, Line, NULL);
+; 444  : 		{
+; 445  : 			currentToken = newToken(keyword_tt, 0, Line, NULL);
 
 	push	0
 	mov	eax, DWORD PTR _Line
@@ -1833,14 +1833,14 @@ $LN15@scan_curTo:
 	mov	DWORD PTR _currentToken, eax
 $LN16@scan_curTo:
 
-; 484  : 		}
-; 485  : 		if (keyword_tt == TT_IDENT)
+; 446  : 		}
+; 447  : 		if (keyword_tt == TT_IDENT)
 
 	cmp	DWORD PTR _keyword_tt$6[ebp], 18	; 00000012H
 	jne	SHORT $LN17@scan_curTo
 
-; 486  : 		{
-; 487  : 			currentToken = newToken_identToken(TT_IDENT, Line, cur_key_ret_val.ident_name, 0, NULL);
+; 448  : 		{
+; 449  : 			currentToken = newToken_identToken(TT_IDENT, Line, cur_key_ret_val.ident_name, 0, NULL);
 
 	push	0
 	push	0
@@ -1855,21 +1855,21 @@ $LN16@scan_curTo:
 	mov	DWORD PTR _currentToken, eax
 $LN17@scan_curTo:
 
-; 488  : 		}
-; 489  : 	}
-; 490  : 
-; 491  : 	if (c == '"')
+; 450  : 		}
+; 451  : 	}
+; 452  : 
+; 453  : 	if (c == '"')
 
 	cmp	DWORD PTR _c$[ebp], 34			; 00000022H
 	jne	$LN18@scan_curTo
 
-; 492  : 	{
-; 493  : 		LinkedList* strList = newLinkedList();
+; 454  : 	{
+; 455  : 		LinkedList* strList = newLinkedList();
 
 	call	_newLinkedList
 	mov	DWORD PTR _strList$5[ebp], eax
 
-; 494  : 		createNewString(c, strList);
+; 456  : 		createNewString(c, strList);
 
 	mov	eax, DWORD PTR _strList$5[ebp]
 	push	eax
@@ -1878,7 +1878,7 @@ $LN17@scan_curTo:
 	call	_createNewString
 	add	esp, 8
 
-; 495  : 		char* string_final = createFinalString(strList);
+; 457  : 		char* string_final = createFinalString(strList);
 
 	mov	eax, DWORD PTR _strList$5[ebp]
 	push	eax
@@ -1886,7 +1886,7 @@ $LN17@scan_curTo:
 	add	esp, 4
 	mov	DWORD PTR _string_final$4[ebp], eax
 
-; 496  : 		currentToken = newToken_str(TT_STRING, 0, Line, string_final, new_DATA_STRUCT(string_final, NULL, NULL, NULL, NULL, DT_STRING, 1));
+; 458  : 		currentToken = newToken_str(TT_STRING, 0, Line, string_final, new_DATA_STRUCT(string_final, NULL, NULL, NULL, NULL, DT_STRING, 1));
 
 	push	1
 	push	4
@@ -1911,8 +1911,8 @@ $LN17@scan_curTo:
 	add	esp, 24					; 00000018H
 	mov	DWORD PTR _currentToken, eax
 
-; 497  : 
-; 498  : 		free(strList);
+; 459  : 
+; 460  : 		free(strList);
 
 	mov	esi, esp
 	mov	eax, DWORD PTR _strList$5[ebp]
@@ -1923,14 +1923,14 @@ $LN17@scan_curTo:
 	call	__RTC_CheckEsp
 $LN18@scan_curTo:
 
-; 499  : 	}
-; 500  : 
-; 501  : 	char charT[] = "'";
+; 461  : 	}
+; 462  : 
+; 463  : 	char charT[] = "'";
 
 	mov	ax, WORD PTR ??_C@_01GEODFPGF@?8@
 	mov	WORD PTR _charT$[ebp], ax
 
-; 502  : 	if (c == charT[0])
+; 464  : 	if (c == charT[0])
 
 	mov	eax, 1
 	imul	ecx, eax, 0
@@ -1938,8 +1938,8 @@ $LN18@scan_curTo:
 	cmp	DWORD PTR _c$[ebp], edx
 	jne	SHORT $LN19@scan_curTo
 
-; 503  : 	{
-; 504  : 		char val = scanChars(c);
+; 465  : 	{
+; 466  : 		char val = scanChars(c);
 
 	mov	eax, DWORD PTR _c$[ebp]
 	push	eax
@@ -1947,7 +1947,7 @@ $LN18@scan_curTo:
 	add	esp, 4
 	mov	BYTE PTR _val$3[ebp], al
 
-; 505  : 		char* valPtr = malloc(sizeof(char));
+; 467  : 		char* valPtr = malloc(sizeof(char));
 
 	mov	esi, esp
 	push	1
@@ -1957,13 +1957,13 @@ $LN18@scan_curTo:
 	call	__RTC_CheckEsp
 	mov	DWORD PTR _valPtr$2[ebp], eax
 
-; 506  : 		*valPtr = val;
+; 468  : 		*valPtr = val;
 
 	mov	eax, DWORD PTR _valPtr$2[ebp]
 	mov	cl, BYTE PTR _val$3[ebp]
 	mov	BYTE PTR [eax], cl
 
-; 507  : 		currentToken = newToken_str(TT_CHAR, 0, Line, val, new_DATA_STRUCT(NULL, NULL, NULL, NULL, valPtr, DT_CHAR, 1));
+; 469  : 		currentToken = newToken_str(TT_CHAR, 0, Line, val, new_DATA_STRUCT(NULL, NULL, NULL, NULL, valPtr, DT_CHAR, 1));
 
 	push	1
 	push	3
@@ -1989,8 +1989,8 @@ $LN18@scan_curTo:
 	mov	DWORD PTR _currentToken, eax
 $LN19@scan_curTo:
 
-; 508  : 	}
-; 509  : }
+; 470  : 	}
+; 471  : }
 
 	push	edx
 	mov	ecx, ebp

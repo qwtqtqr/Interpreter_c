@@ -331,40 +331,40 @@ void printToken(int tokenType)
 {
 	switch (tokenType)
 	{
-	case TT_PLUS:              printf("TT_PLUS"); break;
-	case TT_MINUS:             printf("TT_MINUS"); break;
-	case TT_MUL:               printf("TT_MUL"); break;
-	case TT_DIV:               printf("TT_DIV"); break;
-	case TT_POW:               printf("TT_POW"); break;
-	case TT_INT:               printf("TT_INT"); break;
-	case TT_OP_END:            printf("TT_OP_END"); break;
-	case TT_PRINT:             printf("TT_PRINT"); break;
-	case TT_IF:                printf("TT_IF"); break;
-	case TT_LEFT_PAREN:        printf("TT_LEFT_PAREN"); break;
-	case TT_RIGHT_PAREN:       printf("TT_RIGHT_PAREN"); break;
-	case TT_LEFT_CURLY:        printf("TT_LEFT_CURLY"); break;
-	case TT_RIGHT_CURLY:       printf("TT_RIGHT_CURLY"); break;
-	case TT_STRING:            printf("TT_STRING"); break;
-	case TT_WHILE:             printf("TT_WHILE"); break;
-	case TT_CHAR:              printf("TT_CHAR"); break;
-	case TT_FLOAT:             printf("TT_FLOAT"); break;
-	case TT_EOF:               printf("TT_EOF"); break;
-	case TT_IDENT:             printf("TT_IDENT"); break; 
-	case TT_EQUALS:            printf("TT_EQUALS"); break;
-	case TT_VAR:               printf("TT_VAR"); break;
-	case TT_UNDEF:             printf("TT_UNDEF"); break;
-	case TT_EQUALS_CMP:        printf("TT_EQUALS_CMP"); break;
-	case TT_AND:               printf("TT_AND"); break;
-	case TT_OR:                printf("TT_OR"); break;
-	case TT_ANY_OP:            printf("TT_ANY_OP"); break;
-	case TT_GREATER:           printf("TT_GREATER"); break;
-	case TT_SMALLER:           printf("TT_SMALLER"); break;
-	case TT_GREATER_EQUALS:    printf("TT_GREATER_EQUALS"); break;
-	case TT_SMALLER_EQUALS:    printf("TT_SMALLER_EQUALS"); break;
-	case TT_BOOL_TRUE:         printf("TT_BOOL_TRUE"); break;
-	case TT_BOOL_FALSE:        printf("TT_BOOL_FALSE"); break;
-	case TT_SCOPE:             printf("TT_SCOPE"); break;
-	case TT_SCOPE_END:         printf("TT_SCOPE_END"); break;
+	case TT_PLUS:              printf("TT_PLUS\n"); break;
+	case TT_MINUS:             printf("TT_MINUS\n"); break;
+	case TT_MUL:               printf("TT_MUL\n"); break;
+	case TT_DIV:               printf("TT_DIV\n"); break;
+	case TT_POW:               printf("TT_POW\n"); break;
+	case TT_INT:               printf("TT_INT\n"); break;
+	case TT_OP_END:            printf("TT_OP_END\n"); break;
+	case TT_PRINT:             printf("TT_PRINT\n"); break;
+	case TT_IF:                printf("TT_IF\n"); break;
+	case TT_LEFT_PAREN:        printf("TT_LEFT_PAREN\n"); break;
+	case TT_RIGHT_PAREN:       printf("TT_RIGHT_PAREN\n"); break;
+	case TT_LEFT_CURLY:        printf("TT_LEFT_CURLY\n"); break;
+	case TT_RIGHT_CURLY:       printf("TT_RIGHT_CURLY\n"); break;
+	case TT_STRING:            printf("TT_STRING\n"); break;
+	case TT_WHILE:             printf("TT_WHILE\n"); break;
+	case TT_CHAR:              printf("TT_CHAR\n"); break;
+	case TT_FLOAT:             printf("TT_FLOAT\n"); break;
+	case TT_EOF:               printf("TT_EOF\n"); break;
+	case TT_IDENT:             printf("TT_IDENT\n"); break; 
+	case TT_EQUALS:            printf("TT_EQUALS\n"); break;
+	case TT_VAR:               printf("TT_VAR\n"); break;
+	case TT_UNDEF:             printf("TT_UNDEF\n"); break;
+	case TT_EQUALS_CMP:        printf("TT_EQUALS_CMP\n"); break;
+	case TT_AND:               printf("TT_AND\n"); break;
+	case TT_OR:                printf("TT_OR\n"); break;
+	case TT_ANY_OP:            printf("TT_ANY_OP\n"); break;
+	case TT_GREATER:           printf("TT_GREATER\n"); break;
+	case TT_SMALLER:           printf("TT_SMALLER\n"); break;
+	case TT_GREATER_EQUALS:    printf("TT_GREATER_EQUALS\n"); break;
+	case TT_SMALLER_EQUALS:    printf("TT_SMALLER_EQUALS\n"); break;
+	case TT_BOOL_TRUE:         printf("TT_BOOL_TRUE\n"); break;
+	case TT_BOOL_FALSE:        printf("TT_BOOL_FALSE\n"); break;
+	case TT_SCOPE:             printf("TT_SCOPE\n"); break;
+	case TT_SCOPE_END:         printf("TT_SCOPE_END\n"); break;
 	}
 }
 

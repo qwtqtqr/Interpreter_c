@@ -1332,7 +1332,7 @@ _key$ = 20						; size = 4
 _varName$ = 24						; size = 4
 _LinkedList_add_end PROC				; COMDAT
 
-; 63   : void LinkedList_add_end(LinkedList* list, void* data, unsigned long hash, void* key, char* varName) {
+; 63   : node_t* LinkedList_add_end(LinkedList* list, void* data, unsigned long hash, void* key, char* varName) {
 
 	push	ebp
 	mov	ebp, esp
@@ -1347,7 +1347,7 @@ _LinkedList_add_end PROC				; COMDAT
 	mov	ecx, OFFSET __0524722D_list@c
 	call	@__CheckForDebuggerJustMyCode@4
 
-; 64   : 	LinkedList_add(list, -1, data, hash, key, varName);
+; 64   : 	return LinkedList_add(list, -1, data, hash, key, varName);
 
 	mov	eax, DWORD PTR _varName$[ebp]
 	push	eax
@@ -1387,7 +1387,7 @@ _key$ = 20						; size = 4
 _varName$ = 24						; size = 4
 _LinkedList_add_beg PROC				; COMDAT
 
-; 59   : void LinkedList_add_beg(LinkedList* list, void* data, unsigned long hash, void* key, char* varName) {
+; 59   : node_t* LinkedList_add_beg(LinkedList* list, void* data, unsigned long hash, void* key, char* varName) {
 
 	push	ebp
 	mov	ebp, esp
@@ -1402,7 +1402,7 @@ _LinkedList_add_beg PROC				; COMDAT
 	mov	ecx, OFFSET __0524722D_list@c
 	call	@__CheckForDebuggerJustMyCode@4
 
-; 60   : 	LinkedList_add(list, 0, data, hash, key, varName);
+; 60   : 	return LinkedList_add(list, 0, data, hash, key, varName);
 
 	mov	eax, DWORD PTR _varName$[ebp]
 	push	eax
@@ -1447,7 +1447,7 @@ _key$ = 24						; size = 4
 _varName$ = 28						; size = 4
 _LinkedList_add PROC					; COMDAT
 
-; 14   : void LinkedList_add(LinkedList* list, int index, void* data, unsigned long hash, void* key, char* varName) {
+; 14   : node_t* LinkedList_add(LinkedList* list, int index, void* data, unsigned long hash, void* key, char* varName) {
 
 	push	ebp
 	mov	ebp, esp
@@ -1472,17 +1472,17 @@ _LinkedList_add PROC					; COMDAT
 	call	__RTC_CheckEsp
 	mov	DWORD PTR _node$[ebp], eax
 
-; 16   : 	node->data = data;
-
-	mov	eax, DWORD PTR _node$[ebp]
-	mov	ecx, DWORD PTR _data$[ebp]
-	mov	DWORD PTR [eax], ecx
-
-; 17   : 	node->hash = hash;
+; 16   : 	node->hash = hash;
 
 	mov	eax, DWORD PTR _node$[ebp]
 	mov	ecx, DWORD PTR _hash$[ebp]
 	mov	DWORD PTR [eax+16], ecx
+
+; 17   : 	node->data = data;
+
+	mov	eax, DWORD PTR _node$[ebp]
+	mov	ecx, DWORD PTR _data$[ebp]
+	mov	DWORD PTR [eax], ecx
 
 ; 18   : 	node->key = key;
 
@@ -1539,8 +1539,10 @@ _LinkedList_add PROC					; COMDAT
 	mov	edx, DWORD PTR _list$[ebp]
 	mov	DWORD PTR [edx+8], ecx
 
-; 29   : 		return;
+; 29   : 		return list->tail;
 
+	mov	eax, DWORD PTR _list$[ebp]
+	mov	eax, DWORD PTR [eax+4]
 	jmp	$LN1@LinkedList
 $LN4@LinkedList:
 
@@ -1624,8 +1626,10 @@ $LN3@LinkedList:
 	mov	edx, DWORD PTR _list$[ebp]
 	mov	DWORD PTR [edx+8], ecx
 
-; 47   : 		return;
+; 47   : 		return list->head;
 
+	mov	eax, DWORD PTR _list$[ebp]
+	mov	eax, DWORD PTR [eax]
 	jmp	SHORT $LN1@LinkedList
 $LN5@LinkedList:
 
@@ -1661,9 +1665,13 @@ $LN5@LinkedList:
 	add	ecx, 1
 	mov	edx, DWORD PTR _list$[ebp]
 	mov	DWORD PTR [edx+8], ecx
+
+; 55   : 		return list->tail;
+
+	mov	eax, DWORD PTR _list$[ebp]
+	mov	eax, DWORD PTR [eax+4]
 $LN1@LinkedList:
 
-; 55   : 		return;
 ; 56   : 	}
 ; 57   : }
 

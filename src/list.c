@@ -11,10 +11,10 @@ LinkedList* newLinkedList() {
 	return initList;
 }
 
-void LinkedList_add(LinkedList* list, int index, void* data, unsigned long hash, void* key, char* varName) {
+node_t* LinkedList_add(LinkedList* list, int index, void* data, unsigned long hash, void* key, char* varName) {
 	node_t* node = malloc(sizeof(node_t));
-	node->data = data;
 	node->hash = hash;
+	node->data = data;
 	node->key = key;
 	node->varName = varName;
 	node->next = NULL;
@@ -26,7 +26,7 @@ void LinkedList_add(LinkedList* list, int index, void* data, unsigned long hash,
 		list->head = node;
 		list->tail = node;
 		list->size++;
-		return;
+		return list->tail;
 	}
 	int idx = 0;
 	node_t* prev = NULL;
@@ -44,7 +44,7 @@ void LinkedList_add(LinkedList* list, int index, void* data, unsigned long hash,
 		cur->last = node;
 		node->next = cur;
 		list->size++;
-		return;
+		return list->head;
 	}
 	if (cur == NULL)
 	{
@@ -52,16 +52,16 @@ void LinkedList_add(LinkedList* list, int index, void* data, unsigned long hash,
 		prev->next = node;
 		list->tail = node;
 		list->size++;
-		return;
+		return list->tail;
 	}
 }
 
-void LinkedList_add_beg(LinkedList* list, void* data, unsigned long hash, void* key, char* varName) {
-	LinkedList_add(list, 0, data, hash, key, varName);
+node_t* LinkedList_add_beg(LinkedList* list, void* data, unsigned long hash, void* key, char* varName) {
+	return LinkedList_add(list, 0, data, hash, key, varName);
 }
 
-void LinkedList_add_end(LinkedList* list, void* data, unsigned long hash, void* key, char* varName) {
-	LinkedList_add(list, -1, data, hash, key, varName);
+node_t* LinkedList_add_end(LinkedList* list, void* data, unsigned long hash, void* key, char* varName) {
+	return LinkedList_add(list, -1, data, hash, key, varName);
 }
 
 int LinkedList_size(LinkedList* list) {

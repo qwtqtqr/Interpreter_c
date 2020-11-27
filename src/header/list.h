@@ -21,9 +21,9 @@ typedef struct LinkedList {
 }LinkedList;
 
 LinkedList* newLinkedList();
-void LinkedList_add(LinkedList* list, int index, void* data, unsigned long hash, void* key, char* varName);
-void LinkedList_add_beg(LinkedList* list, void* data, unsigned long hash, void* key, char* varName);
-void LinkedList_add_end(LinkedList* list, void* data, unsigned long hash, void* key, char* varName);
+node_t* LinkedList_add(LinkedList* list, int index, void* data, unsigned long hash, void* key, char* varName);
+node_t* LinkedList_add_beg(LinkedList* list, void* data, unsigned long hash, void* key, char* varName);
+node_t* LinkedList_add_end(LinkedList* list, void* data, unsigned long hash, void* key, char* varName);
 int LinkedList_size(LinkedList* list);
 void* LinkedList_getItem(LinkedList* list, int index);
 void LinkedList_clear(LinkedList* list);

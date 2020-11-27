@@ -62,7 +62,7 @@ PUBLIC	_interpretAST_int
 PUBLIC	_interpretMainAST
 PUBLIC	__JustMyCode_Default
 PUBLIC	??_C@_0BK@OIGNKPAC@?$FLERROR?$FN?5invalid?5datatype?6@ ; `string'
-PUBLIC	??_C@_0DE@GBCHEBMG@?$FLERROR?$FN?5variable?5does?5not?5exist@ ; `string'
+PUBLIC	??_C@_0DJ@JHPPHMML@?$FLERROR?$FN?5variable?5?8?$CFs?8?5does?5not?5@ ; `string'
 PUBLIC	??_C@_05IBFPJDFI@?$CFlld?6@			; `string'
 PUBLIC	??_C@_04FHILBAAL@?$CFLf?6@			; `string'
 PUBLIC	??_C@_06NIOGPBNO@false?6@			; `string'
@@ -135,10 +135,11 @@ CONST	ENDS
 CONST	SEGMENT
 ??_C@_05IBFPJDFI@?$CFlld?6@ DB '%lld', 0aH, 00H		; `string'
 CONST	ENDS
-;	COMDAT ??_C@_0DE@GBCHEBMG@?$FLERROR?$FN?5variable?5does?5not?5exist@
+;	COMDAT ??_C@_0DJ@JHPPHMML@?$FLERROR?$FN?5variable?5?8?$CFs?8?5does?5not?5@
 CONST	SEGMENT
-??_C@_0DE@GBCHEBMG@?$FLERROR?$FN?5variable?5does?5not?5exist@ DB '[ERROR]'
-	DB	' variable does not exist or is out of scope', 0aH, 00H ; `string'
+??_C@_0DJ@JHPPHMML@?$FLERROR?$FN?5variable?5?8?$CFs?8?5does?5not?5@ DB '['
+	DB	'ERROR] variable ''%s'' does not exist or is out of scope', 0aH
+	DB	00H						; `string'
 CONST	ENDS
 ;	COMDAT ??_C@_0BK@OIGNKPAC@?$FLERROR?$FN?5invalid?5datatype?6@
 CONST	SEGMENT
@@ -3591,15 +3592,18 @@ _TEXT	ENDS
 ; File C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c
 ;	COMDAT _interpretMainAST
 _TEXT	SEGMENT
-tv310 = -304						; size = 4
-tv84 = -304						; size = 4
-_cmp_expr_dt$1 = -104					; size = 4
-_cmp_expr$2 = -92					; size = 4
-_curID$3 = -80						; size = 4
-_saveVarName$4 = -68					; size = 4
-_curNodeData$5 = -56					; size = 4
-_struct_dt$6 = -44					; size = 4
-_printVal_struct$7 = -32				; size = 4
+tv319 = -340						; size = 4
+tv84 = -340						; size = 4
+_cmp_expr_dt$1 = -140					; size = 4
+_cmp_expr$2 = -128					; size = 4
+_curID$3 = -116						; size = 4
+_curID$4 = -104						; size = 4
+_node$5 = -92						; size = 4
+_id_token$6 = -80					; size = 4
+_saveVarName$7 = -68					; size = 4
+_curNodeData$8 = -56					; size = 4
+_struct_dt$9 = -44					; size = 4
+_printVal_struct$10 = -32				; size = 4
 _in_new_scope$ = -20					; size = 4
 _curNode$ = -8						; size = 4
 _root$ = 8						; size = 4
@@ -3609,12 +3613,12 @@ _interpretMainAST PROC					; COMDAT
 
 	push	ebp
 	mov	ebp, esp
-	sub	esp, 304				; 00000130H
+	sub	esp, 340				; 00000154H
 	push	ebx
 	push	esi
 	push	edi
-	lea	edi, DWORD PTR [ebp-304]
-	mov	ecx, 76					; 0000004cH
+	lea	edi, DWORD PTR [ebp-340]
+	mov	ecx, 85					; 00000055H
 	mov	eax, -858993460				; ccccccccH
 	rep stosd
 	mov	ecx, OFFSET __36662879_interpretAST@c
@@ -3650,23 +3654,23 @@ $LN2@interpretM:
 	push	ecx
 	call	_interpretAST_int
 	add	esp, 4
-	mov	DWORD PTR _printVal_struct$7[ebp], eax
+	mov	DWORD PTR _printVal_struct$10[ebp], eax
 
 ; 279  : 			int struct_dt = printVal_struct->dataType;
 
-	mov	eax, DWORD PTR _printVal_struct$7[ebp]
+	mov	eax, DWORD PTR _printVal_struct$10[ebp]
 	mov	ecx, DWORD PTR [eax+20]
-	mov	DWORD PTR _struct_dt$6[ebp], ecx
+	mov	DWORD PTR _struct_dt$9[ebp], ecx
 
 ; 280  : 			if (struct_dt == DT_INT)
 
-	cmp	DWORD PTR _struct_dt$6[ebp], 0
+	cmp	DWORD PTR _struct_dt$9[ebp], 0
 	jne	SHORT $LN8@interpretM
 
 ; 281  : 			{
 ; 282  : 				printf("%lld\n", *(printVal_struct->intVal));
 
-	mov	eax, DWORD PTR _printVal_struct$7[ebp]
+	mov	eax, DWORD PTR _printVal_struct$10[ebp]
 	mov	ecx, DWORD PTR [eax+12]
 	mov	edx, DWORD PTR [ecx+4]
 	push	edx
@@ -3683,13 +3687,13 @@ $LN8@interpretM:
 
 ; 284  : 			else if (struct_dt == DT_FLOAT)
 
-	cmp	DWORD PTR _struct_dt$6[ebp], 2
+	cmp	DWORD PTR _struct_dt$9[ebp], 2
 	jne	SHORT $LN10@interpretM
 
 ; 285  : 			{
 ; 286  : 				printf("%Lf\n", *(printVal_struct->doubleVal));
 
-	mov	eax, DWORD PTR _printVal_struct$7[ebp]
+	mov	eax, DWORD PTR _printVal_struct$10[ebp]
 	mov	ecx, DWORD PTR [eax+8]
 	sub	esp, 8
 	movsd	xmm0, QWORD PTR [ecx]
@@ -3706,13 +3710,13 @@ $LN10@interpretM:
 ; 288  : 
 ; 289  : 			else if (struct_dt == DT_BOOL)
 
-	cmp	DWORD PTR _struct_dt$6[ebp], 5
+	cmp	DWORD PTR _struct_dt$9[ebp], 5
 	jne	SHORT $LN4@interpretM
 
 ; 290  : 			{
 ; 291  : 				switch (*(printVal_struct->boolVal))
 
-	mov	eax, DWORD PTR _printVal_struct$7[ebp]
+	mov	eax, DWORD PTR _printVal_struct$10[ebp]
 	mov	ecx, DWORD PTR [eax+4]
 	mov	edx, DWORD PTR [ecx]
 	mov	DWORD PTR tv84[ebp], edx
@@ -3758,7 +3762,7 @@ $LN6@interpretM:
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax+28]
-	mov	DWORD PTR _curNodeData$5[ebp], ecx
+	mov	DWORD PTR _curNodeData$8[ebp], ecx
 
 ; 302  : 			char* saveVarName = calloc(strlen(curNode->varName), sizeof(char));
 
@@ -3774,22 +3778,22 @@ $LN6@interpretM:
 	add	esp, 8
 	cmp	esi, esp
 	call	__RTC_CheckEsp
-	mov	DWORD PTR _saveVarName$4[ebp], eax
+	mov	DWORD PTR _saveVarName$7[ebp], eax
 
 ; 303  : 			saveVarName = strcpy(saveVarName, curNode->varName);
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax+32]
 	push	ecx
-	mov	edx, DWORD PTR _saveVarName$4[ebp]
+	mov	edx, DWORD PTR _saveVarName$7[ebp]
 	push	edx
 	call	_strcpy
 	add	esp, 8
-	mov	DWORD PTR _saveVarName$4[ebp], eax
+	mov	DWORD PTR _saveVarName$7[ebp], eax
 
 ; 304  : 			stackFrame_add_var(saveVarName);
 
-	mov	eax, DWORD PTR _saveVarName$4[ebp]
+	mov	eax, DWORD PTR _saveVarName$7[ebp]
 	push	eax
 	call	_stackFrame_add_var
 	add	esp, 4
@@ -3797,7 +3801,7 @@ $LN6@interpretM:
 ; 305  : 
 ; 306  : 			if (curNodeData->init == 0)
 
-	mov	eax, DWORD PTR _curNodeData$5[ebp]
+	mov	eax, DWORD PTR _curNodeData$8[ebp]
 	cmp	DWORD PTR [eax+8], 0
 	jne	SHORT $LN17@interpretM
 
@@ -3816,7 +3820,7 @@ $LN6@interpretM:
 	add	esp, 32					; 00000020H
 	push	eax
 	push	1
-	mov	eax, DWORD PTR _saveVarName$4[ebp]
+	mov	eax, DWORD PTR _saveVarName$7[ebp]
 	push	eax
 	push	0
 	push	0
@@ -3825,7 +3829,7 @@ $LN6@interpretM:
 	call	_newID_token
 	add	esp, 28					; 0000001cH
 	push	eax
-	mov	ecx, DWORD PTR _saveVarName$4[ebp]
+	mov	ecx, DWORD PTR _saveVarName$7[ebp]
 	push	ecx
 	call	_symtable_add
 	add	esp, 8
@@ -3834,78 +3838,98 @@ $LN17@interpretM:
 ; 309  : 			}
 ; 310  : 			if (curNodeData->init == 1)
 
-	mov	eax, DWORD PTR _curNodeData$5[ebp]
+	mov	eax, DWORD PTR _curNodeData$8[ebp]
 	cmp	DWORD PTR [eax+8], 1
 	jne	$LN21@interpretM
 
 ; 311  : 			{
 ; 312  : 				if (curNodeData->var == 1)
 
-	mov	eax, DWORD PTR _curNodeData$5[ebp]
+	mov	eax, DWORD PTR _curNodeData$8[ebp]
 	cmp	DWORD PTR [eax+24], 1
 	jne	SHORT $LN19@interpretM
 
 ; 313  : 				{
-; 314  : 					symtable_add(saveVarName, newID_token(DT_INT, 1, 0, saveVarName, 1, interpretAST_int(curNode->left)));
+; 314  : 					// fix bug  (symtable)
+; 315  : 					struct IDENT_tokenData* id_token = newID_token(DT_INT, 1, 0, saveVarName, 1, NULL);
 
-	mov	eax, DWORD PTR _curNode$[ebp]
-	mov	ecx, DWORD PTR [eax+20]
-	push	ecx
-	call	_interpretAST_int
-	add	esp, 4
-	push	eax
+	push	0
 	push	1
-	mov	edx, DWORD PTR _saveVarName$4[ebp]
-	push	edx
+	mov	eax, DWORD PTR _saveVarName$7[ebp]
+	push	eax
 	push	0
 	push	0
 	push	1
 	push	0
 	call	_newID_token
 	add	esp, 28					; 0000001cH
+	mov	DWORD PTR _id_token$6[ebp], eax
+
+; 316  : 					node_t* node = symtable_add(saveVarName, id_token);
+
+	mov	eax, DWORD PTR _id_token$6[ebp]
 	push	eax
-	mov	eax, DWORD PTR _saveVarName$4[ebp]
-	push	eax
+	mov	ecx, DWORD PTR _saveVarName$7[ebp]
+	push	ecx
 	call	_symtable_add
 	add	esp, 8
+	mov	DWORD PTR _node$5[ebp], eax
 
-; 315  : 				}
+; 317  : 					struct IDENT_tokenData* curID = symtable_getItem(saveVarName);
+
+	mov	eax, DWORD PTR _saveVarName$7[ebp]
+	push	eax
+	call	_symtable_getItem
+	add	esp, 4
+	mov	DWORD PTR _curID$4[ebp], eax
+
+; 318  : 					curID->data = interpretAST_int(curNode->left);
+
+	mov	eax, DWORD PTR _curNode$[ebp]
+	mov	ecx, DWORD PTR [eax+20]
+	push	ecx
+	call	_interpretAST_int
+	add	esp, 4
+	mov	edx, DWORD PTR _curID$4[ebp]
+	mov	DWORD PTR [edx+28], eax
+
+; 319  : 				}
 
 	jmp	SHORT $LN21@interpretM
 $LN19@interpretM:
 
-; 316  : 				else if (curNodeData->var == 0)
+; 320  : 				else if (curNodeData->var == 0)
 
-	mov	eax, DWORD PTR _curNodeData$5[ebp]
+	mov	eax, DWORD PTR _curNodeData$8[ebp]
 	cmp	DWORD PTR [eax+24], 0
 	jne	SHORT $LN21@interpretM
 
-; 317  : 				{
-; 318  : 					struct IDENT_tokenData* curID = symtable_getItem(curNodeData->varName);
+; 321  : 				{
+; 322  : 					struct IDENT_tokenData* curID = symtable_getItem(curNodeData->varName);
 
-	mov	eax, DWORD PTR _curNodeData$5[ebp]
+	mov	eax, DWORD PTR _curNodeData$8[ebp]
 	mov	ecx, DWORD PTR [eax]
 	push	ecx
 	call	_symtable_getItem
 	add	esp, 4
 	mov	DWORD PTR _curID$3[ebp], eax
 
-; 319  : 					if (curID == NULL)
+; 323  : 					if (curID == NULL)
 
 	cmp	DWORD PTR _curID$3[ebp], 0
 	jne	SHORT $LN22@interpretM
 
-; 320  : 					{
-; 321  : 						printf("[SYNTAX ERROR] variable '%s' has not been initialized\n", curNodeData->varName);
+; 324  : 					{
+; 325  : 						printf("[SYNTAX ERROR] variable '%s' has not been initialized\n", curNodeData->varName);
 
-	mov	eax, DWORD PTR _curNodeData$5[ebp]
+	mov	eax, DWORD PTR _curNodeData$8[ebp]
 	mov	ecx, DWORD PTR [eax]
 	push	ecx
 	push	OFFSET ??_C@_0DH@FNIBEMKD@?$FLSYNTAX?5ERROR?$FN?5variable?5?8?$CFs?8?5ha@
 	call	_printf
 	add	esp, 8
 
-; 322  : 						exit(1);
+; 326  : 						exit(1);
 
 	mov	esi, esp
 	push	1
@@ -3914,8 +3938,8 @@ $LN19@interpretM:
 	call	__RTC_CheckEsp
 $LN22@interpretM:
 
-; 323  : 					}
-; 324  : 					curID->data = interpretAST_int(curNode->left);
+; 327  : 					}
+; 328  : 					curID->data = interpretAST_int(curNode->left);
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax+20]
@@ -3926,34 +3950,34 @@ $LN22@interpretM:
 	mov	DWORD PTR [edx+28], eax
 $LN21@interpretM:
 
-; 325  : 				}
-; 326  : 			}
-; 327  : 
-; 328  : 			free(curNodeData);
+; 329  : 				}
+; 330  : 			}
+; 331  : 
+; 332  : 			free(curNodeData);
 
 	mov	esi, esp
-	mov	eax, DWORD PTR _curNodeData$5[ebp]
+	mov	eax, DWORD PTR _curNodeData$8[ebp]
 	push	eax
 	call	DWORD PTR __imp__free
 	add	esp, 4
 	cmp	esi, esp
 	call	__RTC_CheckEsp
 
-; 329  : 		}
+; 333  : 		}
 
 	jmp	$LN37@interpretM
 $LN15@interpretM:
 
-; 330  : 
-; 331  : 		// todo: free ident_node
-; 332  : 		else if (curNode->tokenType == TT_UNDEF)
+; 334  : 
+; 335  : 		// todo: free ident_node
+; 336  : 		else if (curNode->tokenType == TT_UNDEF)
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	cmp	DWORD PTR [eax+16], 21			; 00000015H
 	jne	SHORT $LN23@interpretM
 
-; 333  : 		{
-; 334  : 			symtable_removeItem(curNode->left->varName);
+; 337  : 		{
+; 338  : 			symtable_removeItem(curNode->left->varName);
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax+20]
@@ -3962,21 +3986,21 @@ $LN15@interpretM:
 	call	_symtable_removeItem
 	add	esp, 4
 
-; 335  : 		}
+; 339  : 		}
 
 	jmp	$LN37@interpretM
 $LN23@interpretM:
 
-; 336  : 
-; 337  : 
-; 338  : 		else if (curNode->tokenType == TT_IF)
+; 340  : 
+; 341  : 
+; 342  : 		else if (curNode->tokenType == TT_IF)
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	cmp	DWORD PTR [eax+16], 8
 	jne	$LN25@interpretM
 
-; 339  : 		{
-; 340  : 		    struct DATA_STRUCT* cmp_expr = interpretAST_int(curNode->left->left);
+; 343  : 		{
+; 344  : 		    struct DATA_STRUCT* cmp_expr = interpretAST_int(curNode->left->left);
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax+20]
@@ -3986,31 +4010,31 @@ $LN23@interpretM:
 	add	esp, 4
 	mov	DWORD PTR _cmp_expr$2[ebp], eax
 
-; 341  : 			int cmp_expr_dt = cmp_expr->dataType;
+; 345  : 			int cmp_expr_dt = cmp_expr->dataType;
 
 	mov	eax, DWORD PTR _cmp_expr$2[ebp]
 	mov	ecx, DWORD PTR [eax+20]
 	mov	DWORD PTR _cmp_expr_dt$1[ebp], ecx
 
-; 342  : 			if (cmp_expr_dt == DT_INT)
+; 346  : 			if (cmp_expr_dt == DT_INT)
 
 	cmp	DWORD PTR _cmp_expr_dt$1[ebp], 0
 	jne	SHORT $LN27@interpretM
 
-; 343  : 			{
-; 344  : 				if (*(cmp_expr->intVal) != 0)
+; 347  : 			{
+; 348  : 				if (*(cmp_expr->intVal) != 0)
 
 	mov	eax, DWORD PTR _cmp_expr$2[ebp]
 	mov	ecx, DWORD PTR [eax+12]
-	mov	DWORD PTR tv310[ebp], ecx
-	mov	edx, DWORD PTR tv310[ebp]
-	mov	eax, DWORD PTR tv310[ebp]
+	mov	DWORD PTR tv319[ebp], ecx
+	mov	edx, DWORD PTR tv319[ebp]
+	mov	eax, DWORD PTR tv319[ebp]
 	mov	ecx, DWORD PTR [edx]
 	or	ecx, DWORD PTR [eax+4]
 	je	SHORT $LN29@interpretM
 
-; 345  : 				{
-; 346  : 					interpretMainAST(curNode->left->right);
+; 349  : 				{
+; 350  : 					interpretMainAST(curNode->left->right);
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax+20]
@@ -4020,20 +4044,20 @@ $LN23@interpretM:
 	add	esp, 4
 $LN29@interpretM:
 
-; 347  : 				}
-; 348  : 			}
+; 351  : 				}
+; 352  : 			}
 
 	jmp	SHORT $LN34@interpretM
 $LN27@interpretM:
 
-; 349  : 
-; 350  : 			else if (cmp_expr_dt == DT_FLOAT)
+; 353  : 
+; 354  : 			else if (cmp_expr_dt == DT_FLOAT)
 
 	cmp	DWORD PTR _cmp_expr_dt$1[ebp], 2
 	jne	SHORT $LN30@interpretM
 
-; 351  : 			{
-; 352  : 				if (*(cmp_expr->doubleVal) != 1)
+; 355  : 			{
+; 356  : 				if (*(cmp_expr->doubleVal) != 1)
 
 	mov	eax, DWORD PTR _cmp_expr$2[ebp]
 	mov	ecx, DWORD PTR [eax+8]
@@ -4043,8 +4067,8 @@ $LN27@interpretM:
 	test	ah, 68					; 00000044H
 	jnp	SHORT $LN32@interpretM
 
-; 353  : 				{
-; 354  : 					interpretMainAST(curNode->left->right);
+; 357  : 				{
+; 358  : 					interpretMainAST(curNode->left->right);
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax+20]
@@ -4054,28 +4078,28 @@ $LN27@interpretM:
 	add	esp, 4
 $LN32@interpretM:
 
-; 355  : 				}
-; 356  : 			}
+; 359  : 				}
+; 360  : 	        }
 
 	jmp	SHORT $LN34@interpretM
 $LN30@interpretM:
 
-; 357  : 
-; 358  : 			else if (cmp_expr_dt == DT_BOOL)
+; 361  : 
+; 362  : 			else if (cmp_expr_dt == DT_BOOL)
 
 	cmp	DWORD PTR _cmp_expr_dt$1[ebp], 5
 	jne	SHORT $LN34@interpretM
 
-; 359  : 			{
-; 360  : 				if (*(cmp_expr->boolVal) != 0)
+; 363  : 			{
+; 364  : 				if (*(cmp_expr->boolVal) != 0)
 
 	mov	eax, DWORD PTR _cmp_expr$2[ebp]
 	mov	ecx, DWORD PTR [eax+4]
 	cmp	DWORD PTR [ecx], 0
 	je	SHORT $LN34@interpretM
 
-; 361  : 				{
-; 362  : 					interpretMainAST(curNode->left->right);
+; 365  : 				{
+; 366  : 					interpretMainAST(curNode->left->right);
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax+20]
@@ -4085,27 +4109,27 @@ $LN30@interpretM:
 	add	esp, 4
 $LN34@interpretM:
 
-; 363  : 				}
-; 364  : 			}
-; 365  : 		}
+; 367  : 				}
+; 368  : 			}
+; 369  : 		}
 
 	jmp	SHORT $LN37@interpretM
 $LN25@interpretM:
 
-; 366  : 
-; 367  : 
-; 368  : 		else if (curNode->tokenType == TT_SCOPE)
+; 370  : 
+; 371  : 
+; 372  : 		else if (curNode->tokenType == TT_SCOPE)
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	cmp	DWORD PTR [eax+16], 33			; 00000021H
 	jne	SHORT $LN35@interpretM
 
-; 369  : 		{
-; 370  : 			varStack_push_frame();
+; 373  : 		{
+; 374  : 			varStack_push_frame();
 
 	call	_varStack_push_frame
 
-; 371  : 			interpretMainAST(curNode->left);
+; 375  : 			interpretMainAST(curNode->left);
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax+20]
@@ -4113,44 +4137,44 @@ $LN25@interpretM:
 	call	_interpretMainAST
 	add	esp, 4
 
-; 372  : 		}
+; 376  : 		}
 
 	jmp	SHORT $LN37@interpretM
 $LN35@interpretM:
 
-; 373  : 
-; 374  : 		else if (curNode->tokenType == TT_SCOPE_END)
+; 377  : 
+; 378  : 		else if (curNode->tokenType == TT_SCOPE_END)
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	cmp	DWORD PTR [eax+16], 34			; 00000022H
 	jne	SHORT $LN37@interpretM
 
-; 375  : 		{
-; 376  : 			varStack_pop_frame();
+; 379  : 		{
+; 380  : 			varStack_pop_frame();
 
 	call	_varStack_pop_frame
 $LN37@interpretM:
 
-; 377  : 		}
-; 378  : 
-; 379  : 
-; 380  : 		curNode = curNode->right;
+; 381  : 		}
+; 382  : 
+; 383  : 
+; 384  : 		curNode = curNode->right;
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax+24]
 	mov	DWORD PTR _curNode$[ebp], ecx
 
-; 381  : 	}
+; 385  : 	}
 
 	jmp	$LN2@interpretM
 $LN3@interpretM:
 
-; 382  : }
+; 386  : }
 
 	pop	edi
 	pop	esi
 	pop	ebx
-	add	esp, 304				; 00000130H
+	add	esp, 340				; 00000154H
 	cmp	ebp, esp
 	call	__RTC_CheckEsp
 	mov	esp, ebp
@@ -4444,11 +4468,14 @@ $LN17@interpretA:
 	jne	SHORT $LN18@interpretA
 
 ; 227  : 		{
-; 228  : 			printf("[ERROR] variable does not exist or is out of scope\n");
+; 228  : 			printf("[ERROR] variable '%s' does not exist or is out of scope\n", root->varName);
 
-	push	OFFSET ??_C@_0DE@GBCHEBMG@?$FLERROR?$FN?5variable?5does?5not?5exist@
+	mov	eax, DWORD PTR _root$[ebp]
+	mov	ecx, DWORD PTR [eax+32]
+	push	ecx
+	push	OFFSET ??_C@_0DJ@JHPPHMML@?$FLERROR?$FN?5variable?5?8?$CFs?8?5does?5not?5@
 	call	_printf
-	add	esp, 4
+	add	esp, 8
 
 ; 229  : 			exit(1);
 
@@ -4728,7 +4755,6 @@ $LN2@interpretA:
 	mov	esp, ebp
 	pop	ebp
 	ret	0
-	npad	3
 $LN35@interpretA:
 	DD	$LN8@interpretA
 	DD	$LN9@interpretA

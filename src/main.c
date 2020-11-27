@@ -10,7 +10,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning(disable:4996)
 
-
 int Line = 1;
 int Putback = 0;
 struct Token* currentToken = NULL;
@@ -49,7 +48,6 @@ int main(int argc, char* argv[])
 		struct AST_Node* ast_root = genMainAST(0, SCOPE_MODE_DEFAULT);
 		varStack_push_frame();  // globl frame
 		interpretMainAST(ast_root);
-
 #if 0
 		struct AST_Node* curNode = ast_root;
 		printf("\n\n\ncurNode:  %d\n", curNode->tokenType);

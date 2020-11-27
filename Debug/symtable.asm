@@ -62,7 +62,6 @@ PUBLIC	_symtable_removeItem__test
 PUBLIC	_getBucketVal
 PUBLIC	_symtable_setItemVal
 PUBLIC	__JustMyCode_Default
-EXTRN	__imp__free:PROC
 EXTRN	__imp__malloc:PROC
 EXTRN	_newLinkedList:PROC
 EXTRN	_LinkedList_add_end:PROC
@@ -564,8 +563,12 @@ $LN2@symtable_r:
 	jne	SHORT $LN5@symtable_r
 
 ; 158  :         {
-; 159  :            // free(curNode_head->data);
-; 160  :             LinkedList_remove(globl_symtable[bucket], cur_idx);
+; 159  :             if (curNode_head->data != NULL)
+; 160  :             {
+; 161  :                 //free(curNode_head->data);
+; 162  :                 //curNode_head->data = NULL;
+; 163  :             }
+; 164  :             LinkedList_remove(globl_symtable[bucket], cur_idx);
 
 	mov	eax, DWORD PTR _cur_idx$[ebp]
 	push	eax
@@ -575,37 +578,37 @@ $LN2@symtable_r:
 	call	_LinkedList_remove
 	add	esp, 8
 
-; 161  :             return 0;
+; 165  :             return 0;
 
 	xor	eax, eax
 	jmp	SHORT $LN1@symtable_r
 $LN5@symtable_r:
 
-; 162  :         }
-; 163  :        
-; 164  :         cur_idx++;
+; 166  :         }
+; 167  :        
+; 168  :         cur_idx++;
 
 	mov	eax, DWORD PTR _cur_idx$[ebp]
 	add	eax, 1
 	mov	DWORD PTR _cur_idx$[ebp], eax
 
-; 165  :         curNode_head = curNode_head->next;
+; 169  :         curNode_head = curNode_head->next;
 
 	mov	eax, DWORD PTR _curNode_head$[ebp]
 	mov	ecx, DWORD PTR [eax+4]
 	mov	DWORD PTR _curNode_head$[ebp], ecx
 
-; 166  :     }
+; 170  :     }
 
 	jmp	SHORT $LN2@symtable_r
 $LN3@symtable_r:
 
-; 167  :     return -1;
+; 171  :     return -1;
 
 	or	eax, -1
 $LN1@symtable_r:
 
-; 168  : }
+; 172  : }
 
 	pop	edi
 	pop	esi
@@ -740,17 +743,7 @@ $LN2@symtable_r:
 	jne	SHORT $LN5@symtable_r
 
 ; 122  :         {
-; 123  :             free(curNode_head->data);
-
-	mov	esi, esp
-	mov	eax, DWORD PTR _curNode_head$[ebp]
-	mov	ecx, DWORD PTR [eax]
-	push	ecx
-	call	DWORD PTR __imp__free
-	add	esp, 4
-	cmp	esi, esp
-	call	__RTC_CheckEsp
-
+; 123  :            // free(curNode_head->data);
 ; 124  :             LinkedList_remove(globl_symtable[bucket], curIndex_head);
 
 	mov	eax, DWORD PTR _curIndex_head$[ebp]
@@ -786,17 +779,7 @@ $LN5@symtable_r:
 	jne	SHORT $LN6@symtable_r
 
 ; 129  :         {
-; 130  :             free(curNode_tail->data);
-
-	mov	esi, esp
-	mov	eax, DWORD PTR _curNode_tail$[ebp]
-	mov	ecx, DWORD PTR [eax]
-	push	ecx
-	call	DWORD PTR __imp__free
-	add	esp, 4
-	cmp	esi, esp
-	call	__RTC_CheckEsp
-
+; 130  :             //free(curNode_tail->data);
 ; 131  :             LinkedList_remove(globl_symtable[bucket], curIndex_tail);
 
 	mov	eax, DWORD PTR _curIndex_tail$[ebp]
@@ -874,7 +857,7 @@ _var$ = 28						; size = 4
 _data$ = 32						; size = 4
 _newID_token PROC					; COMDAT
 
-; 175  : {
+; 179  : {
 
 	push	ebp
 	mov	ebp, esp
@@ -889,7 +872,7 @@ _newID_token PROC					; COMDAT
 	mov	ecx, OFFSET __B4C58C4E_symtable@c
 	call	@__CheckForDebuggerJustMyCode@4
 
-; 176  :     struct IDENT_tokenData* initID = malloc(sizeof(struct IDENT_tokenData));
+; 180  :     struct IDENT_tokenData* initID = malloc(sizeof(struct IDENT_tokenData));
 
 	mov	esi, esp
 	push	32					; 00000020H
@@ -899,19 +882,19 @@ _newID_token PROC					; COMDAT
 	call	__RTC_CheckEsp
 	mov	DWORD PTR _initID$[ebp], eax
 
-; 177  :     initID->dataType = dataType;
+; 181  :     initID->dataType = dataType;
 
 	mov	eax, DWORD PTR _initID$[ebp]
 	mov	ecx, DWORD PTR _dataType$[ebp]
 	mov	DWORD PTR [eax+4], ecx
 
-; 178  :     initID->init = init;
+; 182  :     initID->init = init;
 
 	mov	eax, DWORD PTR _initID$[ebp]
 	mov	ecx, DWORD PTR _init$[ebp]
 	mov	DWORD PTR [eax+8], ecx
 
-; 179  :     initID->value = value;
+; 183  :     initID->value = value;
 
 	mov	eax, DWORD PTR _initID$[ebp]
 	mov	ecx, DWORD PTR _value$[ebp]
@@ -919,29 +902,29 @@ _newID_token PROC					; COMDAT
 	mov	edx, DWORD PTR _value$[ebp+4]
 	mov	DWORD PTR [eax+20], edx
 
-; 180  :     initID->varName = varName;
+; 184  :     initID->varName = varName;
 
 	mov	eax, DWORD PTR _initID$[ebp]
 	mov	ecx, DWORD PTR _varName$[ebp]
 	mov	DWORD PTR [eax], ecx
 
-; 181  :     initID->var = var;
+; 185  :     initID->var = var;
 
 	mov	eax, DWORD PTR _initID$[ebp]
 	mov	ecx, DWORD PTR _var$[ebp]
 	mov	DWORD PTR [eax+24], ecx
 
-; 182  :     initID->data = data;
+; 186  :     initID->data = data;
 
 	mov	eax, DWORD PTR _initID$[ebp]
 	mov	ecx, DWORD PTR _data$[ebp]
 	mov	DWORD PTR [eax+28], ecx
 
-; 183  :     return initID;
+; 187  :     return initID;
 
 	mov	eax, DWORD PTR _initID$[ebp]
 
-; 184  : }
+; 188  : }
 
 	pop	edi
 	pop	esi
@@ -1187,7 +1170,7 @@ _symtable_add PROC					; COMDAT
 $LN2@symtable_a:
 
 ; 36   :     }
-; 37   :     LinkedList_add_end(globl_symtable[bucket], data, 0, NULL, varName);
+; 37   :     return LinkedList_add_end(globl_symtable[bucket], data, 0, NULL, varName);
 
 	mov	eax, DWORD PTR _varName$[ebp]
 	push	eax

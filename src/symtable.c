@@ -25,7 +25,7 @@ unsigned int getBucketVal(unsigned long long hash)
     return (unsigned int)(hash % SYMTABLE_SIZE);
 }
 
-void symtable_add(char* varName, struct IDENT_tokenData* data)
+node_t* symtable_add(char* varName, struct IDENT_tokenData* data)
 {
     unsigned long long hash = hash_string(varName);
     unsigned int bucket = getBucketVal(hash);
@@ -34,7 +34,7 @@ void symtable_add(char* varName, struct IDENT_tokenData* data)
     {
         globl_symtable[bucket] = newLinkedList();
     }
-    LinkedList_add_end(globl_symtable[bucket], data, 0, NULL, varName);
+    return LinkedList_add_end(globl_symtable[bucket], data, 0, NULL, varName);
 }
 
 
@@ -120,14 +120,14 @@ int symtable_removeItem(char* varName)
         char* varName_head = curNode_head->varName;
         if (strcmp(varName, varName_head) == 0)
         {
-            free(curNode_head->data);
+           // free(curNode_head->data);
             LinkedList_remove(globl_symtable[bucket], curIndex_head);
             return 0;
         }
         char* varname_tail = curNode_tail->varName;
         if (strcmp(varName, varName_head) == 0)
         {
-            free(curNode_tail->data);
+            //free(curNode_tail->data);
             LinkedList_remove(globl_symtable[bucket], curIndex_tail);
             return 0;
         }
@@ -156,7 +156,11 @@ int symtable_removeItem__test(char* varName)
         char* varName_head = curNode_head->varName;
         if (strcmp(varName, varName_head) == 0)
         {
-           // free(curNode_head->data);
+            if (curNode_head->data != NULL)
+            {
+                //free(curNode_head->data);
+                //curNode_head->data = NULL;
+            }
             LinkedList_remove(globl_symtable[bucket], cur_idx);
             return 0;
         }

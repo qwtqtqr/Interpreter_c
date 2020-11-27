@@ -131,22 +131,22 @@ static int getOpPrecedence(struct Token* t)
 
 	switch (tt)
 	{
-	case TT_INT:             return 0;
-	case TT_FLOAT:           return 0;
-	case TT_PLUS:            return 10;
-	case TT_MINUS:           return 10;
-	case TT_MUL:	         return 20;
-	case TT_DIV:	         return 20;
-	case TT_OP_END:		     return 0;
-	case TT_POW:	         return 25;
-	case TT_EQUALS_CMP:	     return 5;
-	case TT_NOT_EQUALS:      return 5;
-	case TT_GREATER:	     return 5;
-	case TT_SMALLER:	     return 5;
-	case TT_GREATER_EQUALS:	 return 5;
-	case TT_SMALLER_EQUALS:  return 5;
-	case TT_AND:             return 2;
-	case TT_OR:              return 2;
+	case TT_INT:              return 0;
+	case TT_FLOAT:            return 0;
+	case TT_PLUS:             return 10;
+	case TT_MINUS:            return 10;
+	case TT_MUL:	          return 20;
+	case TT_DIV:	          return 20;
+	case TT_OP_END:		      return 0;
+	case TT_POW:	          return 25;
+	case TT_EQUALS_CMP:	      return 5;
+	case TT_NOT_EQUALS:       return 5;
+	case TT_GREATER:	      return 5;
+	case TT_SMALLER:	      return 5;
+	case TT_GREATER_EQUALS:	  return 5;
+	case TT_SMALLER_EQUALS:   return 5;
+	case TT_AND:              return 2;
+	case TT_OR:               return 2;
 	}
 	return -1;
 }

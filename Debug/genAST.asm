@@ -254,97 +254,97 @@ _getOpPrecedence PROC					; COMDAT
 $LN4@getOpPrece:
 
 ; 133  : 	{
-; 134  : 	case TT_INT:             return 0;
+; 134  : 	case TT_INT:              return 0;
 
 	xor	eax, eax
 	jmp	SHORT $LN1@getOpPrece
 $LN5@getOpPrece:
 
-; 135  : 	case TT_FLOAT:           return 0;
+; 135  : 	case TT_FLOAT:            return 0;
 
 	xor	eax, eax
 	jmp	SHORT $LN1@getOpPrece
 $LN6@getOpPrece:
 
-; 136  : 	case TT_PLUS:            return 10;
+; 136  : 	case TT_PLUS:             return 10;
 
 	mov	eax, 10					; 0000000aH
 	jmp	SHORT $LN1@getOpPrece
 $LN7@getOpPrece:
 
-; 137  : 	case TT_MINUS:           return 10;
+; 137  : 	case TT_MINUS:            return 10;
 
 	mov	eax, 10					; 0000000aH
 	jmp	SHORT $LN1@getOpPrece
 $LN8@getOpPrece:
 
-; 138  : 	case TT_MUL:	         return 20;
+; 138  : 	case TT_MUL:	          return 20;
 
 	mov	eax, 20					; 00000014H
 	jmp	SHORT $LN1@getOpPrece
 $LN9@getOpPrece:
 
-; 139  : 	case TT_DIV:	         return 20;
+; 139  : 	case TT_DIV:	          return 20;
 
 	mov	eax, 20					; 00000014H
 	jmp	SHORT $LN1@getOpPrece
 $LN10@getOpPrece:
 
-; 140  : 	case TT_OP_END:		     return 0;
+; 140  : 	case TT_OP_END:		      return 0;
 
 	xor	eax, eax
 	jmp	SHORT $LN1@getOpPrece
 $LN11@getOpPrece:
 
-; 141  : 	case TT_POW:	         return 25;
+; 141  : 	case TT_POW:	          return 25;
 
 	mov	eax, 25					; 00000019H
 	jmp	SHORT $LN1@getOpPrece
 $LN12@getOpPrece:
 
-; 142  : 	case TT_EQUALS_CMP:	     return 5;
+; 142  : 	case TT_EQUALS_CMP:	      return 5;
 
 	mov	eax, 5
 	jmp	SHORT $LN1@getOpPrece
 $LN13@getOpPrece:
 
-; 143  : 	case TT_NOT_EQUALS:      return 5;
+; 143  : 	case TT_NOT_EQUALS:       return 5;
 
 	mov	eax, 5
 	jmp	SHORT $LN1@getOpPrece
 $LN14@getOpPrece:
 
-; 144  : 	case TT_GREATER:	     return 5;
+; 144  : 	case TT_GREATER:	      return 5;
 
 	mov	eax, 5
 	jmp	SHORT $LN1@getOpPrece
 $LN15@getOpPrece:
 
-; 145  : 	case TT_SMALLER:	     return 5;
+; 145  : 	case TT_SMALLER:	      return 5;
 
 	mov	eax, 5
 	jmp	SHORT $LN1@getOpPrece
 $LN16@getOpPrece:
 
-; 146  : 	case TT_GREATER_EQUALS:	 return 5;
+; 146  : 	case TT_GREATER_EQUALS:	  return 5;
 
 	mov	eax, 5
 	jmp	SHORT $LN1@getOpPrece
 $LN17@getOpPrece:
 
-; 147  : 	case TT_SMALLER_EQUALS:  return 5;
+; 147  : 	case TT_SMALLER_EQUALS:   return 5;
 
 	mov	eax, 5
 	jmp	SHORT $LN1@getOpPrece
 $LN18@getOpPrece:
 
-; 148  : 	case TT_AND:             return 2;
+; 148  : 	case TT_AND:              return 2;
 
 	mov	eax, 2
 	jmp	SHORT $LN1@getOpPrece
 $LN19@getOpPrece:
 
-; 149  : 	case TT_OR:              return 2;
+; 149  : 	case TT_OR:               return 2;
 
 	mov	eax, 2
 	jmp	SHORT $LN1@getOpPrece

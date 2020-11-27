@@ -5,6 +5,7 @@
 struct STACK_FRAME
 {
 	struct STACK_FRAME* next;
+	struct STACK_FRAME* prev;
 	void* data;
 };
 

@@ -225,7 +225,7 @@ struct DATA_STRUCT* interpretAST_int(struct AST_Node* root)
 		curIdent = (struct IDENT_tokenData*)symtable_getItem(root->varName);
 		if (curIdent == NULL)
 		{
-			printf("[ERROR] variable does not exist or is out of scope\n");
+			printf("[ERROR] variable '%s' does not exist or is out of scope\n", root->varName);
 			exit(1);
 		}
 		int dt = curIdent->data->dataType;
@@ -311,7 +311,11 @@ void interpretMainAST(struct AST_Node* root)
 			{
 				if (curNodeData->var == 1)
 				{
-					symtable_add(saveVarName, newID_token(DT_INT, 1, 0, saveVarName, 1, interpretAST_int(curNode->left)));
+					// fix bug  (symtable)
+					struct IDENT_tokenData* id_token = newID_token(DT_INT, 1, 0, saveVarName, 1, NULL);
+					node_t* node = symtable_add(saveVarName, id_token);
+					struct IDENT_tokenData* curID = symtable_getItem(saveVarName);
+					curID->data = interpretAST_int(curNode->left);
 				}
 				else if (curNodeData->var == 0)
 				{
@@ -353,7 +357,7 @@ void interpretMainAST(struct AST_Node* root)
 				{
 					interpretMainAST(curNode->left->right);
 				}
-			}
+	        }
 
 			else if (cmp_expr_dt == DT_BOOL)
 			{

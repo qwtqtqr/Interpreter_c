@@ -1,8 +1,18 @@
 var boolVal = true && 1 == 1;
 
 {
-  var s = 45;
-  print(s);
+   var s = 45;
+   print(s);
+}
+
+{
+   var s = 50;
+   print(s);
+}
+
+{
+   var s = 10;
+   print(s);
 }
 
 
@@ -21,3 +31,7 @@ if (boolVal)
 print(  10 + 1 /2  );
 print(boolVal);
 
+{
+print(101);
+}
+print (2);

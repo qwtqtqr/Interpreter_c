@@ -148,7 +148,7 @@ _argc$ = 8						; size = 4
 _argv$ = 12						; size = 4
 _main	PROC						; COMDAT
 
-; 39   : {
+; 38   : {
 
 	push	ebp
 	mov	ebp, esp
@@ -163,22 +163,22 @@ _main	PROC						; COMDAT
 	mov	ecx, OFFSET __D01D7B14_main@c
 	call	@__CheckForDebuggerJustMyCode@4
 
-; 40   : 	initGloblVar();
+; 39   : 	initGloblVar();
 
 	call	_initGloblVar
 
-; 41   : 	const char* fileName = "test.txt";
+; 40   : 	const char* fileName = "test.txt";
 
 	mov	DWORD PTR _fileName$[ebp], OFFSET ??_C@_08OKJMHBIC@test?4txt@
 
-; 42   : 	LinkedList* tokenList = newLinkedList();
+; 41   : 	LinkedList* tokenList = newLinkedList();
 
 	call	_newLinkedList
 	mov	DWORD PTR _tokenList$[ebp], eax
 
+; 42   : 
 ; 43   : 
-; 44   : 
-; 45   : 	Infile = fopen(fileName, "r");
+; 44   : 	Infile = fopen(fileName, "r");
 
 	mov	esi, esp
 	push	OFFSET ??_C@_01KDCPPGHE@r@
@@ -190,18 +190,18 @@ _main	PROC						; COMDAT
 	call	__RTC_CheckEsp
 	mov	DWORD PTR _Infile, eax
 
-; 46   : 	if (Infile != NULL)
+; 45   : 	if (Infile != NULL)
 
 	cmp	DWORD PTR _Infile, 0
 	je	SHORT $LN2@main
 
-; 47   : 	{
-; 48   : 		globl_var_stack = mkVarStack();
+; 46   : 	{
+; 47   : 		globl_var_stack = mkVarStack();
 
 	call	_mkVarStack
 	mov	DWORD PTR _globl_var_stack, eax
 
-; 49   : 		struct AST_Node* ast_root = genMainAST(0, SCOPE_MODE_DEFAULT);
+; 48   : 		struct AST_Node* ast_root = genMainAST(0, SCOPE_MODE_DEFAULT);
 
 	push	0
 	push	0
@@ -209,32 +209,31 @@ _main	PROC						; COMDAT
 	add	esp, 8
 	mov	DWORD PTR _ast_root$1[ebp], eax
 
-; 50   : 		varStack_push_frame();  // globl frame
+; 49   : 		varStack_push_frame();  // globl frame
 
 	call	_varStack_push_frame
 
-; 51   : 		interpretMainAST(ast_root);
+; 50   : 		interpretMainAST(ast_root);
 
 	mov	eax, DWORD PTR _ast_root$1[ebp]
 	push	eax
 	call	_interpretMainAST
 	add	esp, 4
 
-; 52   : 
-; 53   : #if 0
-; 54   : 		struct AST_Node* curNode = ast_root;
-; 55   : 		printf("\n\n\ncurNode:  %d\n", curNode->tokenType);
-; 56   : #endif
-; 57   : 
-; 58   : 		/*
-; 59   : 		int** intArr = calloc(50, sizeof(int));
-; 60   : 		if (intArr[65] == NULL)
-; 61   : 		{
-; 62   : 			printf("NULL\n");
-; 63   : 		}
-; 64   : 		*/
-; 65   : 
-; 66   : 		exit(0);
+; 51   : #if 0
+; 52   : 		struct AST_Node* curNode = ast_root;
+; 53   : 		printf("\n\n\ncurNode:  %d\n", curNode->tokenType);
+; 54   : #endif
+; 55   : 
+; 56   : 		/*
+; 57   : 		int** intArr = calloc(50, sizeof(int));
+; 58   : 		if (intArr[65] == NULL)
+; 59   : 		{
+; 60   : 			printf("NULL\n");
+; 61   : 		}
+; 62   : 		*/
+; 63   : 
+; 64   : 		exit(0);
 
 	mov	esi, esp
 	push	0
@@ -243,9 +242,9 @@ _main	PROC						; COMDAT
 	call	__RTC_CheckEsp
 $LN2@main:
 
-; 67   : 	}
-; 68   : 
-; 69   : 	printf("[ERROR] could not open file '%s'\n", fileName);
+; 65   : 	}
+; 66   : 
+; 67   : 	printf("[ERROR] could not open file '%s'\n", fileName);
 
 	mov	eax, DWORD PTR _fileName$[ebp]
 	push	eax
@@ -253,8 +252,8 @@ $LN2@main:
 	call	_printf
 	add	esp, 8
 
-; 70   : 
-; 71   : 	exit(1);
+; 68   : 
+; 69   : 	exit(1);
 
 	mov	esi, esp
 	push	1
@@ -263,7 +262,7 @@ $LN2@main:
 	call	__RTC_CheckEsp
 $LN3@main:
 
-; 72   : }
+; 70   : }
 
 	pop	edi
 	pop	esi
@@ -282,7 +281,7 @@ _TEXT	ENDS
 _TEXT	SEGMENT
 _initGloblVar PROC					; COMDAT
 
-; 28   : {
+; 27   : {
 
 	push	ebp
 	mov	ebp, esp
@@ -297,7 +296,7 @@ _initGloblVar PROC					; COMDAT
 	mov	ecx, OFFSET __D01D7B14_main@c
 	call	@__CheckForDebuggerJustMyCode@4
 
-; 29   : 	currentToken = malloc(sizeof(struct Token));
+; 28   : 	currentToken = malloc(sizeof(struct Token));
 
 	mov	esi, esp
 	push	56					; 00000038H
@@ -307,15 +306,15 @@ _initGloblVar PROC					; COMDAT
 	call	__RTC_CheckEsp
 	mov	DWORD PTR _currentToken, eax
 
-; 30   : 	Line = 1;
+; 29   : 	Line = 1;
 
 	mov	DWORD PTR _Line, 1
 
-; 31   : 	Putback = 0;
+; 30   : 	Putback = 0;
 
 	mov	DWORD PTR _Putback, 0
 
-; 32   : }
+; 31   : }
 
 	pop	edi
 	pop	esi
