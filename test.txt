@@ -8,12 +8,12 @@ if(true)
 
 elif(true) 
 {
-   print(10011);
+   print(11);
 }
 
 else
 {
-   print(1111111);
+   print(111);
 }
 
 
