@@ -16,6 +16,8 @@ PUBLIC	??_C@_03MEPDGFMA@var@				; `string'
 PUBLIC	??_C@_05PKCPKOLM@undef@				; `string'
 PUBLIC	??_C@_04LOAJBDKD@true@				; `string'
 PUBLIC	??_C@_05LAPONLG@false@				; `string'
+PUBLIC	??_C@_04GNFOIEOK@elif@				; `string'
+PUBLIC	??_C@_04FHMCPBIP@else@				; `string'
 msvcjmc	SEGMENT
 __1850469A_corecrt_stdio_config@h DB 01H
 __01D10305_corecrt_wstdio@h DB 01H
@@ -27,6 +29,14 @@ __8478A1A4_tokens@h DB 01H
 __E2865EBA_corecrt_math@h DB 01H
 __E66679EA_variable@c DB 01H
 msvcjmc	ENDS
+;	COMDAT ??_C@_04FHMCPBIP@else@
+CONST	SEGMENT
+??_C@_04FHMCPBIP@else@ DB 'else', 00H			; `string'
+CONST	ENDS
+;	COMDAT ??_C@_04GNFOIEOK@elif@
+CONST	SEGMENT
+??_C@_04GNFOIEOK@elif@ DB 'elif', 00H			; `string'
+CONST	ENDS
 ;	COMDAT ??_C@_05LAPONLG@false@
 CONST	SEGMENT
 ??_C@_05LAPONLG@false@ DB 'false', 00H			; `string'

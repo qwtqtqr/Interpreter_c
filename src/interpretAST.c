@@ -348,10 +348,12 @@ void interpretMainAST(struct AST_Node* root)
 		{
 		    struct DATA_STRUCT* cmp_expr = interpretAST_binexpr(curNode->left->left);
 			int cmp_expr_dt = cmp_expr->dataType;
+			int init = 0;
 			if (cmp_expr_dt == DT_INT)
 			{
 				if (*(cmp_expr->intVal) != 0)
 				{
+					init = 1;
 					interpretMainAST(curNode->left->right);
 				}
 			}
@@ -360,6 +362,7 @@ void interpretMainAST(struct AST_Node* root)
 			{
 				if (*(cmp_expr->doubleVal) != 1)
 				{
+					init = 1;
 					interpretMainAST(curNode->left->right);
 				}
 	        }
@@ -368,11 +371,63 @@ void interpretMainAST(struct AST_Node* root)
 			{
 				if (*(cmp_expr->boolVal) != 0)
 				{
+					init = 1;
+					interpretMainAST(curNode->left->right);
+				}
+			}
+			///////////////////////////////////////////////////////
+			//// ELIF
+			///////////////////////////////////////////////////////
+			while (curNode->right->tokenType == TT_ELIF)
+			{
+				curNode = curNode->right;
+				struct DATA_STRUCT* cmp_expr = interpretAST_binexpr(curNode->left->left);
+				int cmp_expr_dt = cmp_expr->dataType;
+				if (cmp_expr_dt == DT_INT)
+				{
+					if (*(cmp_expr->intVal) != 0 && init != 1)
+					{
+						init = 1;
+						interpretMainAST(curNode->left->right);
+					}
+				}
+
+				else if (cmp_expr_dt == DT_FLOAT)
+				{
+					if (*(cmp_expr->doubleVal) != 1 && init != 1)
+					{
+						init = 1;
+						interpretMainAST(curNode->left->right);
+					}
+				}
+
+				else if (cmp_expr_dt == DT_BOOL)
+				{
+					if (*(cmp_expr->boolVal) != 0 && init != 1)
+					{
+						init = 1;
+						interpretMainAST(curNode->left->right);
+					}
+				}
+			}
+
+			////////////////////////////////////////////////////
+			////  ELSE
+			////////////////////////////////////////////////////
+			if (curNode->right->tokenType == TT_ELSE)
+			{
+				curNode = curNode->right;
+				
+				if (init == 0)
+				{
+					init = 1;
 					interpretMainAST(curNode->left->right);
 				}
 			}
 		}
-
+		////////////////////////////////////////////////////
+		////  SCOPE
+		////////////////////////////////////////////////////
 
 		else if (curNode->tokenType == TT_SCOPE)
 		{
@@ -385,6 +440,20 @@ void interpretMainAST(struct AST_Node* root)
 			varStack_pop_frame();
 		}
 
+		//////////////////////////////////////////////////
+
+		// todo:  add error to gen function!!!
+		/*if (curNode->tokenType == TT_ELIF)
+		{
+			printf("[ERROR] you cannot have an 'elif' statement without an 'if' statement \n");
+			exit(1);
+		}
+
+		if (curNode->tokenType == TT_ELSE)
+		{
+			printf("[ERROR] you cannot have an 'else' statement without an 'if' statement \n");
+			exit(1);
+		}*/
 
 		curNode = curNode->right;
 	}

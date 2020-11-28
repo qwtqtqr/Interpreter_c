@@ -16,6 +16,8 @@ PUBLIC	??_C@_03MEPDGFMA@var@				; `string'
 PUBLIC	??_C@_05PKCPKOLM@undef@				; `string'
 PUBLIC	??_C@_04LOAJBDKD@true@				; `string'
 PUBLIC	??_C@_05LAPONLG@false@				; `string'
+PUBLIC	??_C@_04GNFOIEOK@elif@				; `string'
+PUBLIC	??_C@_04FHMCPBIP@else@				; `string'
 msvcjmc	SEGMENT
 __1850469A_corecrt_stdio_config@h DB 01H
 __01D10305_corecrt_wstdio@h DB 01H
@@ -29,6 +31,14 @@ __8DC84CAD_corecrt_wtime@h DB 01H
 __CF01F9AA_time@h DB 01H
 __56B56370_scan@c DB 01H
 msvcjmc	ENDS
+;	COMDAT ??_C@_04FHMCPBIP@else@
+CONST	SEGMENT
+??_C@_04FHMCPBIP@else@ DB 'else', 00H			; `string'
+CONST	ENDS
+;	COMDAT ??_C@_04GNFOIEOK@elif@
+CONST	SEGMENT
+??_C@_04GNFOIEOK@elif@ DB 'elif', 00H			; `string'
+CONST	ENDS
 ;	COMDAT ??_C@_05LAPONLG@false@
 CONST	SEGMENT
 ??_C@_05LAPONLG@false@ DB 'false', 00H			; `string'
@@ -338,6 +348,10 @@ _multicharTokens DD FLAT:??_C@_05IJDJACGD@print@
 	DD	01fH
 	DD	FLAT:??_C@_05LAPONLG@false@
 	DD	020H
+	DD	FLAT:??_C@_04GNFOIEOK@elif@
+	DD	023H
+	DD	FLAT:??_C@_04FHMCPBIP@else@
+	DD	024H
 _singleCharTokens DD 02bH
 	DD	00H
 	DD	02dH
@@ -780,7 +794,7 @@ $LN2@keyword:
 	add	eax, 1
 	mov	DWORD PTR _i$3[ebp], eax
 $LN4@keyword:
-	cmp	DWORD PTR _i$3[ebp], 7
+	cmp	DWORD PTR _i$3[ebp], 9
 	jae	SHORT $LN3@keyword
 
 ; 44   : 	{
@@ -3270,7 +3284,7 @@ _identToken_data$ = 20					; size = 8
 _data$ = 28						; size = 4
 _newToken_identToken PROC				; COMDAT
 
-; 231  : {
+; 234  : {
 
 	push	ebp
 	mov	ebp, esp
@@ -3285,7 +3299,7 @@ _newToken_identToken PROC				; COMDAT
 	mov	ecx, OFFSET __8478A1A4_tokens@h
 	call	@__CheckForDebuggerJustMyCode@4
 
-; 232  : 	struct Token* initToken = malloc(sizeof(struct Token));
+; 235  : 	struct Token* initToken = malloc(sizeof(struct Token));
 
 	mov	esi, esp
 	push	56					; 00000038H
@@ -3295,42 +3309,42 @@ _newToken_identToken PROC				; COMDAT
 	call	__RTC_CheckEsp
 	mov	DWORD PTR _initToken$[ebp], eax
 
-; 233  : 	initToken->tokenType = tokenType;
+; 236  : 	initToken->tokenType = tokenType;
 
 	mov	eax, DWORD PTR _initToken$[ebp]
 	mov	ecx, DWORD PTR _tokenType$[ebp]
 	mov	DWORD PTR [eax], ecx
 
-; 234  : 	initToken->intValue = 0;
+; 237  : 	initToken->intValue = 0;
 
 	mov	eax, DWORD PTR _initToken$[ebp]
 	mov	DWORD PTR [eax+8], 0
 	mov	DWORD PTR [eax+12], 0
 
-; 235  : 	initToken->line = line;
+; 238  : 	initToken->line = line;
 
 	mov	eax, DWORD PTR _initToken$[ebp]
 	mov	ecx, DWORD PTR _line$[ebp]
 	mov	DWORD PTR [eax+16], ecx
 
-; 236  : 	initToken->strVal = NULL;
+; 239  : 	initToken->strVal = NULL;
 
 	mov	eax, DWORD PTR _initToken$[ebp]
 	mov	DWORD PTR [eax+20], 0
 
-; 237  : 	initToken->floatVal = 0;
+; 240  : 	initToken->floatVal = 0;
 
 	mov	eax, DWORD PTR _initToken$[ebp]
 	xorps	xmm0, xmm0
 	movsd	QWORD PTR [eax+24], xmm0
 
-; 238  : 	initToken->IdentToken_name = identToken_name;
+; 241  : 	initToken->IdentToken_name = identToken_name;
 
 	mov	eax, DWORD PTR _initToken$[ebp]
 	mov	ecx, DWORD PTR _identToken_name$[ebp]
 	mov	DWORD PTR [eax+32], ecx
 
-; 239  : 	initToken->IdentToken_data = identToken_data;
+; 242  : 	initToken->IdentToken_data = identToken_data;
 
 	mov	eax, DWORD PTR _initToken$[ebp]
 	mov	ecx, DWORD PTR _identToken_data$[ebp]
@@ -3338,17 +3352,17 @@ _newToken_identToken PROC				; COMDAT
 	mov	edx, DWORD PTR _identToken_data$[ebp+4]
 	mov	DWORD PTR [eax+44], edx
 
-; 240  : 	initToken->data = data;
+; 243  : 	initToken->data = data;
 
 	mov	eax, DWORD PTR _initToken$[ebp]
 	mov	ecx, DWORD PTR _data$[ebp]
 	mov	DWORD PTR [eax+48], ecx
 
-; 241  : 	return initToken;
+; 244  : 	return initToken;
 
 	mov	eax, DWORD PTR _initToken$[ebp]
 
-; 242  : }
+; 245  : }
 
 	pop	edi
 	pop	esi
@@ -3372,7 +3386,7 @@ _line$ = 20						; size = 4
 _data$ = 24						; size = 4
 _newToken_float PROC					; COMDAT
 
-; 217  : {
+; 220  : {
 
 	push	ebp
 	mov	ebp, esp
@@ -3387,7 +3401,7 @@ _newToken_float PROC					; COMDAT
 	mov	ecx, OFFSET __8478A1A4_tokens@h
 	call	@__CheckForDebuggerJustMyCode@4
 
-; 218  : 	struct Token* initToken_float = malloc(sizeof(struct Token));
+; 221  : 	struct Token* initToken_float = malloc(sizeof(struct Token));
 
 	mov	esi, esp
 	push	56					; 00000038H
@@ -3397,57 +3411,57 @@ _newToken_float PROC					; COMDAT
 	call	__RTC_CheckEsp
 	mov	DWORD PTR _initToken_float$[ebp], eax
 
-; 219  : 	initToken_float->tokenType = tokenType;
+; 222  : 	initToken_float->tokenType = tokenType;
 
 	mov	eax, DWORD PTR _initToken_float$[ebp]
 	mov	ecx, DWORD PTR _tokenType$[ebp]
 	mov	DWORD PTR [eax], ecx
 
-; 220  : 	initToken_float->intValue = 0;
+; 223  : 	initToken_float->intValue = 0;
 
 	mov	eax, DWORD PTR _initToken_float$[ebp]
 	mov	DWORD PTR [eax+8], 0
 	mov	DWORD PTR [eax+12], 0
 
-; 221  : 	initToken_float->line = line;
+; 224  : 	initToken_float->line = line;
 
 	mov	eax, DWORD PTR _initToken_float$[ebp]
 	mov	ecx, DWORD PTR _line$[ebp]
 	mov	DWORD PTR [eax+16], ecx
 
-; 222  : 	initToken_float->strVal = NULL;
+; 225  : 	initToken_float->strVal = NULL;
 
 	mov	eax, DWORD PTR _initToken_float$[ebp]
 	mov	DWORD PTR [eax+20], 0
 
-; 223  : 	initToken_float->floatVal = floatVal;
+; 226  : 	initToken_float->floatVal = floatVal;
 
 	mov	eax, DWORD PTR _initToken_float$[ebp]
 	movsd	xmm0, QWORD PTR _floatVal$[ebp]
 	movsd	QWORD PTR [eax+24], xmm0
 
-; 224  : 	initToken_float->IdentToken_name = NULL;
+; 227  : 	initToken_float->IdentToken_name = NULL;
 
 	mov	eax, DWORD PTR _initToken_float$[ebp]
 	mov	DWORD PTR [eax+32], 0
 
-; 225  : 	initToken_float->IdentToken_data = 0;
+; 228  : 	initToken_float->IdentToken_data = 0;
 
 	mov	eax, DWORD PTR _initToken_float$[ebp]
 	mov	DWORD PTR [eax+40], 0
 	mov	DWORD PTR [eax+44], 0
 
-; 226  : 	initToken_float->data = data;
+; 229  : 	initToken_float->data = data;
 
 	mov	eax, DWORD PTR _initToken_float$[ebp]
 	mov	ecx, DWORD PTR _data$[ebp]
 	mov	DWORD PTR [eax+48], ecx
 
-; 227  : 	return initToken_float;
+; 230  : 	return initToken_float;
 
 	mov	eax, DWORD PTR _initToken_float$[ebp]
 
-; 228  : }
+; 231  : }
 
 	pop	edi
 	pop	esi
@@ -3472,7 +3486,7 @@ _strVal$ = 24						; size = 4
 _data$ = 28						; size = 4
 _newToken_str PROC					; COMDAT
 
-; 203  : {
+; 206  : {
 
 	push	ebp
 	mov	ebp, esp
@@ -3487,7 +3501,7 @@ _newToken_str PROC					; COMDAT
 	mov	ecx, OFFSET __8478A1A4_tokens@h
 	call	@__CheckForDebuggerJustMyCode@4
 
-; 204  : 	struct Token* initToken_str = malloc(sizeof(struct Token));
+; 207  : 	struct Token* initToken_str = malloc(sizeof(struct Token));
 
 	mov	esi, esp
 	push	56					; 00000038H
@@ -3497,13 +3511,13 @@ _newToken_str PROC					; COMDAT
 	call	__RTC_CheckEsp
 	mov	DWORD PTR _initToken_str$[ebp], eax
 
-; 205  : 	initToken_str->tokenType = tokenType;
+; 208  : 	initToken_str->tokenType = tokenType;
 
 	mov	eax, DWORD PTR _initToken_str$[ebp]
 	mov	ecx, DWORD PTR _tokenType$[ebp]
 	mov	DWORD PTR [eax], ecx
 
-; 206  : 	initToken_str->intValue = intValue;
+; 209  : 	initToken_str->intValue = intValue;
 
 	mov	eax, DWORD PTR _initToken_str$[ebp]
 	mov	ecx, DWORD PTR _intValue$[ebp]
@@ -3511,46 +3525,46 @@ _newToken_str PROC					; COMDAT
 	mov	edx, DWORD PTR _intValue$[ebp+4]
 	mov	DWORD PTR [eax+12], edx
 
-; 207  : 	initToken_str->line = line;
+; 210  : 	initToken_str->line = line;
 
 	mov	eax, DWORD PTR _initToken_str$[ebp]
 	mov	ecx, DWORD PTR _line$[ebp]
 	mov	DWORD PTR [eax+16], ecx
 
-; 208  : 	initToken_str->strVal = strVal;
+; 211  : 	initToken_str->strVal = strVal;
 
 	mov	eax, DWORD PTR _initToken_str$[ebp]
 	mov	ecx, DWORD PTR _strVal$[ebp]
 	mov	DWORD PTR [eax+20], ecx
 
-; 209  : 	initToken_str->floatVal = 0;
+; 212  : 	initToken_str->floatVal = 0;
 
 	mov	eax, DWORD PTR _initToken_str$[ebp]
 	xorps	xmm0, xmm0
 	movsd	QWORD PTR [eax+24], xmm0
 
-; 210  : 	initToken_str->IdentToken_name = NULL;
+; 213  : 	initToken_str->IdentToken_name = NULL;
 
 	mov	eax, DWORD PTR _initToken_str$[ebp]
 	mov	DWORD PTR [eax+32], 0
 
-; 211  : 	initToken_str->IdentToken_data = 0;
+; 214  : 	initToken_str->IdentToken_data = 0;
 
 	mov	eax, DWORD PTR _initToken_str$[ebp]
 	mov	DWORD PTR [eax+40], 0
 	mov	DWORD PTR [eax+44], 0
 
-; 212  : 	initToken_str->data = data;
+; 215  : 	initToken_str->data = data;
 
 	mov	eax, DWORD PTR _initToken_str$[ebp]
 	mov	ecx, DWORD PTR _data$[ebp]
 	mov	DWORD PTR [eax+48], ecx
 
-; 213  : 	return initToken_str;
+; 216  : 	return initToken_str;
 
 	mov	eax, DWORD PTR _initToken_str$[ebp]
 
-; 214  : }
+; 217  : }
 
 	pop	edi
 	pop	esi
@@ -3574,7 +3588,7 @@ _line$ = 20						; size = 4
 _data$ = 24						; size = 4
 _newToken PROC						; COMDAT
 
-; 189  : {
+; 192  : {
 
 	push	ebp
 	mov	ebp, esp
@@ -3589,7 +3603,7 @@ _newToken PROC						; COMDAT
 	mov	ecx, OFFSET __8478A1A4_tokens@h
 	call	@__CheckForDebuggerJustMyCode@4
 
-; 190  : 	struct Token* initToken = malloc(sizeof(struct Token));
+; 193  : 	struct Token* initToken = malloc(sizeof(struct Token));
 
 	mov	esi, esp
 	push	56					; 00000038H
@@ -3599,13 +3613,13 @@ _newToken PROC						; COMDAT
 	call	__RTC_CheckEsp
 	mov	DWORD PTR _initToken$[ebp], eax
 
-; 191  : 	initToken->tokenType = tokenType;
+; 194  : 	initToken->tokenType = tokenType;
 
 	mov	eax, DWORD PTR _initToken$[ebp]
 	mov	ecx, DWORD PTR _tokenType$[ebp]
 	mov	DWORD PTR [eax], ecx
 
-; 192  : 	initToken->intValue = intValue;
+; 195  : 	initToken->intValue = intValue;
 
 	mov	eax, DWORD PTR _initToken$[ebp]
 	mov	ecx, DWORD PTR _intValue$[ebp]
@@ -3613,45 +3627,45 @@ _newToken PROC						; COMDAT
 	mov	edx, DWORD PTR _intValue$[ebp+4]
 	mov	DWORD PTR [eax+12], edx
 
-; 193  : 	initToken->line = line;
+; 196  : 	initToken->line = line;
 
 	mov	eax, DWORD PTR _initToken$[ebp]
 	mov	ecx, DWORD PTR _line$[ebp]
 	mov	DWORD PTR [eax+16], ecx
 
-; 194  : 	initToken->strVal = NULL;
+; 197  : 	initToken->strVal = NULL;
 
 	mov	eax, DWORD PTR _initToken$[ebp]
 	mov	DWORD PTR [eax+20], 0
 
-; 195  : 	initToken->floatVal = 0;
+; 198  : 	initToken->floatVal = 0;
 
 	mov	eax, DWORD PTR _initToken$[ebp]
 	xorps	xmm0, xmm0
 	movsd	QWORD PTR [eax+24], xmm0
 
-; 196  : 	initToken->IdentToken_name = NULL;
+; 199  : 	initToken->IdentToken_name = NULL;
 
 	mov	eax, DWORD PTR _initToken$[ebp]
 	mov	DWORD PTR [eax+32], 0
 
-; 197  : 	initToken->IdentToken_data = 0;
+; 200  : 	initToken->IdentToken_data = 0;
 
 	mov	eax, DWORD PTR _initToken$[ebp]
 	mov	DWORD PTR [eax+40], 0
 	mov	DWORD PTR [eax+44], 0
 
-; 198  : 	initToken->data = data;
+; 201  : 	initToken->data = data;
 
 	mov	eax, DWORD PTR _initToken$[ebp]
 	mov	ecx, DWORD PTR _data$[ebp]
 	mov	DWORD PTR [eax+48], ecx
 
-; 199  : 	return initToken;
+; 202  : 	return initToken;
 
 	mov	eax, DWORD PTR _initToken$[ebp]
 
-; 200  : }
+; 203  : }
 
 	pop	edi
 	pop	esi

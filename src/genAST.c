@@ -391,6 +391,30 @@ struct AST_Node* genMainAST(int scope_depth, int scope_mode)
 		return node;
 		break;
      
+	case TT_ELIF:
+		scan_curToken();
+		if (currentToken->tokenType != TT_LEFT_PAREN)
+		{
+			printf("[SYNTAX ERROR] '(' is missing in Line %d\n", Line);
+			exit(1);
+		}
+		node = mkastnode(TT_ELIF, 0, 0, NULL, NULL, NULL, NULL);
+		node->left = mkastnode(TT_ANY_OP, 0, 0, NULL, NULL, NULL, NULL);
+		node->left->left = binexpr(0, TT_LEFT_CURLY);
+		node->left->right = genMainAST(scope_depth, SCOPE_MODE_STATEMENT);
+		node->right = genMainAST(scope_depth, scope_mode);
+		return node;
+		break;
+
+	case TT_ELSE:
+		node = mkastnode(TT_ELSE, 0, 0, NULL, NULL, NULL, NULL);
+		node->left = mkastnode(TT_ANY_OP, 0, 0, NULL, NULL, NULL, NULL);
+		node->left->left = NULL;
+		node->left->right = genMainAST(scope_depth, SCOPE_MODE_STATEMENT);
+		node->right = genMainAST(scope_depth, scope_mode);
+		return node;
+		break;
+
 
 	///////////////////////////////////////////////////////////////////
 	//    SCOPE

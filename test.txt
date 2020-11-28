@@ -1,5 +1,20 @@
 var boolVal = true && 1 == 1;
 
+if(true)
+{
+print(1);
+}
+
+elif(true) 
+{
+print(10011);
+}
+
+else
+{
+print(1111111);
+}
+
 {
    var s = 45;
    print(s);
@@ -36,4 +51,4 @@ print(boolVal);
 {
 print(101);
 }
-print (2);
+print(2);

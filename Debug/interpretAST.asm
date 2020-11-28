@@ -16,6 +16,8 @@ PUBLIC	??_C@_03MEPDGFMA@var@				; `string'
 PUBLIC	??_C@_05PKCPKOLM@undef@				; `string'
 PUBLIC	??_C@_04LOAJBDKD@true@				; `string'
 PUBLIC	??_C@_05LAPONLG@false@				; `string'
+PUBLIC	??_C@_04GNFOIEOK@elif@				; `string'
+PUBLIC	??_C@_04FHMCPBIP@else@				; `string'
 msvcjmc	SEGMENT
 __1850469A_corecrt_stdio_config@h DB 01H
 __01D10305_corecrt_wstdio@h DB 01H
@@ -27,6 +29,14 @@ __8478A1A4_tokens@h DB 01H
 __E2865EBA_corecrt_math@h DB 01H
 __36662879_interpretAST@c DB 01H
 msvcjmc	ENDS
+;	COMDAT ??_C@_04FHMCPBIP@else@
+CONST	SEGMENT
+??_C@_04FHMCPBIP@else@ DB 'else', 00H			; `string'
+CONST	ENDS
+;	COMDAT ??_C@_04GNFOIEOK@elif@
+CONST	SEGMENT
+??_C@_04GNFOIEOK@elif@ DB 'elif', 00H			; `string'
+CONST	ENDS
 ;	COMDAT ??_C@_05LAPONLG@false@
 CONST	SEGMENT
 ??_C@_05LAPONLG@false@ DB 'false', 00H			; `string'
@@ -3592,18 +3602,22 @@ _TEXT	ENDS
 ; File C:\Users\leonf\Desktop\vsCode\c\Interpreter\Interpreter_github\Interpreter\src\interpretAST.c
 ;	COMDAT _interpretMainAST
 _TEXT	SEGMENT
-tv319 = -340						; size = 4
-tv84 = -340						; size = 4
-_cmp_expr_dt$1 = -140					; size = 4
-_cmp_expr$2 = -128					; size = 4
-_curID$3 = -116						; size = 4
-_curID$4 = -104						; size = 4
-_node$5 = -92						; size = 4
-_id_token$6 = -80					; size = 4
-_saveVarName$7 = -68					; size = 4
-_curNodeData$8 = -56					; size = 4
-_struct_dt$9 = -44					; size = 4
-_printVal_struct$10 = -32				; size = 4
+tv393 = -376						; size = 4
+tv367 = -376						; size = 4
+tv84 = -376						; size = 4
+_cmp_expr_dt$1 = -176					; size = 4
+_cmp_expr$2 = -164					; size = 4
+_init$3 = -152						; size = 4
+_cmp_expr_dt$4 = -140					; size = 4
+_cmp_expr$5 = -128					; size = 4
+_curID$6 = -116						; size = 4
+_curID$7 = -104						; size = 4
+_node$8 = -92						; size = 4
+_id_token$9 = -80					; size = 4
+_saveVarName$10 = -68					; size = 4
+_curNodeData$11 = -56					; size = 4
+_struct_dt$12 = -44					; size = 4
+_printVal_struct$13 = -32				; size = 4
 _in_new_scope$ = -20					; size = 4
 _curNode$ = -8						; size = 4
 _root$ = 8						; size = 4
@@ -3613,12 +3627,12 @@ _interpretMainAST PROC					; COMDAT
 
 	push	ebp
 	mov	ebp, esp
-	sub	esp, 340				; 00000154H
+	sub	esp, 376				; 00000178H
 	push	ebx
 	push	esi
 	push	edi
-	lea	edi, DWORD PTR [ebp-340]
-	mov	ecx, 85					; 00000055H
+	lea	edi, DWORD PTR [ebp-376]
+	mov	ecx, 94					; 0000005eH
 	mov	eax, -858993460				; ccccccccH
 	rep stosd
 	mov	ecx, OFFSET __36662879_interpretAST@c
@@ -3644,7 +3658,7 @@ $LN2@interpretM:
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	cmp	DWORD PTR [eax+16], 7
-	jne	$LN6@interpretM
+	jne	$LN8@interpretM
 
 ; 282  : 		{
 ; 283  : 			struct DATA_STRUCT* printVal_struct = interpretAST_binexpr(curNode->left);
@@ -3654,23 +3668,23 @@ $LN2@interpretM:
 	push	ecx
 	call	_interpretAST_binexpr
 	add	esp, 4
-	mov	DWORD PTR _printVal_struct$10[ebp], eax
+	mov	DWORD PTR _printVal_struct$13[ebp], eax
 
 ; 284  : 			int struct_dt = printVal_struct->dataType;
 
-	mov	eax, DWORD PTR _printVal_struct$10[ebp]
+	mov	eax, DWORD PTR _printVal_struct$13[ebp]
 	mov	ecx, DWORD PTR [eax+20]
-	mov	DWORD PTR _struct_dt$9[ebp], ecx
+	mov	DWORD PTR _struct_dt$12[ebp], ecx
 
 ; 285  : 			if (struct_dt == DT_INT)
 
-	cmp	DWORD PTR _struct_dt$9[ebp], 0
-	jne	SHORT $LN8@interpretM
+	cmp	DWORD PTR _struct_dt$12[ebp], 0
+	jne	SHORT $LN10@interpretM
 
 ; 286  : 			{
 ; 287  : 				printf("%lld\n", *(printVal_struct->intVal));
 
-	mov	eax, DWORD PTR _printVal_struct$10[ebp]
+	mov	eax, DWORD PTR _printVal_struct$13[ebp]
 	mov	ecx, DWORD PTR [eax+12]
 	mov	edx, DWORD PTR [ecx+4]
 	push	edx
@@ -3683,17 +3697,17 @@ $LN2@interpretM:
 ; 288  : 			}
 
 	jmp	SHORT $LN4@interpretM
-$LN8@interpretM:
+$LN10@interpretM:
 
 ; 289  : 			else if (struct_dt == DT_FLOAT)
 
-	cmp	DWORD PTR _struct_dt$9[ebp], 2
-	jne	SHORT $LN10@interpretM
+	cmp	DWORD PTR _struct_dt$12[ebp], 2
+	jne	SHORT $LN12@interpretM
 
 ; 290  : 			{
 ; 291  : 				printf("%Lf\n", *(printVal_struct->doubleVal));
 
-	mov	eax, DWORD PTR _printVal_struct$10[ebp]
+	mov	eax, DWORD PTR _printVal_struct$13[ebp]
 	mov	ecx, DWORD PTR [eax+8]
 	sub	esp, 8
 	movsd	xmm0, QWORD PTR [ecx]
@@ -3705,27 +3719,27 @@ $LN8@interpretM:
 ; 292  : 			}
 
 	jmp	SHORT $LN4@interpretM
-$LN10@interpretM:
+$LN12@interpretM:
 
 ; 293  : 
 ; 294  : 			else if (struct_dt == DT_BOOL)
 
-	cmp	DWORD PTR _struct_dt$9[ebp], 5
+	cmp	DWORD PTR _struct_dt$12[ebp], 5
 	jne	SHORT $LN4@interpretM
 
 ; 295  : 			{
 ; 296  : 				switch (*(printVal_struct->boolVal))
 
-	mov	eax, DWORD PTR _printVal_struct$10[ebp]
+	mov	eax, DWORD PTR _printVal_struct$13[ebp]
 	mov	ecx, DWORD PTR [eax+4]
 	mov	edx, DWORD PTR [ecx]
 	mov	DWORD PTR tv84[ebp], edx
 	cmp	DWORD PTR tv84[ebp], 0
-	je	SHORT $LN13@interpretM
+	je	SHORT $LN15@interpretM
 	cmp	DWORD PTR tv84[ebp], 1
-	je	SHORT $LN14@interpretM
+	je	SHORT $LN16@interpretM
 	jmp	SHORT $LN4@interpretM
-$LN13@interpretM:
+$LN15@interpretM:
 
 ; 297  : 				{
 ; 298  : 				case 0: printf("false\n"); break;
@@ -3734,7 +3748,7 @@ $LN13@interpretM:
 	call	_printf
 	add	esp, 4
 	jmp	SHORT $LN4@interpretM
-$LN14@interpretM:
+$LN16@interpretM:
 
 ; 299  : 				case 1: printf("true\n");  break;
 
@@ -3747,22 +3761,22 @@ $LN4@interpretM:
 ; 301  : 			}
 ; 302  : 		}
 
-	jmp	$LN37@interpretM
-$LN6@interpretM:
+	jmp	$LN49@interpretM
+$LN8@interpretM:
 
 ; 303  : 
 ; 304  : 		else if (curNode->tokenType == TT_IDENT)
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	cmp	DWORD PTR [eax+16], 18			; 00000012H
-	jne	$LN15@interpretM
+	jne	$LN17@interpretM
 
 ; 305  : 		{
 ; 306  : 			struct IDENT_tokenData* curNodeData = (struct IDENT_tokenData*)curNode->otherData;
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax+28]
-	mov	DWORD PTR _curNodeData$8[ebp], ecx
+	mov	DWORD PTR _curNodeData$11[ebp], ecx
 
 ; 307  : 			char* saveVarName = calloc(strlen(curNode->varName), sizeof(char));
 
@@ -3778,22 +3792,22 @@ $LN6@interpretM:
 	add	esp, 8
 	cmp	esi, esp
 	call	__RTC_CheckEsp
-	mov	DWORD PTR _saveVarName$7[ebp], eax
+	mov	DWORD PTR _saveVarName$10[ebp], eax
 
 ; 308  : 			saveVarName = strcpy(saveVarName, curNode->varName);
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax+32]
 	push	ecx
-	mov	edx, DWORD PTR _saveVarName$7[ebp]
+	mov	edx, DWORD PTR _saveVarName$10[ebp]
 	push	edx
 	call	_strcpy
 	add	esp, 8
-	mov	DWORD PTR _saveVarName$7[ebp], eax
+	mov	DWORD PTR _saveVarName$10[ebp], eax
 
 ; 309  : 			stackFrame_add_var(saveVarName);
 
-	mov	eax, DWORD PTR _saveVarName$7[ebp]
+	mov	eax, DWORD PTR _saveVarName$10[ebp]
 	push	eax
 	call	_stackFrame_add_var
 	add	esp, 4
@@ -3801,9 +3815,9 @@ $LN6@interpretM:
 ; 310  : 
 ; 311  : 			if (curNodeData->init == 0)
 
-	mov	eax, DWORD PTR _curNodeData$8[ebp]
+	mov	eax, DWORD PTR _curNodeData$11[ebp]
 	cmp	DWORD PTR [eax+8], 0
-	jne	SHORT $LN17@interpretM
+	jne	SHORT $LN19@interpretM
 
 ; 312  : 			{
 ; 313  : 				symtable_add(saveVarName, newID_token(DT_INT, 0, 0, saveVarName, 1, new_DATA_STRUCT(NULL, NULL, NULL, NULL, NULL, -1, 1)));
@@ -3820,7 +3834,7 @@ $LN6@interpretM:
 	add	esp, 32					; 00000020H
 	push	eax
 	push	1
-	mov	eax, DWORD PTR _saveVarName$7[ebp]
+	mov	eax, DWORD PTR _saveVarName$10[ebp]
 	push	eax
 	push	0
 	push	0
@@ -3829,25 +3843,25 @@ $LN6@interpretM:
 	call	_newID_token
 	add	esp, 28					; 0000001cH
 	push	eax
-	mov	ecx, DWORD PTR _saveVarName$7[ebp]
+	mov	ecx, DWORD PTR _saveVarName$10[ebp]
 	push	ecx
 	call	_symtable_add
 	add	esp, 8
-$LN17@interpretM:
+$LN19@interpretM:
 
 ; 314  : 			}
 ; 315  : 			if (curNodeData->init == 1)
 
-	mov	eax, DWORD PTR _curNodeData$8[ebp]
+	mov	eax, DWORD PTR _curNodeData$11[ebp]
 	cmp	DWORD PTR [eax+8], 1
-	jne	$LN21@interpretM
+	jne	$LN23@interpretM
 
 ; 316  : 			{
 ; 317  : 				if (curNodeData->var == 1)
 
-	mov	eax, DWORD PTR _curNodeData$8[ebp]
+	mov	eax, DWORD PTR _curNodeData$11[ebp]
 	cmp	DWORD PTR [eax+24], 1
-	jne	SHORT $LN19@interpretM
+	jne	SHORT $LN21@interpretM
 
 ; 318  : 				{
 ; 319  : 					// fix bug  (symtable)
@@ -3855,7 +3869,7 @@ $LN17@interpretM:
 
 	push	0
 	push	1
-	mov	eax, DWORD PTR _saveVarName$7[ebp]
+	mov	eax, DWORD PTR _saveVarName$10[ebp]
 	push	eax
 	push	0
 	push	0
@@ -3863,25 +3877,25 @@ $LN17@interpretM:
 	push	0
 	call	_newID_token
 	add	esp, 28					; 0000001cH
-	mov	DWORD PTR _id_token$6[ebp], eax
+	mov	DWORD PTR _id_token$9[ebp], eax
 
 ; 321  : 					node_t* node = symtable_add(saveVarName, id_token);
 
-	mov	eax, DWORD PTR _id_token$6[ebp]
+	mov	eax, DWORD PTR _id_token$9[ebp]
 	push	eax
-	mov	ecx, DWORD PTR _saveVarName$7[ebp]
+	mov	ecx, DWORD PTR _saveVarName$10[ebp]
 	push	ecx
 	call	_symtable_add
 	add	esp, 8
-	mov	DWORD PTR _node$5[ebp], eax
+	mov	DWORD PTR _node$8[ebp], eax
 
 ; 322  : 					struct IDENT_tokenData* curID = symtable_getItem(saveVarName);
 
-	mov	eax, DWORD PTR _saveVarName$7[ebp]
+	mov	eax, DWORD PTR _saveVarName$10[ebp]
 	push	eax
 	call	_symtable_getItem
 	add	esp, 4
-	mov	DWORD PTR _curID$4[ebp], eax
+	mov	DWORD PTR _curID$7[ebp], eax
 
 ; 323  : 					curID->data = interpretAST_binexpr(curNode->left);
 
@@ -3890,39 +3904,39 @@ $LN17@interpretM:
 	push	ecx
 	call	_interpretAST_binexpr
 	add	esp, 4
-	mov	edx, DWORD PTR _curID$4[ebp]
+	mov	edx, DWORD PTR _curID$7[ebp]
 	mov	DWORD PTR [edx+28], eax
 
 ; 324  : 				}
 
-	jmp	SHORT $LN21@interpretM
-$LN19@interpretM:
+	jmp	SHORT $LN23@interpretM
+$LN21@interpretM:
 
 ; 325  : 				else if (curNodeData->var == 0)
 
-	mov	eax, DWORD PTR _curNodeData$8[ebp]
+	mov	eax, DWORD PTR _curNodeData$11[ebp]
 	cmp	DWORD PTR [eax+24], 0
-	jne	SHORT $LN21@interpretM
+	jne	SHORT $LN23@interpretM
 
 ; 326  : 				{
 ; 327  : 					struct IDENT_tokenData* curID = symtable_getItem(curNodeData->varName);
 
-	mov	eax, DWORD PTR _curNodeData$8[ebp]
+	mov	eax, DWORD PTR _curNodeData$11[ebp]
 	mov	ecx, DWORD PTR [eax]
 	push	ecx
 	call	_symtable_getItem
 	add	esp, 4
-	mov	DWORD PTR _curID$3[ebp], eax
+	mov	DWORD PTR _curID$6[ebp], eax
 
 ; 328  : 					if (curID == NULL)
 
-	cmp	DWORD PTR _curID$3[ebp], 0
-	jne	SHORT $LN22@interpretM
+	cmp	DWORD PTR _curID$6[ebp], 0
+	jne	SHORT $LN24@interpretM
 
 ; 329  : 					{
 ; 330  : 						printf("[SYNTAX ERROR] variable '%s' has not been initialized\n", curNodeData->varName);
 
-	mov	eax, DWORD PTR _curNodeData$8[ebp]
+	mov	eax, DWORD PTR _curNodeData$11[ebp]
 	mov	ecx, DWORD PTR [eax]
 	push	ecx
 	push	OFFSET ??_C@_0DH@FNIBEMKD@?$FLSYNTAX?5ERROR?$FN?5variable?5?8?$CFs?8?5ha@
@@ -3936,7 +3950,7 @@ $LN19@interpretM:
 	call	DWORD PTR __imp__exit
 	cmp	esi, esp
 	call	__RTC_CheckEsp
-$LN22@interpretM:
+$LN24@interpretM:
 
 ; 332  : 					}
 ; 333  : 					curID->data = interpretAST_binexpr(curNode->left);
@@ -3946,9 +3960,9 @@ $LN22@interpretM:
 	push	ecx
 	call	_interpretAST_binexpr
 	add	esp, 4
-	mov	edx, DWORD PTR _curID$3[ebp]
+	mov	edx, DWORD PTR _curID$6[ebp]
 	mov	DWORD PTR [edx+28], eax
-$LN21@interpretM:
+$LN23@interpretM:
 
 ; 334  : 				}
 ; 335  : 			}
@@ -3956,7 +3970,7 @@ $LN21@interpretM:
 ; 337  : 			free(curNodeData);
 
 	mov	esi, esp
-	mov	eax, DWORD PTR _curNodeData$8[ebp]
+	mov	eax, DWORD PTR _curNodeData$11[ebp]
 	push	eax
 	call	DWORD PTR __imp__free
 	add	esp, 4
@@ -3965,8 +3979,8 @@ $LN21@interpretM:
 
 ; 338  : 		}
 
-	jmp	$LN37@interpretM
-$LN15@interpretM:
+	jmp	$LN49@interpretM
+$LN17@interpretM:
 
 ; 339  : 
 ; 340  : 		// todo: free ident_node
@@ -3974,7 +3988,7 @@ $LN15@interpretM:
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	cmp	DWORD PTR [eax+16], 21			; 00000015H
-	jne	SHORT $LN23@interpretM
+	jne	SHORT $LN25@interpretM
 
 ; 342  : 		{
 ; 343  : 			symtable_removeItem(curNode->left->varName);
@@ -3988,8 +4002,8 @@ $LN15@interpretM:
 
 ; 344  : 		}
 
-	jmp	$LN37@interpretM
-$LN23@interpretM:
+	jmp	$LN49@interpretM
+$LN25@interpretM:
 
 ; 345  : 
 ; 346  : 
@@ -3997,7 +4011,7 @@ $LN23@interpretM:
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	cmp	DWORD PTR [eax+16], 8
-	jne	$LN25@interpretM
+	jne	$LN27@interpretM
 
 ; 348  : 		{
 ; 349  : 		    struct DATA_STRUCT* cmp_expr = interpretAST_binexpr(curNode->left->left);
@@ -4008,33 +4022,41 @@ $LN23@interpretM:
 	push	edx
 	call	_interpretAST_binexpr
 	add	esp, 4
-	mov	DWORD PTR _cmp_expr$2[ebp], eax
+	mov	DWORD PTR _cmp_expr$5[ebp], eax
 
 ; 350  : 			int cmp_expr_dt = cmp_expr->dataType;
 
-	mov	eax, DWORD PTR _cmp_expr$2[ebp]
+	mov	eax, DWORD PTR _cmp_expr$5[ebp]
 	mov	ecx, DWORD PTR [eax+20]
-	mov	DWORD PTR _cmp_expr_dt$1[ebp], ecx
+	mov	DWORD PTR _cmp_expr_dt$4[ebp], ecx
 
-; 351  : 			if (cmp_expr_dt == DT_INT)
+; 351  : 			int init = 0;
 
-	cmp	DWORD PTR _cmp_expr_dt$1[ebp], 0
-	jne	SHORT $LN27@interpretM
+	mov	DWORD PTR _init$3[ebp], 0
 
-; 352  : 			{
-; 353  : 				if (*(cmp_expr->intVal) != 0)
+; 352  : 			if (cmp_expr_dt == DT_INT)
 
-	mov	eax, DWORD PTR _cmp_expr$2[ebp]
+	cmp	DWORD PTR _cmp_expr_dt$4[ebp], 0
+	jne	SHORT $LN29@interpretM
+
+; 353  : 			{
+; 354  : 				if (*(cmp_expr->intVal) != 0)
+
+	mov	eax, DWORD PTR _cmp_expr$5[ebp]
 	mov	ecx, DWORD PTR [eax+12]
-	mov	DWORD PTR tv319[ebp], ecx
-	mov	edx, DWORD PTR tv319[ebp]
-	mov	eax, DWORD PTR tv319[ebp]
+	mov	DWORD PTR tv367[ebp], ecx
+	mov	edx, DWORD PTR tv367[ebp]
+	mov	eax, DWORD PTR tv367[ebp]
 	mov	ecx, DWORD PTR [edx]
 	or	ecx, DWORD PTR [eax+4]
-	je	SHORT $LN29@interpretM
+	je	SHORT $LN31@interpretM
 
-; 354  : 				{
-; 355  : 					interpretMainAST(curNode->left->right);
+; 355  : 				{
+; 356  : 					init = 1;
+
+	mov	DWORD PTR _init$3[ebp], 1
+
+; 357  : 					interpretMainAST(curNode->left->right);
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax+20]
@@ -4042,64 +4064,37 @@ $LN23@interpretM:
 	push	edx
 	call	_interpretMainAST
 	add	esp, 4
+$LN31@interpretM:
+
+; 358  : 				}
+; 359  : 			}
+
+	jmp	SHORT $LN36@interpretM
 $LN29@interpretM:
 
-; 356  : 				}
-; 357  : 			}
+; 360  : 
+; 361  : 			else if (cmp_expr_dt == DT_FLOAT)
 
-	jmp	SHORT $LN34@interpretM
-$LN27@interpretM:
+	cmp	DWORD PTR _cmp_expr_dt$4[ebp], 2
+	jne	SHORT $LN32@interpretM
 
-; 358  : 
-; 359  : 			else if (cmp_expr_dt == DT_FLOAT)
+; 362  : 			{
+; 363  : 				if (*(cmp_expr->doubleVal) != 1)
 
-	cmp	DWORD PTR _cmp_expr_dt$1[ebp], 2
-	jne	SHORT $LN30@interpretM
-
-; 360  : 			{
-; 361  : 				if (*(cmp_expr->doubleVal) != 1)
-
-	mov	eax, DWORD PTR _cmp_expr$2[ebp]
+	mov	eax, DWORD PTR _cmp_expr$5[ebp]
 	mov	ecx, DWORD PTR [eax+8]
 	movsd	xmm0, QWORD PTR [ecx]
 	ucomisd	xmm0, QWORD PTR __real@3ff0000000000000
 	lahf
 	test	ah, 68					; 00000044H
-	jnp	SHORT $LN32@interpretM
+	jnp	SHORT $LN34@interpretM
 
-; 362  : 				{
-; 363  : 					interpretMainAST(curNode->left->right);
+; 364  : 				{
+; 365  : 					init = 1;
 
-	mov	eax, DWORD PTR _curNode$[ebp]
-	mov	ecx, DWORD PTR [eax+20]
-	mov	edx, DWORD PTR [ecx+24]
-	push	edx
-	call	_interpretMainAST
-	add	esp, 4
-$LN32@interpretM:
+	mov	DWORD PTR _init$3[ebp], 1
 
-; 364  : 				}
-; 365  : 	        }
-
-	jmp	SHORT $LN34@interpretM
-$LN30@interpretM:
-
-; 366  : 
-; 367  : 			else if (cmp_expr_dt == DT_BOOL)
-
-	cmp	DWORD PTR _cmp_expr_dt$1[ebp], 5
-	jne	SHORT $LN34@interpretM
-
-; 368  : 			{
-; 369  : 				if (*(cmp_expr->boolVal) != 0)
-
-	mov	eax, DWORD PTR _cmp_expr$2[ebp]
-	mov	ecx, DWORD PTR [eax+4]
-	cmp	DWORD PTR [ecx], 0
-	je	SHORT $LN34@interpretM
-
-; 370  : 				{
-; 371  : 					interpretMainAST(curNode->left->right);
+; 366  : 					interpretMainAST(curNode->left->right);
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax+20]
@@ -4109,27 +4104,256 @@ $LN30@interpretM:
 	add	esp, 4
 $LN34@interpretM:
 
-; 372  : 				}
-; 373  : 			}
-; 374  : 		}
+; 367  : 				}
+; 368  : 	        }
 
-	jmp	SHORT $LN37@interpretM
-$LN25@interpretM:
+	jmp	SHORT $LN36@interpretM
+$LN32@interpretM:
 
-; 375  : 
-; 376  : 
-; 377  : 		else if (curNode->tokenType == TT_SCOPE)
+; 369  : 
+; 370  : 			else if (cmp_expr_dt == DT_BOOL)
+
+	cmp	DWORD PTR _cmp_expr_dt$4[ebp], 5
+	jne	SHORT $LN36@interpretM
+
+; 371  : 			{
+; 372  : 				if (*(cmp_expr->boolVal) != 0)
+
+	mov	eax, DWORD PTR _cmp_expr$5[ebp]
+	mov	ecx, DWORD PTR [eax+4]
+	cmp	DWORD PTR [ecx], 0
+	je	SHORT $LN36@interpretM
+
+; 373  : 				{
+; 374  : 					init = 1;
+
+	mov	DWORD PTR _init$3[ebp], 1
+
+; 375  : 					interpretMainAST(curNode->left->right);
+
+	mov	eax, DWORD PTR _curNode$[ebp]
+	mov	ecx, DWORD PTR [eax+20]
+	mov	edx, DWORD PTR [ecx+24]
+	push	edx
+	call	_interpretMainAST
+	add	esp, 4
+$LN36@interpretM:
+
+; 376  : 				}
+; 377  : 			}
+; 378  : 			///////////////////////////////////////////////////////
+; 379  : 			//// ELIF
+; 380  : 			///////////////////////////////////////////////////////
+; 381  : 			while (curNode->right->tokenType == TT_ELIF)
+
+	mov	eax, DWORD PTR _curNode$[ebp]
+	mov	ecx, DWORD PTR [eax+24]
+	cmp	DWORD PTR [ecx+16], 35			; 00000023H
+	jne	$LN7@interpretM
+
+; 382  : 			{
+; 383  : 				curNode = curNode->right;
+
+	mov	eax, DWORD PTR _curNode$[ebp]
+	mov	ecx, DWORD PTR [eax+24]
+	mov	DWORD PTR _curNode$[ebp], ecx
+
+; 384  : 				struct DATA_STRUCT* cmp_expr = interpretAST_binexpr(curNode->left->left);
+
+	mov	eax, DWORD PTR _curNode$[ebp]
+	mov	ecx, DWORD PTR [eax+20]
+	mov	edx, DWORD PTR [ecx+20]
+	push	edx
+	call	_interpretAST_binexpr
+	add	esp, 4
+	mov	DWORD PTR _cmp_expr$2[ebp], eax
+
+; 385  : 				int cmp_expr_dt = cmp_expr->dataType;
+
+	mov	eax, DWORD PTR _cmp_expr$2[ebp]
+	mov	ecx, DWORD PTR [eax+20]
+	mov	DWORD PTR _cmp_expr_dt$1[ebp], ecx
+
+; 386  : 				if (cmp_expr_dt == DT_INT)
+
+	cmp	DWORD PTR _cmp_expr_dt$1[ebp], 0
+	jne	SHORT $LN37@interpretM
+
+; 387  : 				{
+; 388  : 					if (*(cmp_expr->intVal) != 0 && init != 1)
+
+	mov	eax, DWORD PTR _cmp_expr$2[ebp]
+	mov	ecx, DWORD PTR [eax+12]
+	mov	DWORD PTR tv393[ebp], ecx
+	mov	edx, DWORD PTR tv393[ebp]
+	mov	eax, DWORD PTR tv393[ebp]
+	mov	ecx, DWORD PTR [edx]
+	or	ecx, DWORD PTR [eax+4]
+	je	SHORT $LN39@interpretM
+	cmp	DWORD PTR _init$3[ebp], 1
+	je	SHORT $LN39@interpretM
+
+; 389  : 					{
+; 390  : 						init = 1;
+
+	mov	DWORD PTR _init$3[ebp], 1
+
+; 391  : 						interpretMainAST(curNode->left->right);
+
+	mov	eax, DWORD PTR _curNode$[ebp]
+	mov	ecx, DWORD PTR [eax+20]
+	mov	edx, DWORD PTR [ecx+24]
+	push	edx
+	call	_interpretMainAST
+	add	esp, 4
+$LN39@interpretM:
+
+; 392  : 					}
+; 393  : 				}
+
+	jmp	$LN44@interpretM
+$LN37@interpretM:
+
+; 394  : 
+; 395  : 				else if (cmp_expr_dt == DT_FLOAT)
+
+	cmp	DWORD PTR _cmp_expr_dt$1[ebp], 2
+	jne	SHORT $LN40@interpretM
+
+; 396  : 				{
+; 397  : 					if (*(cmp_expr->doubleVal) != 1 && init != 1)
+
+	mov	eax, DWORD PTR _cmp_expr$2[ebp]
+	mov	ecx, DWORD PTR [eax+8]
+	movsd	xmm0, QWORD PTR [ecx]
+	ucomisd	xmm0, QWORD PTR __real@3ff0000000000000
+	lahf
+	test	ah, 68					; 00000044H
+	jnp	SHORT $LN42@interpretM
+	cmp	DWORD PTR _init$3[ebp], 1
+	je	SHORT $LN42@interpretM
+
+; 398  : 					{
+; 399  : 						init = 1;
+
+	mov	DWORD PTR _init$3[ebp], 1
+
+; 400  : 						interpretMainAST(curNode->left->right);
+
+	mov	eax, DWORD PTR _curNode$[ebp]
+	mov	ecx, DWORD PTR [eax+20]
+	mov	edx, DWORD PTR [ecx+24]
+	push	edx
+	call	_interpretMainAST
+	add	esp, 4
+$LN42@interpretM:
+
+; 401  : 					}
+; 402  : 				}
+
+	jmp	SHORT $LN44@interpretM
+$LN40@interpretM:
+
+; 403  : 
+; 404  : 				else if (cmp_expr_dt == DT_BOOL)
+
+	cmp	DWORD PTR _cmp_expr_dt$1[ebp], 5
+	jne	SHORT $LN44@interpretM
+
+; 405  : 				{
+; 406  : 					if (*(cmp_expr->boolVal) != 0 && init != 1)
+
+	mov	eax, DWORD PTR _cmp_expr$2[ebp]
+	mov	ecx, DWORD PTR [eax+4]
+	cmp	DWORD PTR [ecx], 0
+	je	SHORT $LN44@interpretM
+	cmp	DWORD PTR _init$3[ebp], 1
+	je	SHORT $LN44@interpretM
+
+; 407  : 					{
+; 408  : 						init = 1;
+
+	mov	DWORD PTR _init$3[ebp], 1
+
+; 409  : 						interpretMainAST(curNode->left->right);
+
+	mov	eax, DWORD PTR _curNode$[ebp]
+	mov	ecx, DWORD PTR [eax+20]
+	mov	edx, DWORD PTR [ecx+24]
+	push	edx
+	call	_interpretMainAST
+	add	esp, 4
+$LN44@interpretM:
+
+; 410  : 					}
+; 411  : 				}
+; 412  : 			}
+
+	jmp	$LN36@interpretM
+$LN7@interpretM:
+
+; 413  : 
+; 414  : 			////////////////////////////////////////////////////
+; 415  : 			////  ELSE
+; 416  : 			////////////////////////////////////////////////////
+; 417  : 			if (curNode->right->tokenType == TT_ELSE)
+
+	mov	eax, DWORD PTR _curNode$[ebp]
+	mov	ecx, DWORD PTR [eax+24]
+	cmp	DWORD PTR [ecx+16], 36			; 00000024H
+	jne	SHORT $LN46@interpretM
+
+; 418  : 			{
+; 419  : 				curNode = curNode->right;
+
+	mov	eax, DWORD PTR _curNode$[ebp]
+	mov	ecx, DWORD PTR [eax+24]
+	mov	DWORD PTR _curNode$[ebp], ecx
+
+; 420  : 				
+; 421  : 				if (init == 0)
+
+	cmp	DWORD PTR _init$3[ebp], 0
+	jne	SHORT $LN46@interpretM
+
+; 422  : 				{
+; 423  : 					init = 1;
+
+	mov	DWORD PTR _init$3[ebp], 1
+
+; 424  : 					interpretMainAST(curNode->left->right);
+
+	mov	eax, DWORD PTR _curNode$[ebp]
+	mov	ecx, DWORD PTR [eax+20]
+	mov	edx, DWORD PTR [ecx+24]
+	push	edx
+	call	_interpretMainAST
+	add	esp, 4
+$LN46@interpretM:
+
+; 425  : 				}
+; 426  : 			}
+; 427  : 		}
+
+	jmp	SHORT $LN49@interpretM
+$LN27@interpretM:
+
+; 428  : 		////////////////////////////////////////////////////
+; 429  : 		////  SCOPE
+; 430  : 		////////////////////////////////////////////////////
+; 431  : 
+; 432  : 		else if (curNode->tokenType == TT_SCOPE)
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	cmp	DWORD PTR [eax+16], 33			; 00000021H
-	jne	SHORT $LN35@interpretM
+	jne	SHORT $LN47@interpretM
 
-; 378  : 		{
-; 379  : 			varStack_push_frame();
+; 433  : 		{
+; 434  : 			varStack_push_frame();
 
 	call	_varStack_push_frame
 
-; 380  : 			interpretMainAST(curNode->left);
+; 435  : 			interpretMainAST(curNode->left);
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax+20]
@@ -4137,44 +4361,58 @@ $LN25@interpretM:
 	call	_interpretMainAST
 	add	esp, 4
 
-; 381  : 		}
+; 436  : 		}
 
-	jmp	SHORT $LN37@interpretM
-$LN35@interpretM:
+	jmp	SHORT $LN49@interpretM
+$LN47@interpretM:
 
-; 382  : 
-; 383  : 		else if (curNode->tokenType == TT_SCOPE_END)
+; 437  : 
+; 438  : 		else if (curNode->tokenType == TT_SCOPE_END)
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	cmp	DWORD PTR [eax+16], 34			; 00000022H
-	jne	SHORT $LN37@interpretM
+	jne	SHORT $LN49@interpretM
 
-; 384  : 		{
-; 385  : 			varStack_pop_frame();
+; 439  : 		{
+; 440  : 			varStack_pop_frame();
 
 	call	_varStack_pop_frame
-$LN37@interpretM:
+$LN49@interpretM:
 
-; 386  : 		}
-; 387  : 
-; 388  : 
-; 389  : 		curNode = curNode->right;
+; 441  : 		}
+; 442  : 
+; 443  : 		//////////////////////////////////////////////////
+; 444  : 
+; 445  : 		// todo:  add error to gen function!!!
+; 446  : 		/*if (curNode->tokenType == TT_ELIF)
+; 447  : 		{
+; 448  : 			printf("[ERROR] you cannot have an 'elif' statement without an 'if' statement \n");
+; 449  : 			exit(1);
+; 450  : 		}
+; 451  : 
+; 452  : 		if (curNode->tokenType == TT_ELSE)
+; 453  : 		{
+; 454  : 			printf("[ERROR] you cannot have an 'else' statement without an 'if' statement \n");
+; 455  : 			exit(1);
+; 456  : 		}*/
+; 457  : 
+; 458  : 		curNode = curNode->right;
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax+24]
 	mov	DWORD PTR _curNode$[ebp], ecx
 
-; 390  : 	}
+; 459  : 	}
 
 	jmp	$LN2@interpretM
 $LN3@interpretM:
 
-; 391  : }
+; 460  : }
 
 	pop	edi
 	pop	esi
 	pop	ebx
-	add	esp, 340				; 00000154H
+	add	esp, 376				; 00000178H
 	cmp	ebp, esp
 	call	__RTC_CheckEsp
 	mov	esp, ebp

@@ -122,6 +122,8 @@ enum
 	TT_BOOL_FALSE,
 	TT_SCOPE,
 	TT_SCOPE_END,
+	TT_ELIF,
+	TT_ELSE,
 };
 
 
@@ -164,7 +166,8 @@ static struct TokenIdent multicharTokens[] =
 	{"print", TT_PRINT}, {"if", TT_IF},
 	{"while", TT_WHILE}, {"var", TT_VAR},
 	{"undef", TT_UNDEF}, {"true", TT_BOOL_TRUE},
-	{"false", TT_BOOL_FALSE},
+	{"false", TT_BOOL_FALSE}, {"elif", TT_ELIF},
+	{"else", TT_ELSE},
 };
 
 struct NumericVal

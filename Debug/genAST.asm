@@ -19,6 +19,8 @@ PUBLIC	??_C@_03MEPDGFMA@var@				; `string'
 PUBLIC	??_C@_05PKCPKOLM@undef@				; `string'
 PUBLIC	??_C@_04LOAJBDKD@true@				; `string'
 PUBLIC	??_C@_05LAPONLG@false@				; `string'
+PUBLIC	??_C@_04GNFOIEOK@elif@				; `string'
+PUBLIC	??_C@_04FHMCPBIP@else@				; `string'
 _BSS	SEGMENT
 _globl_open_curly_count DD 01H DUP (?)
 _globl_closed_curly_count DD 01H DUP (?)
@@ -35,6 +37,14 @@ __8478A1A4_tokens@h DB 01H
 __E2865EBA_corecrt_math@h DB 01H
 __B5AFADD0_genAST@c DB 01H
 msvcjmc	ENDS
+;	COMDAT ??_C@_04FHMCPBIP@else@
+CONST	SEGMENT
+??_C@_04FHMCPBIP@else@ DB 'else', 00H			; `string'
+CONST	ENDS
+;	COMDAT ??_C@_04GNFOIEOK@elif@
+CONST	SEGMENT
+??_C@_04GNFOIEOK@elif@ DB 'elif', 00H			; `string'
+CONST	ENDS
 ;	COMDAT ??_C@_05LAPONLG@false@
 CONST	SEGMENT
 ??_C@_05LAPONLG@false@ DB 'false', 00H			; `string'
@@ -909,11 +919,11 @@ _genMainAST PROC					; COMDAT
 	mov	edx, DWORD PTR tv65[ebp]
 	sub	edx, 7
 	mov	DWORD PTR tv65[ebp], edx
-	cmp	DWORD PTR tv65[ebp], 14			; 0000000eH
+	cmp	DWORD PTR tv65[ebp], 29			; 0000001dH
 	ja	$LN2@genMainAST
 	mov	eax, DWORD PTR tv65[ebp]
-	movzx	ecx, BYTE PTR $LN22@genMainAST[eax]
-	jmp	DWORD PTR $LN23@genMainAST[ecx*4]
+	movzx	ecx, BYTE PTR $LN25@genMainAST[eax]
+	jmp	DWORD PTR $LN26@genMainAST[ecx*4]
 $LN4@genMainAST:
 
 ; 329  : 	{
@@ -1310,33 +1320,212 @@ $LN13@genMainAST:
 $LN14@genMainAST:
 
 ; 393  :      
-; 394  : 
-; 395  : 	///////////////////////////////////////////////////////////////////
-; 396  : 	//    SCOPE
-; 397  : 	///////////////////////////////////////////////////////////////////
-; 398  : 
-; 399  : 	case TT_LEFT_CURLY:
-; 400  : 		globl_open_curly_count++;
+; 394  : 	case TT_ELIF:
+; 395  : 		scan_curToken();
+
+	call	_scan_curToken
+
+; 396  : 		if (currentToken->tokenType != TT_LEFT_PAREN)
+
+	mov	eax, DWORD PTR _currentToken
+	cmp	DWORD PTR [eax], 9
+	je	SHORT $LN15@genMainAST
+
+; 397  : 		{
+; 398  : 			printf("[SYNTAX ERROR] '(' is missing in Line %d\n", Line);
+
+	mov	eax, DWORD PTR _Line
+	push	eax
+	push	OFFSET ??_C@_0CK@IKFFBBDD@?$FLSYNTAX?5ERROR?$FN?5?8?$CI?8?5is?5missing?5i@
+	call	_printf
+	add	esp, 8
+
+; 399  : 			exit(1);
+
+	mov	esi, esp
+	push	1
+	call	DWORD PTR __imp__exit
+	cmp	esi, esp
+	call	__RTC_CheckEsp
+$LN15@genMainAST:
+
+; 400  : 		}
+; 401  : 		node = mkastnode(TT_ELIF, 0, 0, NULL, NULL, NULL, NULL);
+
+	push	0
+	push	0
+	push	0
+	push	0
+	sub	esp, 8
+	xorps	xmm0, xmm0
+	movsd	QWORD PTR [esp], xmm0
+	push	0
+	push	0
+	push	35					; 00000023H
+	call	_mkastnode
+	add	esp, 36					; 00000024H
+	mov	DWORD PTR _node$[ebp], eax
+
+; 402  : 		node->left = mkastnode(TT_ANY_OP, 0, 0, NULL, NULL, NULL, NULL);
+
+	push	0
+	push	0
+	push	0
+	push	0
+	sub	esp, 8
+	xorps	xmm0, xmm0
+	movsd	QWORD PTR [esp], xmm0
+	push	0
+	push	0
+	push	25					; 00000019H
+	call	_mkastnode
+	add	esp, 36					; 00000024H
+	mov	ecx, DWORD PTR _node$[ebp]
+	mov	DWORD PTR [ecx+20], eax
+
+; 403  : 		node->left->left = binexpr(0, TT_LEFT_CURLY);
+
+	push	11					; 0000000bH
+	push	0
+	call	_binexpr
+	add	esp, 8
+	mov	ecx, DWORD PTR _node$[ebp]
+	mov	edx, DWORD PTR [ecx+20]
+	mov	DWORD PTR [edx+20], eax
+
+; 404  : 		node->left->right = genMainAST(scope_depth, SCOPE_MODE_STATEMENT);
+
+	push	1
+	mov	eax, DWORD PTR _scope_depth$[ebp]
+	push	eax
+	call	_genMainAST
+	add	esp, 8
+	mov	ecx, DWORD PTR _node$[ebp]
+	mov	edx, DWORD PTR [ecx+20]
+	mov	DWORD PTR [edx+24], eax
+
+; 405  : 		node->right = genMainAST(scope_depth, scope_mode);
+
+	mov	eax, DWORD PTR _scope_mode$[ebp]
+	push	eax
+	mov	ecx, DWORD PTR _scope_depth$[ebp]
+	push	ecx
+	call	_genMainAST
+	add	esp, 8
+	mov	edx, DWORD PTR _node$[ebp]
+	mov	DWORD PTR [edx+24], eax
+
+; 406  : 		return node;
+
+	mov	eax, DWORD PTR _node$[ebp]
+	jmp	$LN1@genMainAST
+
+; 407  : 		break;
+
+	jmp	$LN2@genMainAST
+$LN16@genMainAST:
+
+; 408  : 
+; 409  : 	case TT_ELSE:
+; 410  : 		node = mkastnode(TT_ELSE, 0, 0, NULL, NULL, NULL, NULL);
+
+	push	0
+	push	0
+	push	0
+	push	0
+	sub	esp, 8
+	xorps	xmm0, xmm0
+	movsd	QWORD PTR [esp], xmm0
+	push	0
+	push	0
+	push	36					; 00000024H
+	call	_mkastnode
+	add	esp, 36					; 00000024H
+	mov	DWORD PTR _node$[ebp], eax
+
+; 411  : 		node->left = mkastnode(TT_ANY_OP, 0, 0, NULL, NULL, NULL, NULL);
+
+	push	0
+	push	0
+	push	0
+	push	0
+	sub	esp, 8
+	xorps	xmm0, xmm0
+	movsd	QWORD PTR [esp], xmm0
+	push	0
+	push	0
+	push	25					; 00000019H
+	call	_mkastnode
+	add	esp, 36					; 00000024H
+	mov	ecx, DWORD PTR _node$[ebp]
+	mov	DWORD PTR [ecx+20], eax
+
+; 412  : 		node->left->left = NULL;
+
+	mov	eax, DWORD PTR _node$[ebp]
+	mov	ecx, DWORD PTR [eax+20]
+	mov	DWORD PTR [ecx+20], 0
+
+; 413  : 		node->left->right = genMainAST(scope_depth, SCOPE_MODE_STATEMENT);
+
+	push	1
+	mov	eax, DWORD PTR _scope_depth$[ebp]
+	push	eax
+	call	_genMainAST
+	add	esp, 8
+	mov	ecx, DWORD PTR _node$[ebp]
+	mov	edx, DWORD PTR [ecx+20]
+	mov	DWORD PTR [edx+24], eax
+
+; 414  : 		node->right = genMainAST(scope_depth, scope_mode);
+
+	mov	eax, DWORD PTR _scope_mode$[ebp]
+	push	eax
+	mov	ecx, DWORD PTR _scope_depth$[ebp]
+	push	ecx
+	call	_genMainAST
+	add	esp, 8
+	mov	edx, DWORD PTR _node$[ebp]
+	mov	DWORD PTR [edx+24], eax
+
+; 415  : 		return node;
+
+	mov	eax, DWORD PTR _node$[ebp]
+	jmp	$LN1@genMainAST
+
+; 416  : 		break;
+
+	jmp	$LN2@genMainAST
+$LN17@genMainAST:
+
+; 417  : 
+; 418  : 
+; 419  : 	///////////////////////////////////////////////////////////////////
+; 420  : 	//    SCOPE
+; 421  : 	///////////////////////////////////////////////////////////////////
+; 422  : 
+; 423  : 	case TT_LEFT_CURLY:
+; 424  : 		globl_open_curly_count++;
 
 	mov	eax, DWORD PTR _globl_open_curly_count
 	add	eax, 1
 	mov	DWORD PTR _globl_open_curly_count, eax
 
-; 401  : 		globl_current_depth = globl_open_curly_count - globl_closed_curly_count;
+; 425  : 		globl_current_depth = globl_open_curly_count - globl_closed_curly_count;
 
 	mov	eax, DWORD PTR _globl_open_curly_count
 	sub	eax, DWORD PTR _globl_closed_curly_count
 	mov	DWORD PTR _globl_current_depth, eax
 
-; 402  : 		if (globl_current_depth == (scope_depth + 1))
+; 426  : 		if (globl_current_depth == (scope_depth + 1))
 
 	mov	eax, DWORD PTR _scope_depth$[ebp]
 	add	eax, 1
 	cmp	DWORD PTR _globl_current_depth, eax
-	jne	SHORT $LN15@genMainAST
+	jne	SHORT $LN18@genMainAST
 
-; 403  : 		{
-; 404  : 			node = mkastnode(TT_SCOPE, 0, 0, NULL, NULL, NULL, NULL);
+; 427  : 		{
+; 428  : 			node = mkastnode(TT_SCOPE, 0, 0, NULL, NULL, NULL, NULL);
 
 	push	0
 	push	0
@@ -1352,7 +1541,7 @@ $LN14@genMainAST:
 	add	esp, 36					; 00000024H
 	mov	DWORD PTR _node$[ebp], eax
 
-; 405  : 			node->left = genMainAST(globl_current_depth, SCOPE_MODE_DEFAULT);
+; 429  : 			node->left = genMainAST(globl_current_depth, SCOPE_MODE_DEFAULT);
 
 	push	0
 	mov	eax, DWORD PTR _globl_current_depth
@@ -1362,13 +1551,13 @@ $LN14@genMainAST:
 	mov	ecx, DWORD PTR _node$[ebp]
 	mov	DWORD PTR [ecx+20], eax
 
-; 406  : 			if (scope_mode == SCOPE_MODE_DEFAULT)
+; 430  : 			if (scope_mode == SCOPE_MODE_DEFAULT)
 
 	cmp	DWORD PTR _scope_mode$[ebp], 0
-	jne	SHORT $LN16@genMainAST
+	jne	SHORT $LN19@genMainAST
 
-; 407  : 			{
-; 408  : 				node->right = genMainAST(globl_current_depth, scope_mode);
+; 431  : 			{
+; 432  : 				node->right = genMainAST(globl_current_depth, scope_mode);
 
 	mov	eax, DWORD PTR _scope_mode$[ebp]
 	push	eax
@@ -1378,56 +1567,56 @@ $LN14@genMainAST:
 	add	esp, 8
 	mov	edx, DWORD PTR _node$[ebp]
 	mov	DWORD PTR [edx+24], eax
-$LN16@genMainAST:
+$LN19@genMainAST:
 
-; 409  : 			}
-; 410  : 			return node;
+; 433  : 			}
+; 434  : 			return node;
 
 	mov	eax, DWORD PTR _node$[ebp]
 	jmp	$LN1@genMainAST
-$LN15@genMainAST:
+$LN18@genMainAST:
 
-; 411  : 		}
-; 412  : 		break;
+; 435  : 		}
+; 436  : 		break;
 
 	jmp	SHORT $LN2@genMainAST
-$LN17@genMainAST:
+$LN20@genMainAST:
 
-; 413  : 
-; 414  : 	case TT_RIGHT_CURLY:
-; 415  : 		globl_closed_curly_count++;
+; 437  : 
+; 438  : 	case TT_RIGHT_CURLY:
+; 439  : 		globl_closed_curly_count++;
 
 	mov	eax, DWORD PTR _globl_closed_curly_count
 	add	eax, 1
 	mov	DWORD PTR _globl_closed_curly_count, eax
 
-; 416  : 		globl_current_depth = globl_open_curly_count - globl_closed_curly_count;
+; 440  : 		globl_current_depth = globl_open_curly_count - globl_closed_curly_count;
 
 	mov	eax, DWORD PTR _globl_open_curly_count
 	sub	eax, DWORD PTR _globl_closed_curly_count
 	mov	DWORD PTR _globl_current_depth, eax
 
-; 417  : 		if (globl_current_depth == (scope_depth -1))
+; 441  : 		if (globl_current_depth == (scope_depth -1))
 
 	mov	eax, DWORD PTR _scope_depth$[ebp]
 	sub	eax, 1
 	cmp	DWORD PTR _globl_current_depth, eax
-	jne	SHORT $LN18@genMainAST
+	jne	SHORT $LN21@genMainAST
 
-; 418  : 		{
-; 419  : 			globl_open_curly_count -= 1;
+; 442  : 		{
+; 443  : 			globl_open_curly_count -= 1;
 
 	mov	eax, DWORD PTR _globl_open_curly_count
 	sub	eax, 1
 	mov	DWORD PTR _globl_open_curly_count, eax
 
-; 420  : 			globl_closed_curly_count -= 1;
+; 444  : 			globl_closed_curly_count -= 1;
 
 	mov	eax, DWORD PTR _globl_closed_curly_count
 	sub	eax, 1
 	mov	DWORD PTR _globl_closed_curly_count, eax
 
-; 421  : 			node = mkastnode(TT_SCOPE_END, 0, 0, NULL, NULL, NULL, NULL);
+; 445  : 			node = mkastnode(TT_SCOPE_END, 0, 0, NULL, NULL, NULL, NULL);
 
 	push	0
 	push	0
@@ -1443,39 +1632,39 @@ $LN17@genMainAST:
 	add	esp, 36					; 00000024H
 	mov	DWORD PTR _node$[ebp], eax
 
-; 422  : 			return node;
+; 446  : 			return node;
 
 	mov	eax, DWORD PTR _node$[ebp]
 	jmp	SHORT $LN1@genMainAST
-$LN18@genMainAST:
+$LN21@genMainAST:
 $LN2@genMainAST:
 
-; 423  : 		}
-; 424  : 		break;
-; 425  : 
-; 426  : 	/////////////////////////////////////////////////////////////////////
-; 427  : 
-; 428  : 
-; 429  : 	}
-; 430  : 	if (currentToken->tokenType == TT_EOF)
+; 447  : 		}
+; 448  : 		break;
+; 449  : 
+; 450  : 	/////////////////////////////////////////////////////////////////////
+; 451  : 
+; 452  : 
+; 453  : 	}
+; 454  : 	if (currentToken->tokenType == TT_EOF)
 
 	mov	eax, DWORD PTR _currentToken
 	cmp	DWORD PTR [eax], 17			; 00000011H
-	jne	SHORT $LN19@genMainAST
+	jne	SHORT $LN22@genMainAST
 
-; 431  : 	{
-; 432  : 		right = NULL;
+; 455  : 	{
+; 456  : 		right = NULL;
 
 	mov	DWORD PTR _right$[ebp], 0
 
-; 433  : 	}
+; 457  : 	}
 
-	jmp	SHORT $LN20@genMainAST
-$LN19@genMainAST:
+	jmp	SHORT $LN23@genMainAST
+$LN22@genMainAST:
 
-; 434  : 	else
-; 435  : 	{
-; 436  : 		right = genMainAST(scope_depth, scope_mode);
+; 458  : 	else
+; 459  : 	{
+; 460  : 		right = genMainAST(scope_depth, scope_mode);
 
 	mov	eax, DWORD PTR _scope_mode$[ebp]
 	push	eax
@@ -1484,10 +1673,10 @@ $LN19@genMainAST:
 	call	_genMainAST
 	add	esp, 8
 	mov	DWORD PTR _right$[ebp], eax
-$LN20@genMainAST:
+$LN23@genMainAST:
 
-; 437  : 	}
-; 438  : 	node = mkastnode(t->tokenType, t->intValue, t->floatVal, left, right, NULL, NULL);
+; 461  : 	}
+; 462  : 	node = mkastnode(t->tokenType, t->intValue, t->floatVal, left, right, NULL, NULL);
 
 	push	0
 	push	0
@@ -1511,12 +1700,12 @@ $LN20@genMainAST:
 	add	esp, 36					; 00000024H
 	mov	DWORD PTR _node$[ebp], eax
 
-; 439  : 	return node;
+; 463  : 	return node;
 
 	mov	eax, DWORD PTR _node$[ebp]
 $LN1@genMainAST:
 
-; 440  : }
+; 464  : }
 
 	pop	edi
 	pop	esi
@@ -1527,32 +1716,48 @@ $LN1@genMainAST:
 	mov	esp, ebp
 	pop	ebp
 	ret	0
-	npad	3
-$LN23@genMainAST:
+$LN26@genMainAST:
 	DD	$LN4@genMainAST
 	DD	$LN12@genMainAST
-	DD	$LN14@genMainAST
 	DD	$LN17@genMainAST
+	DD	$LN20@genMainAST
 	DD	$LN8@genMainAST
 	DD	$LN7@genMainAST
 	DD	$LN9@genMainAST
+	DD	$LN14@genMainAST
+	DD	$LN16@genMainAST
 	DD	$LN2@genMainAST
-$LN22@genMainAST:
+$LN25@genMainAST:
 	DB	0
 	DB	1
-	DB	7
-	DB	7
+	DB	9
+	DB	9
 	DB	2
 	DB	3
-	DB	7
-	DB	7
-	DB	7
-	DB	7
-	DB	7
+	DB	9
+	DB	9
+	DB	9
+	DB	9
+	DB	9
 	DB	4
-	DB	7
+	DB	9
 	DB	5
 	DB	6
+	DB	9
+	DB	9
+	DB	9
+	DB	9
+	DB	9
+	DB	9
+	DB	9
+	DB	9
+	DB	9
+	DB	9
+	DB	9
+	DB	9
+	DB	9
+	DB	7
+	DB	8
 _genMainAST ENDP
 _TEXT	ENDS
 ; Function compile flags: /Odtp /RTCsu /ZI
