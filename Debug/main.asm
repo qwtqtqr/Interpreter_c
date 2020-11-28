@@ -211,12 +211,13 @@ _main	PROC						; COMDAT
 	call	_mkVarStack
 	mov	DWORD PTR _globl_var_stack, eax
 
-; 48   : 		struct AST_Node* ast_root = genMainAST(0, SCOPE_MODE_DEFAULT);
+; 48   : 		struct AST_Node* ast_root = genMainAST(0, SCOPE_MODE_DEFAULT, 0);
 
 	push	0
 	push	0
+	push	0
 	call	_genMainAST
-	add	esp, 8
+	add	esp, 12					; 0000000cH
 	mov	DWORD PTR _ast_root$1[ebp], eax
 
 ; 49   : 		varStack_push_frame();  // globl frame

@@ -278,6 +278,10 @@ void interpretMainAST(struct AST_Node* root)
 	int in_new_scope = 0;
 	while (curNode != NULL)
 	{
+		//////////////////////////////////////////////////////////////
+		////  PRINT
+		//////////////////////////////////////////////////////////////
+
 		if (curNode->tokenType == TT_PRINT)
 		{
 			struct DATA_STRUCT* printVal_struct = interpretAST_binexpr(curNode->left);
@@ -300,6 +304,9 @@ void interpretMainAST(struct AST_Node* root)
 				}
 			}
 		}
+		//////////////////////////////////////////////////////////////
+		////  VARIABLE
+		//////////////////////////////////////////////////////////////
 
 		else if (curNode->tokenType == TT_IDENT)
 		{
@@ -336,6 +343,7 @@ void interpretMainAST(struct AST_Node* root)
 
 			free(curNodeData);
 		}
+		///////////////////////////////////////////////////////////////
 
 		// todo: free ident_node
 		else if (curNode->tokenType == TT_UNDEF)
@@ -343,6 +351,9 @@ void interpretMainAST(struct AST_Node* root)
 			symtable_removeItem(curNode->left->varName);
 		}
 
+		///////////////////////////////////////////////////////////////
+		////  IF
+		///////////////////////////////////////////////////////////////
 
 		else if (curNode->tokenType == TT_IF)
 		{
@@ -441,19 +452,6 @@ void interpretMainAST(struct AST_Node* root)
 		}
 
 		//////////////////////////////////////////////////
-
-		// todo:  add error to gen function!!!
-		/*if (curNode->tokenType == TT_ELIF)
-		{
-			printf("[ERROR] you cannot have an 'elif' statement without an 'if' statement \n");
-			exit(1);
-		}
-
-		if (curNode->tokenType == TT_ELSE)
-		{
-			printf("[ERROR] you cannot have an 'else' statement without an 'if' statement \n");
-			exit(1);
-		}*/
 
 		curNode = curNode->right;
 	}

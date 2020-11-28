@@ -34,7 +34,7 @@ struct AST_Node* mkastnode_ident(int tokenType, INT_VAL intVal, double floatVal,
 struct DATA_STRUCT* interpretAST_binexpr(struct AST_Node* root);
 struct AST_Node* binexpr(int ptp, int interrupt_token);
 
-struct AST_Node* genMainAST(int scope_depth, int scope_mode);
+struct AST_Node* genMainAST(int scope_depth, int scope_mode, int if_init);
 void interpretMainAST(struct AST_Node* root);
 
 struct AST_Node* genVarAST();

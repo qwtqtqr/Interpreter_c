@@ -317,7 +317,7 @@ static int ignore_tokens()
 }
 
 
-struct AST_Node* genMainAST(int scope_depth, int scope_mode)
+struct AST_Node* genMainAST(int scope_depth, int scope_mode, int if_init)
 {
 	struct AST_Node* left = NULL, * right = NULL, * node = NULL;
 	scan_curToken();
@@ -347,12 +347,12 @@ struct AST_Node* genMainAST(int scope_depth, int scope_mode)
 
 	case TT_VAR:
 		node = genVarAST();
-		node->right = genMainAST(scope_depth, SCOPE_MODE_DEFAULT);
+		node->right = genMainAST(scope_depth, SCOPE_MODE_DEFAULT, 0);
 		return node;
 
 	case TT_IDENT:
 		node = genIdentAST();
-		node->right = genMainAST(scope_depth, SCOPE_MODE_DEFAULT);
+		node->right = genMainAST(scope_depth, SCOPE_MODE_DEFAULT, 0);
 		return node;
 
 	case TT_UNDEF:
@@ -371,9 +371,11 @@ struct AST_Node* genMainAST(int scope_depth, int scope_mode)
 			printf("[SYNTAX ERROR] expected a ';' in Line %d\n", Line);
 			exit(1);
 		}
-		right = genMainAST(scope_depth, scope_mode);
+		right = genMainAST(scope_depth, scope_mode, 0);
 		node = mkastnode(TT_UNDEF, 0, 0, left, right, NULL, NULL);
 		return node;
+
+
 
 
 	case TT_IF:
@@ -386,8 +388,8 @@ struct AST_Node* genMainAST(int scope_depth, int scope_mode)
 		node = mkastnode(TT_IF, 0, 0, NULL, NULL, NULL, NULL);
 		node->left = mkastnode(TT_ANY_OP, 0, 0, NULL, NULL, NULL, NULL);
 		node->left->left = binexpr(0, TT_LEFT_CURLY);
-		node->left->right = genMainAST(scope_depth, SCOPE_MODE_STATEMENT);
-		node->right = genMainAST(scope_depth, scope_mode);
+		node->left->right = genMainAST(scope_depth, SCOPE_MODE_STATEMENT, 0);
+		node->right = genMainAST(scope_depth, scope_mode, 1);
 		return node;
 		break;
      
@@ -398,27 +400,41 @@ struct AST_Node* genMainAST(int scope_depth, int scope_mode)
 			printf("[SYNTAX ERROR] '(' is missing in Line %d\n", Line);
 			exit(1);
 		}
+		if (if_init == 0)
+		{
+			printf("[ERROR] you cannot have an 'elif' statement without an 'if' statement (Line %d) \n", Line);
+			exit(1);
+		}
 		node = mkastnode(TT_ELIF, 0, 0, NULL, NULL, NULL, NULL);
 		node->left = mkastnode(TT_ANY_OP, 0, 0, NULL, NULL, NULL, NULL);
 		node->left->left = binexpr(0, TT_LEFT_CURLY);
-		node->left->right = genMainAST(scope_depth, SCOPE_MODE_STATEMENT);
-		node->right = genMainAST(scope_depth, scope_mode);
+		node->left->right = genMainAST(scope_depth, SCOPE_MODE_STATEMENT, 0);
+		node->right = genMainAST(scope_depth, scope_mode, 1);
 		return node;
 		break;
 
 	case TT_ELSE:
+		if (if_init == 0)
+		{
+			printf("[ERROR] you cannot have an 'else' statement without an 'if' statement (Line %d) \n", Line);
+			exit(1);
+		}
 		node = mkastnode(TT_ELSE, 0, 0, NULL, NULL, NULL, NULL);
 		node->left = mkastnode(TT_ANY_OP, 0, 0, NULL, NULL, NULL, NULL);
 		node->left->left = NULL;
-		node->left->right = genMainAST(scope_depth, SCOPE_MODE_STATEMENT);
-		node->right = genMainAST(scope_depth, scope_mode);
+		node->left->right = genMainAST(scope_depth, SCOPE_MODE_STATEMENT, 0);
+		node->right = genMainAST(scope_depth, scope_mode, 0);
 		return node;
 		break;
+
+
 
 
 	///////////////////////////////////////////////////////////////////
 	//    SCOPE
 	///////////////////////////////////////////////////////////////////
+    
+	// todo: add error messages for scope
 
 	case TT_LEFT_CURLY:
 		globl_open_curly_count++;
@@ -426,10 +442,10 @@ struct AST_Node* genMainAST(int scope_depth, int scope_mode)
 		if (globl_current_depth == (scope_depth + 1))
 		{
 			node = mkastnode(TT_SCOPE, 0, 0, NULL, NULL, NULL, NULL);
-			node->left = genMainAST(globl_current_depth, SCOPE_MODE_DEFAULT);
+			node->left = genMainAST(globl_current_depth, SCOPE_MODE_DEFAULT, 0);
 			if (scope_mode == SCOPE_MODE_DEFAULT)
 			{
-				node->right = genMainAST(globl_current_depth, scope_mode);
+				node->right = genMainAST(globl_current_depth, scope_mode, 0);
 			}
 			return node;
 		}
@@ -457,7 +473,7 @@ struct AST_Node* genMainAST(int scope_depth, int scope_mode)
 	}
 	else
 	{
-		right = genMainAST(scope_depth, scope_mode);
+		right = genMainAST(scope_depth, scope_mode, 0);
 	}
 	node = mkastnode(t->tokenType, t->intValue, t->floatVal, left, right, NULL, NULL);
 	return node;

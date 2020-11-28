@@ -1,36 +1,39 @@
 var boolVal = true && 1 == 1;
 
+
 if(true)
 {
-print(1);
+   print(1);
 }
 
 elif(true) 
 {
-print(10011);
+   print(10011);
 }
 
 else
 {
-print(1111111);
+   print(1111111);
 }
+
+
+
 
 {
    var s = 45;
    print(s);
 }
-
 {
    var s = 50;
    print(s);
 }
-
 {
    var s = 10;
    print(s);
 }
  // print(s);
  print(true && false);
+
 
 
 if (boolVal)
@@ -48,7 +51,9 @@ if (boolVal)
 print(  10 + 1 /2  );
 print(boolVal);
 
+
 {
-print(101);
+   print(101);
 }
+
 print(2);

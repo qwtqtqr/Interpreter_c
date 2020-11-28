@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
 	if (Infile != NULL)
 	{
 		globl_var_stack = mkVarStack();
-		struct AST_Node* ast_root = genMainAST(0, SCOPE_MODE_DEFAULT);
+		struct AST_Node* ast_root = genMainAST(0, SCOPE_MODE_DEFAULT, 0);
 		varStack_push_frame();  // globl frame
 		interpretMainAST(ast_root);
 #if 0

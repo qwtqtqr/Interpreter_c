@@ -4383,31 +4383,18 @@ $LN49@interpretM:
 ; 442  : 
 ; 443  : 		//////////////////////////////////////////////////
 ; 444  : 
-; 445  : 		// todo:  add error to gen function!!!
-; 446  : 		/*if (curNode->tokenType == TT_ELIF)
-; 447  : 		{
-; 448  : 			printf("[ERROR] you cannot have an 'elif' statement without an 'if' statement \n");
-; 449  : 			exit(1);
-; 450  : 		}
-; 451  : 
-; 452  : 		if (curNode->tokenType == TT_ELSE)
-; 453  : 		{
-; 454  : 			printf("[ERROR] you cannot have an 'else' statement without an 'if' statement \n");
-; 455  : 			exit(1);
-; 456  : 		}*/
-; 457  : 
-; 458  : 		curNode = curNode->right;
+; 445  : 		curNode = curNode->right;
 
 	mov	eax, DWORD PTR _curNode$[ebp]
 	mov	ecx, DWORD PTR [eax+24]
 	mov	DWORD PTR _curNode$[ebp], ecx
 
-; 459  : 	}
+; 446  : 	}
 
 	jmp	$LN2@interpretM
 $LN3@interpretM:
 
-; 460  : }
+; 447  : }
 
 	pop	edi
 	pop	esi
